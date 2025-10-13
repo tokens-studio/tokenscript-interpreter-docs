@@ -1,0 +1,6 @@
+.docusaurus
+build
+node_modules
+coverage
+.internal-reference
+.DS_Store

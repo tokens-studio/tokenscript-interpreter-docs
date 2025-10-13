@@ -1,0 +1,425 @@
+.heroBanner {
+  position: relative;
+  padding: 5rem 2rem;
+  text-align: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1d4ed8 0%, #0066ff 50%, #3b82f6 100%);
+}
+
+.heroBanner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.heroBanner > .container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.98);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.heroSubtitle {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  font-weight: 400;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.buttons .button {
+  font-size: 1rem;
+  padding: 0.875rem 1.75rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.buttons .button--secondary {
+  background-color: #ffffff;
+  color: #0066ff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.buttons .button--secondary:hover {
+  background-color: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: #0066ff;
+}
+
+.buttons .button--outline {
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  color: #ffffff;
+}
+
+.buttons .button--outline:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+/* Feature Section */
+.featuresSection {
+  padding: 5rem 2rem;
+  background-color: #f8fafc;
+}
+
+html[data-theme="dark"] .featuresSection {
+  background-color: #0a0f1a;
+}
+
+.featuresSection .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+
+html[data-theme="dark"] .sectionTitle {
+  color: #f1f5f9;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  font-size: 1.125rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto 3.5rem;
+  line-height: 1.6;
+}
+
+html[data-theme="dark"] .sectionSubtitle {
+  color: #94a3b8;
+}
+
+.featureCard {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: #0066ff;
+}
+
+html[data-theme="dark"] .featureCard {
+  background-color: #161d2e;
+  border-color: #293548;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .featureCard:hover {
+  background-color: #1a2333;
+  border-color: #3b82f6;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.featureIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0066ff, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
+}
+
+html[data-theme="dark"] .featureIcon {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.featureCard h3 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+html[data-theme="dark"] .featureCard h3 {
+  color: #f1f5f9;
+}
+
+.featureCard p {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #475569;
+  margin-bottom: 1.25rem;
+}
+
+html[data-theme="dark"] .featureCard p {
+  color: #94a3b8;
+}
+
+.featureCard a {
+  color: #0066ff;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: gap 0.2s ease;
+}
+
+html[data-theme="dark"] .featureCard a {
+  color: #60a5fa;
+}
+
+.featureCard a:hover {
+  gap: 0.625rem;
+  color: #0052cc;
+}
+
+html[data-theme="dark"] .featureCard a:hover {
+  color: #93c5fd;
+}
+
+.featureCard a::after {
+  content: "→";
+  font-size: 1.125rem;
+}
+
+/* Value Props Section */
+.valueSection {
+  padding: 5rem 2rem;
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
+}
+
+html[data-theme="dark"] .valueSection {
+  background-color: #0f1623;
+  border-top-color: #293548;
+}
+
+.valueSection .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.valueCard {
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.04), rgba(59, 130, 246, 0.04));
+  border: 1px solid rgba(0, 102, 255, 0.12);
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+}
+
+html[data-theme="dark"] .valueCard {
+  background: linear-gradient(135deg, rgba(29, 78, 216, 0.15), rgba(59, 130, 246, 0.12));
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+.valueCard h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+html[data-theme="dark"] .valueCard h3 {
+  color: #f1f5f9;
+}
+
+.valueCard h3::before {
+  content: "✓";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #0066ff;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+html[data-theme="dark"] .valueCard h3::before {
+  background-color: #3b82f6;
+}
+
+.valueCard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.valueCard li {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #475569;
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+html[data-theme="dark"] .valueCard li {
+  color: #cbd5e1;
+}
+
+.valueCard li::before {
+  content: "•";
+  position: absolute;
+  left: 0.5rem;
+  color: #0066ff;
+  font-weight: 700;
+}
+
+html[data-theme="dark"] .valueCard li::before {
+  color: #60a5fa;
+}
+
+.valueCard li:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #1d4ed8 0%, #0066ff 50%, #3b82f6 100%);
+  text-align: center;
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ctaSection .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaSection h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.ctaSection p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.ctaSection .button {
+  background-color: #ffffff;
+  color: #0066ff;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ctaSection .button:hover {
+  background-color: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: #0066ff;
+}
+
+/* Responsive */
+@media (max-width: 996px) {
+  .heroBanner {
+    padding: 4rem 1.5rem;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.125rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons .button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .featuresSection,
+  .valueSection,
+  .ctaSection {
+    padding: 3rem 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.875rem;
+  }
+
+  .featureCard,
+  .valueCard {
+    margin-bottom: 1.5rem;
+  }
+}

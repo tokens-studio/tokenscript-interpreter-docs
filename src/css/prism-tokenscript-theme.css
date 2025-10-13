@@ -1,0 +1,94 @@
+/* TokenScript syntax highlighting theme for Prism.js */
+/* Matches the Monaco editor theme from web-repl */
+
+:root {
+  --prism-ts-keyword: #0000FF;
+  --prism-ts-type: #267f99;
+  --prism-ts-function: #795da3;
+  --prism-ts-variable: #E31837;
+  --prism-ts-string: #098658;
+  --prism-ts-number: #098658;
+  --prism-ts-hex-color: #E07B39;
+  --prism-ts-comment: #999999;
+  --prism-ts-operator: #D73A49;
+  --prism-ts-punctuation: #24292e;
+}
+
+html[data-theme="dark"] {
+  --prism-ts-keyword: #569CD6;
+  --prism-ts-type: #4EC9B0;
+  --prism-ts-function: #DCDCAA;
+  --prism-ts-variable: #F48771;
+  --prism-ts-string: #CE9178;
+  --prism-ts-number: #B5CEA8;
+  --prism-ts-hex-color: #E07B39;
+  --prism-ts-comment: #6A9955;
+  --prism-ts-operator: #D4D4D4;
+  --prism-ts-punctuation: #D4D4D4;
+}
+
+/* TokenScript language tokens */
+.token.keyword {
+  color: var(--prism-ts-keyword);
+  font-weight: bold;
+}
+
+.token.type,
+.token.class-name,
+.token.color-type {
+  color: var(--prism-ts-type);
+  font-weight: bold;
+}
+
+.token.function {
+  color: var(--prism-ts-function);
+  font-weight: bold;
+}
+
+.token.reference,
+.token.variable {
+  color: var(--prism-ts-variable);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.token.string {
+  color: var(--prism-ts-string);
+}
+
+.token.number,
+.token.number-with-unit {
+  color: var(--prism-ts-number);
+}
+
+.token.hex-color {
+  color: var(--prism-ts-hex-color);
+  font-weight: bold;
+}
+
+.token.comment {
+  color: var(--prism-ts-comment);
+  font-style: italic;
+}
+
+.token.operator {
+  color: var(--prism-ts-operator);
+  font-weight: bold;
+}
+
+.token.punctuation {
+  color: var(--prism-ts-punctuation);
+}
+
+.token.method,
+.token.property {
+  color: var(--prism-ts-variable);
+}
+
+/* Make sure background doesn't override our theme */
+code[class*="language-"],
+pre[class*="language-"] {
+  text-shadow: none;
+}
+
+

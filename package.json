@@ -1,0 +1,33 @@
+{
+  "name": "tokenscript-docs-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Docusaurus site for TokenScript documentation",
+  "scripts": {
+    "docusaurus:start": "docusaurus start",
+    "docusaurus:build": "docusaurus build",
+    "docusaurus:serve": "docusaurus serve",
+    "docusaurus:clear": "docusaurus clear",
+    "lint": "biome lint --config-path ../biome.json .",
+    "format": "biome format --config-path ../biome.json ."
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.5.2",
+    "@docusaurus/preset-classic": "^3.5.2",
+    "@docusaurus/theme-classic": "^3.5.2",
+    "clsx": "^2.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
+    "@tsconfig/docusaurus": "^2.0.3",
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=16.14"
+  }
+}
