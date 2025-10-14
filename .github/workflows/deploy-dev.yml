@@ -21,13 +21,13 @@ jobs:
     outputs:
       sha: ${{ steps.sha.outputs.sha }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - id: sha
         run: echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
   build:
     name: Build Image
-    uses: .github/workflows/app-cloudrun-build.yaml
+    uses: ./.github/workflows/app-cloudrun-build.yaml@main
     with:
       environment: dev
 
@@ -36,7 +36,7 @@ jobs:
   deploy:
     name: Deploy Dev - 100%
     needs: [get-sha, build]
-    uses: .github/workflows/app-deploy-to.yaml
+    uses: ./.github/workflows/app-deploy-to.yaml@main
     with:
       environment: dev
       image-tag: ${{ needs.build.outputs.image-tag }}
