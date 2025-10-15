@@ -83,7 +83,7 @@ tokenscript parse_json --json ./tokens/light.json --output ./dist/light-resolved
 
 ## 5. Explore the Language
 
-- Read the [Language Specification](../spec/overview.md) for syntax and type details.
+- Read the [Language Specification](/spec/overview) for syntax and type details.
 - Try built-in functions: `round(3.1415, 2)`, `rgba(255, 128, 64, 0.5)`.
 - Inspect examples under `examples/blog-articles/` for inspiration.
 

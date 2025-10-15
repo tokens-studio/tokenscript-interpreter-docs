@@ -216,10 +216,19 @@ html[data-theme="dark"] .navbar__link--active {
   padding: 0 !important;
 }
 
-/* Remove default Docusaurus padding */
+/* Fix sidebar scrolling - account for navbar height */
 @media (min-width: 997px) {
   .sidebar_njMd {
     padding-top: 0 !important;
+  }
+  
+  /* Make sidebar sticky and properly scrollable */
+  .theme-doc-sidebar-container {
+    position: sticky !important;
+    top: var(--ifm-navbar-height) !important;
+    height: calc(100vh - var(--ifm-navbar-height)) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
 }
 
