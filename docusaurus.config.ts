@@ -105,8 +105,8 @@ const config: Config = {
               to: "/docs/extensions/color-schemas",
             },
             {
-              label: "Changelog",
-              to: "/docs/changelog",
+              label: "Playground",
+              to: "/docs/guides/playground",
             },
           ],
         },
