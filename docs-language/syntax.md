@@ -54,7 +54,10 @@ variable angle: NumberWithUnit = 45deg;
 
 Wrap token names in braces to read values from the reference map provided to the interpreter or resolver:
 
+// TODO: in interpreter mode you can't use dot notation
+
 ```tokenscript
+// Dot notation works in token resolution
 variable primaryColor: Color = {colors.primary};
 variable spacingLg: NumberWithUnit = {spacing.base} * 3;
 ```
