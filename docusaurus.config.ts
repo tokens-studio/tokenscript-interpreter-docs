@@ -20,14 +20,7 @@ const config: Config = {
     [
       "classic",
       {
-        docs: {
-          path: "./docs",
-          routeBasePath: "docs",
-          sidebarPath: "./sidebars.ts",
-          editUrl: undefined,
-          showLastUpdateAuthor: false,
-          showLastUpdateTime: false,
-        },
+        docs: false, // Disable the default docs plugin
         blog: false,
         pages: {
           path: "src/pages",
@@ -36,6 +29,68 @@ const config: Config = {
           customCss: ["./src/css/custom.css", "./src/css/prism-tokenscript-theme.css"],
         },
       } satisfies Preset.Options,
+    ],
+  ],
+  plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "intro",
+        path: "./docs-intro",
+        routeBasePath: "intro",
+        sidebarPath: "./sidebars-intro.ts",
+        editUrl: undefined,
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "language",
+        path: "./docs-language",
+        routeBasePath: "language",
+        sidebarPath: "./sidebars-language.ts",
+        editUrl: undefined,
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "cli",
+        path: "./docs-cli",
+        routeBasePath: "cli",
+        sidebarPath: "./sidebars-cli.ts",
+        editUrl: undefined,
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "api",
+        path: "./docs-api",
+        routeBasePath: "api",
+        sidebarPath: "./sidebars-api.ts",
+        editUrl: undefined,
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "extensions",
+        path: "./docs-extensions",
+        routeBasePath: "extensions",
+        sidebarPath: "./sidebars-extensions.ts",
+        editUrl: undefined,
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false,
+      },
     ],
   ],
   themeConfig: {
@@ -50,21 +105,38 @@ const config: Config = {
       items: [
         {
           type: "doc",
-          docId: "guides/quickstart",
+          docId: "why-tokenscript",
+          docsPluginId: "intro",
           position: "left",
-          label: "Documentation",
+          label: "Introduction",
         },
         {
-          to: "/docs/guides/quickstart",
-          label: "Quickstart",
+          type: "doc",
+          docId: "tutorial",
+          docsPluginId: "language",
           position: "left",
-          activeBasePath: "/docs/guides/quickstart",
+          label: "Language",
         },
         {
-          to: "/docs/spec/overview",
-          label: "Spec",
+          type: "doc",
+          docId: "overview",
+          docsPluginId: "cli",
           position: "left",
-          activeBasePath: "/docs/spec",
+          label: "CLI",
+        },
+        {
+          type: "doc",
+          docId: "getting-started",
+          docsPluginId: "api",
+          position: "left",
+          label: "API",
+        },
+        {
+          type: "doc",
+          docId: "overview",
+          docsPluginId: "extensions",
+          position: "left",
+          label: "Extensions",
         },
         {
           href: "https://github.com/tokens-studio/tokenscript",
@@ -77,49 +149,53 @@ const config: Config = {
       style: "dark",
       links: [
         {
-          title: "Documentation",
+          title: "Getting Started",
           items: [
             {
-              label: "Getting Started",
-              to: "/docs/guides/quickstart",
+              label: "Why TokenScript",
+              to: "/intro/why-tokenscript",
             },
             {
-              label: "Language Spec",
-              to: "/docs/spec/overview",
+              label: "Quick Start",
+              to: "/intro/quick-start",
             },
             {
-              label: "Integration Guide",
-              to: "/docs/integrator/getting-started",
+              label: "Core Concepts",
+              to: "/intro/concepts",
             },
           ],
         },
         {
-          title: "Resources",
+          title: "Learn",
           items: [
             {
+              label: "Language Tutorial",
+              to: "/language/tutorial",
+            },
+            {
+              label: "Language Reference",
+              to: "/language/overview",
+            },
+            {
               label: "CLI Commands",
-              to: "/docs/cli/commands",
+              to: "/cli/commands",
+            },
+          ],
+        },
+        {
+          title: "Integrate",
+          items: [
+            {
+              label: "API Guide",
+              to: "/api/getting-started",
             },
             {
               label: "Extensions",
-              to: "/docs/extensions/color-schemas",
+              to: "/extensions/color-schemas",
             },
-            {
-              label: "Playground",
-              to: "/docs/guides/playground",
-            },
-          ],
-        },
-        {
-          title: "Community",
-          items: [
             {
               label: "GitHub",
               href: "https://github.com/tokens-studio/tokenscript",
-            },
-            {
-              label: "Tokens Studio",
-              href: "https://tokens.studio",
             },
           ],
         },
