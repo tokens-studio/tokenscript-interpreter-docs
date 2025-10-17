@@ -69,23 +69,6 @@ palette.set("onPrimary", palette.get("primary").to.srgb());
 return palette.get("onPrimary").r;
 ```
 
-- Demonstrates attribute access on structured colors.
-- Mirrored in `tests/interpreter/dictionary.test.ts`.
-
-## Compose Linear Gradients
-
-```tokenscript
-variable gradient: String = linear-gradient(
-  45deg,
-  #FF6600,
-  rgba(255, 255, 255, 0)
-);
-
-return gradient;
-```
-
-Leverages built-in `linear-gradient` and `rgba` functions to emit CSS-ready strings.
-
 ## Guard Against Null Values
 
 ```tokenscript
@@ -99,15 +82,6 @@ if (maybeToken == null) [
 ```
 
 Comparisons with `null` remain safe thanks to dedicated `NullSymbol` semantics.
-
-## Diagnose Type Issues
-
-```tokenscript
-variable value: any = {mismatched_token};
-return type(value);
-```
-
-Returns the runtime type (e.g., `"hex"`, `"string"`) using the built-in `type()` helper, making it easier to debug misconfigured tokens.
 
 ---
 

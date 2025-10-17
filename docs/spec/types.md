@@ -4,6 +4,8 @@ description: Runtime types, default values, methods, and attribute semantics in 
 sidebar_label: Types
 ---
 
+TODO underscore vs camelCase in method names
+
 # Types and Symbols
 
 Every TokenScript variable declaration specifies a type using `Type` or `Type.SubType` notation. The interpreter enforces type correctness during assignment and method calls by instantiating corresponding `Symbol` classes (`src/interpreter/symbols.ts`). This chapter documents each built-in type.

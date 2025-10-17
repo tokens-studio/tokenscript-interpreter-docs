@@ -4,6 +4,9 @@ description: Tokenization rules, keywords, literals, and statement structure for
 sidebar_label: Syntax
 ---
 
+TODO: this still mixes all the concepts.
+
+
 # Lexical Syntax
 
 TokenScript uses a lightweight, whitespace-insensitive syntax optimized for expressing token derivations. This chapter outlines the lexical rules enforced by the lexer (`src/interpreter/lexer.ts`) and the structural expectations enforced by the parser (`src/interpreter/parser.ts`).
@@ -95,9 +98,6 @@ scale = scale + 0.5;
 accent.to = "hex";
 accent.value = "#0066FF";
 ```
-
-- Reassignments may target variables or attributes (`accent.value`).
-- Attribute chains (`foo.bar.baz`) are parsed as a single assignment target.
 
 ### Blocks
 

@@ -47,7 +47,7 @@ if (size == "small") [
 
 ### Truthiness
 
-- Only `Boolean` values are accepted in conditions. Passing other types raises an `InterpreterError`.
+- Only expressions that result in `Boolean` values are accepted in conditions. Passing other types raises an `InterpreterError`.
 - `Boolean` symbols wrapping `null` are treated as invalid.
 
 ## Loops

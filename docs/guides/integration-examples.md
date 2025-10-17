@@ -6,6 +6,8 @@ sidebar_label: Integration Examples
 
 # Integration Examples
 
+TODO: this cant go out like this. Either it is the blogpost or it needs a lot more work. Also think the examples are not verified yet. Like why should there be something generic like a base size that is not specific to certain units?
+
 TokenScript plays well with existing design token workflows. This guide highlights integration patterns inspired by the examples under `examples/blog-articles/`.
 
 ## Style Dictionary Transform

@@ -105,10 +105,3 @@ functionsManager.register("lerp", {
 
 - `MAX_ITERATIONS`: guard against runaway `while` loops (default `1000`).
 - Additional language options can be surfaced by extending `LanguageOptions` in future releases.
-
-## Best Practices
-
-1. Load specs at startup and reuse manager instances to avoid re-parsing scripts.
-2. Validate custom specs with dedicated interpreter tests or the compliance suite.
-3. When distributing specs, version URIs using the `/major.minor.patch/` convention so converters can resolve `latest` automatically.
-4. Keep long-running conversions pure; side effects complicate caching and testing.

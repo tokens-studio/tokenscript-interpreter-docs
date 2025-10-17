@@ -4,7 +4,7 @@ description: Overview of the TokenScript CLI commands and options.
 sidebar_label: Commands
 ---
 
-# CLI Command Reference
+# CLI Reference
 
 Install the CLI globally or via `npx`:
 
@@ -28,9 +28,9 @@ The CLI is built with Commander (`src/cli.ts`) and ships the following commands:
 
 ## `tokenscript parse_tokenset`
 
-| Option | Description |
-| --- | --- |
-| `--tokenset <path>` | Path to a ZIP archive containing DTCG token sets. |
+| Option | Description                                              |
+| --- |----------------------------------------------------------|
+| `--tokenset <path>` | Path to a ZIP archive containing design token sets.      |
 | `--output <path>` | Output file for resolved tokens (`output.json` default). |
 
 Unzips the token set, resolves tokens using `TokenSetResolver`, and writes the result.
@@ -48,9 +48,9 @@ Generates permutations across theme dimensions and resolves each variation.
 
 ## `tokenscript parse_json`
 
-| Option | Description |
-| --- | --- |
-| `--json <path>` | Path to a DTCG JSON file. |
+| Option | Description                          |
+| --- |--------------------------------------|
+| `--json <path>` | Path to a design tokens JSON file.   |
 | `--output <path>` | Output file (`output.json` default). |
 
 Resolves tokens directly from a JSON file without packaging into a ZIP.
@@ -63,7 +63,7 @@ Resolves tokens directly from a JSON file without packaging into a ZIP.
 | `--test-file <path>` | Single test file to run. |
 | `--output <path>` | Output file for report (prints to console if omitted). |
 
-Runs the TokenScript compliance suite and reports pass/fail counts.
+Runs the TokenScript compliance suite and reports pass/fail counts. You need to download the compliance tests separately.
 
 ## General Tips
 

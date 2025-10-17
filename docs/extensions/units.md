@@ -8,6 +8,10 @@ sidebar_label: Unit Schemas
 
 Unit schemas define measurement keywords (e.g., `rem`, `%`) and conversion rules. The `UnitManager` (`src/interpreter/config/managers/unit/manager.ts`) consumes these specs and exposes conversions to arithmetic operators and built-in functions.
 
+
+TODO: We still need to document here how custom values can be passed in for conversions.
+TODO: Make the exact conversion strategy (e.g. for cases with mixed units) more explicit.
+
 ## Schema Structure
 
 ```json
@@ -77,16 +81,3 @@ When evaluating math expressions, the `UnitManager` attempts to convert all oper
 2. For each candidate, attempt to convert all inputs into that unit using registered conversions.
 3. Select the unit yielding the largest magnitude to minimize precision loss.
 4. If no conversion path exists, an `InterpreterError` is raised.
-
-## Testing Units
-
-1. Register the spec in a unit test (see `tests/interpreter/unit-manager.test.ts` for patterns).
-2. Exercise arithmetic operations to confirm conversions behave as expected.
-3. Validate percent or relative logic by combining relative and absolute operands.
-
-## Best Practices
-
-- Provide both forward and reverse conversions when possible.
-- Document baseline assumptions (e.g., `rem` assumes `16px` base) in `description`.
-- Keep conversion scripts small and deterministic for easier debugging.
-- Reuse URIs when publishing updates; rely on semantic versioning to signal breaking changes.

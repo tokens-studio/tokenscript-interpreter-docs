@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9ab2a08-f0b9-4de2-a032-d595666d9392" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/extensions/schema-registry.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/guides/contribute.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/cli/automation.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/cli/automation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/cli/commands.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/cli/reference.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/cli/recipes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/cli/recipes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/extensions/color-schemas.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/extensions/colors.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/extensions/functions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/extensions/functions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/extensions/testing.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/extensions/unit-schemas.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/extensions/units.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/guides/example-inventory.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/guides/integration-examples.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/guides/integration-examples.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/guides/language-recipes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/guides/language-recipes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/integrator/compliance.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/integrator/compliance.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/integrator/configuration.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/integrator/configuration.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/integrator/getting-started.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/integrator/getting-started.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/integrator/tokenset-resolution.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/integrator/tokenset-resolution.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/spec/control-flow.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/control-flow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/spec/functions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/functions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/spec/overview.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/overview.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/spec/syntax.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/syntax.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/spec/types.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/types.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="344qKVCcGh6jCW80qbjsVau0led" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/lilithwittmann/code/tokenscript-interpreter-docs/.github/workflows&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/lilithwittmann/Library/Application Support/JetBrains/PyCharm2025.2/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.github/workflows" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/guides" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-PY-252.23892.515" />
+        <option value="bundled-python-sdk-7e47963ff851-f0eec537fc84-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.23892.515" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9ab2a08-f0b9-4de2-a032-d595666d9392" name="Changes" comment="" />
+      <created>1760483127906</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1760483127906</updated>
+      <workItem from="1760483129227" duration="2742000" />
+      <workItem from="1760669223803" duration="3630000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
