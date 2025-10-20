@@ -52,17 +52,16 @@ Visit `http://localhost:3000/` to see the site.
 
 Use TokenScript syntax highlighting in your markdown files with the `tokenscript` language identifier:
 
-\`\`\`tokenscript
+```tokenscript
 variable primary: Color.Hsl = hsl(220, 100, 50);
-variable darker: Color = relativeDarken(primary, 20);
-return darker.to.hex();
-\`\`\`
+return primary.to.hex();
+```
 
 The custom Prism.js plugin (`src/theme/prism-tokenscript.js`) automatically highlights:
 - **Keywords**: `variable`, `if`, `return`, `while`, `for`
 - **Types**: `Color`, `Number`, `String`, `List`, `Dictionary`
 - **Color Types**: `Color.Hsl`, `Color.Rgb`, `Color.Oklch`
-- **Functions**: `rgb()`, `hsl()`, `roundTo()`, `contrastColor()`
+- **Functions**: `rgb()`, `hsl()`, `round_to()`
 - **References**: `{token.path.reference}`
 - **Hex Colors**: `#FF6B35`, `#000`
 - **Numbers with Units**: `16px`, `1.5rem`, `100%`
