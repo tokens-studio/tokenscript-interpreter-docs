@@ -25,7 +25,7 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `toString` | `Number.toString(radix?: Number)` | Returns the numeric value as a string. Radix (2–36) is optional; base 16 rounds halves downward for color conversions. |
+| `to_stringg` | `Number.to_stringg(radix?: Number)` | Returns the numeric value as a string. Radix (2–36) is optional; base 16 rounds halves downward for color conversions. |
 
 - Attributes: `value` (read-only `Number`).
 
@@ -64,7 +64,7 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `toString` | `NumberWithUnit.toString()` | Renders numeric value followed by unit (e.g., `"16px"`). |
+| `to_string` | `NumberWithUnit.to_string()` | Renders numeric value followed by unit (e.g., `"16px"`). |
 | `to_number` | `NumberWithUnit.to_number()` | Returns the unitless numeric value. |
 
 - Attributes: `value` (`Number`).
@@ -104,7 +104,7 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 | `delete` | `Dictionary.delete(key: String)` | Removes a key if present. |
 | `keys` | `Dictionary.keys()` | Returns keys as `List`. |
 | `values` | `Dictionary.values()` | Returns values as `List`. |
-| `keyexists` / `key_exists` | `Dictionary.keyexists(key: String)` | Returns `Boolean` flag. |
+| `key_exists` / `key_exists` | `Dictionary.keyexists(key: String)` | Returns `Boolean` flag. |
 | `length` | `Dictionary.length()` | Number of entries. |
 | `clear` | `Dictionary.clear()` | Removes all entries. |
 
@@ -121,7 +121,7 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `toString` | `Color.toString()` | Returns the underlying hex string or JSON payload. |
+| `to_string` | `Color.to_string()` | Returns the underlying hex string or JSON payload. |
 | `to.<target>` | `color.to.oklch()` | Uses `ColorManager` conversion graph to produce a new color subtype. |
 
 - Attribute access:

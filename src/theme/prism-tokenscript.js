@@ -39,7 +39,7 @@ export default function tokenscriptLanguage(Prism) {
       alias: 'class-name'
     },
     'function': {
-      pattern: /\b(?:rgb|rgba|hsl|hsla|srgb|lrgb|hex|oklch|oklchRamp|lighten|darken|saturate|desaturate|spin|mix|roundTo|snap|remap|pow|contrastColor|relativeDarken|hslRamp|linear-gradient|type)\b(?=\()/
+      pattern: /\b(?:rgb|rgba|hsl|hsla|srgb|lrgb|hex|oklch|oklchRamp|lighten|darken|saturate|desaturate|spin|mix|round_to|snap|remap|pow|linear-gradient|type)\b(?=\()/
     },
     'method': {
       pattern: /\.\w+(?=\()/,

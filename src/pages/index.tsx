@@ -61,7 +61,7 @@ variable key: String;
 while (step <= 9) [
   stepValue = step * 100;
   lightness = 95 - (step * 10);
-  key = "blue-".concat(stepValue.toString());
+  key = "blue-".concat(stepValue.to_string());
   ramp = ramp.append(hsl(brandHsl.h, brandHsl.s, lightness));
   step = step + 1;
 ]
