@@ -129,8 +129,6 @@ return lighter.to.oklch();
 `}
 </TokenScriptCodeBlock>
 
-Supports: Hex, RGB, HSL, Oklch, P3, and custom color spaces.
-
 #### 4. **Standards-Based** 📋
 
 Works with DTCG JSON - the emerging standard for design tokens:
