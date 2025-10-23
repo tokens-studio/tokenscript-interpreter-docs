@@ -28,6 +28,7 @@ interface TokenScriptCodeBlockProps {
   input?: Record<string, any>;
   colorSchemas?: Map<string, any>;
   functionSchemas?: Map<string, any>;
+  lines?: { start?: number; end?: number };
 }
 
 export default function TokenScriptCodeBlock({ 
@@ -39,20 +40,36 @@ export default function TokenScriptCodeBlock({
   input = {},
   colorSchemas = new Map(),
   functionSchemas = new Map(),
+  lines,
 }: TokenScriptCodeBlockProps) {
   // Use children if provided, otherwise fall back to code prop
-  const code = children || codeProp || '';
+  const fullCode = children || codeProp || '';
   const [copied, setCopied] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const codeRef = useRef<HTMLElement>(null);
+
+  // Get the code to display based on lines prop and expanded state
+  const displayCode = useMemo(() => {
+    if (!lines || expanded) {
+      return fullCode;
+    }
+
+    const codeLines = fullCode.split('\n');
+    const start = (lines.start ?? 1) - 1; // Convert to 0-based index
+    const end = lines.end ?? codeLines.length;
+    
+    return codeLines.slice(start, end).join('\n');
+  }, [fullCode, lines, expanded]);
 
   // Apply Prism highlighting after render
   useEffect(() => {
     if (codeRef.current) {
       Prism.highlightElement(codeRef.current);
     }
-  }, [code, mode]);
+  }, [displayCode, mode]);
 
   // Execute code once and memoize the result
+  // Always execute the full code, not just the displayed portion
   const { result, error, colorManager } = useMemo(() => {
     if (!showResult) {
       return { result: null, error: null, colorManager: undefined };
@@ -87,7 +104,7 @@ export default function TokenScriptCodeBlock({
         
         const config = new Config({ colorManager: colorMgr, functionsManager });
 
-        const lexer = new Lexer(code);
+        const lexer = new Lexer(fullCode);
         const ast = new Parser(lexer).parse();
         const interpreter = new Interpreter(ast, {
           references: { input },
@@ -97,7 +114,7 @@ export default function TokenScriptCodeBlock({
         managerInstance = colorMgr;
       } else {
         // JSON mode: use interpretTokens
-        interpretedResult = interpretTokens(code);
+        interpretedResult = interpretTokens(fullCode);
       }
       
       return { result: interpretedResult, error: null, colorManager: managerInstance };
@@ -108,16 +125,20 @@ export default function TokenScriptCodeBlock({
         colorManager: undefined
       };
     }
-  }, [code, showResult, mode, input, colorSchemas, functionSchemas]);
+  }, [fullCode, showResult, mode, input, colorSchemas, functionSchemas]);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(code);
+      await navigator.clipboard.writeText(fullCode);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
+  };
+
+  const handleExpand = () => {
+    setExpanded(!expanded);
   };
 
   const handleCopyResult = async () => {
@@ -144,20 +165,31 @@ export default function TokenScriptCodeBlock({
           <span className={styles.language}>
             {mode === 'script' ? 'TokenScript' : 'JSON (Design Tokens)'}
           </span>
-          <button 
-            className={styles.copyButton}
-            onClick={handleCopy}
-            aria-label="Copy code"
-          >
-            {copied ? 'Copied!' : 'Copy'}
-          </button>
+          <div className={styles.buttonGroup}>
+            {lines && (
+              <button 
+                className={styles.expandButton}
+                onClick={handleExpand}
+                aria-label={expanded ? 'Collapse code' : 'Expand code'}
+              >
+                {expanded ? 'Collapse' : 'Expand'}
+              </button>
+            )}
+            <button 
+              className={styles.copyButton}
+              onClick={handleCopy}
+              aria-label="Copy code"
+            >
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
         </div>
         <pre className={mode === 'script' ? 'language-tokenscript' : 'language-json'}>
           <code 
             ref={codeRef}
             className={mode === 'script' ? 'language-tokenscript' : 'language-json'}
           >
-            {code}
+            {displayCode}
           </code>
         </pre>
       </div>

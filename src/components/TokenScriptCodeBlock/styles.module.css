@@ -60,7 +60,24 @@ html[data-theme='dark'] .language {
   color: var(--ts-slate-500);
 }
 
+.buttonGroup {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .copyButton {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--ifm-pre-color);
+  transition: all 0.2s ease;
+}
+
+.expandButton {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
@@ -86,6 +103,24 @@ html[data-theme='dark'] .copyButton:hover {
 }
 
 .copyButton:active {
+  transform: scale(0.95);
+}
+
+html[data-theme='dark'] .expandButton {
+  background: rgba(51, 65, 85, 0.3);
+  border-color: rgba(51, 65, 85, 0.5);
+}
+
+.expandButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+html[data-theme='dark'] .expandButton:hover {
+  background: rgba(71, 85, 105, 0.5);
+}
+
+.expandButton:active {
   transform: scale(0.95);
 }
 
@@ -199,7 +234,12 @@ html[data-theme='dark'] .resultHeader {
 
 /* Output Panel Styles */
 .outputContent {
-  padding: 1rem;
+  padding: 0;
+  pre {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+  }
 }
 
 .outputError {

@@ -106,14 +106,20 @@ accent.value = "#0066FF";
 
 - Statement blocks are wrapped in square brackets `[...]`. They can contain multiple statements separated by semicolons or newlines.
 
-```tokenscript
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
+<TokenScriptCodeBlock
+  mode="script"
+  lines={{ start: 3, end: 7 }}
+>
+{`variable condition: Boolean = true;
+
 if (condition) [
-  variable scoped: Number = 1;
-  return scoped;
+  return 1;
 ] else [
   return 0;
-]
-```
+]`}
+</TokenScriptCodeBlock>
 
 ### Expressions
 
