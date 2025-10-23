@@ -12,10 +12,10 @@ Get TokenScript up and running in 5 minutes. You'll install the CLI, resolve you
 
 ## What You'll Do
 
-1. Install TokenScript (30 seconds)
-2. Resolve tokens with one command (1 minute)
-3. Try the interactive REPL (2 minutes)
-4. Write your first script (2 minutes)
+1. Install TokenScript
+2. Resolve tokens with one command 
+3. Try the interactive REPL
+4. Write your first script
 
 **Total time:** ~5 minutes
 
