@@ -14,15 +14,15 @@ Custom functions enable you to extend TokenScript with project-specific logic en
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "name": "Linear Interpolation",
-  "type": "function",
-  "keyword": "lerp",
-  "description": "Linearly interpolates between two numbers.",
-  "script": {
-    "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/latest",
-    "script": "return {start} + ({end} - {start}) * {t};"
-  },
-  "requirements": []
+    "name": "Linear Interpolation",
+    "type": "function",
+    "keyword": "lerp",
+    "description": "Linearly interpolates between two numbers.",
+    "script": {
+      "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/latest",
+      "script": "return {start} + ({end} - {start}) * {t};"
+    },
+    "requirements": []
 }`}
 </TokenScriptCodeBlock>
 

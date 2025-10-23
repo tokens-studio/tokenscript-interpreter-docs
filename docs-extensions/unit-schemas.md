@@ -14,18 +14,18 @@ Unit schemas define measurement keywords (e.g., `rem`, `%`) and conversion rules
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "name": "root em",
-  "type": "absolute",
-  "keyword": "rem",
-  "description": "A root em unit, relative to the root font size.",
-  "conversions": [
-    {
-      "source": "$self",
-      "target": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/px-unit/0/",
-      "script": { "script": "return ({input} * 16)px;" },
-      "description": "Convert rem to pixel based on a root font size of 16px."
-    }
-  ]
+    "name": "root em",
+    "type": "absolute",
+    "keyword": "rem",
+    "description": "A root em unit, relative to the root font size.",
+    "conversions": [
+      {
+        "source": "$self",
+        "target": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/px-unit/0/",
+        "script": { "script": "return ({input} * 16)px;" },
+        "description": "Convert rem to pixel based on a root font size of 16px."
+      }
+    ]
 }`}
 </TokenScriptCodeBlock>
 
