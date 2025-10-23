@@ -34,7 +34,7 @@ variable spacingRamp: List = baseSpacing, baseSpacing * scale, baseSpacing * sca
 variable accent: Color = #44AAFF;
 variable accentOklch: Color.Oklch = accent.to.oklch();
 
-return spacingRamp.join(", ").concat(" / ").concat(accentOklch.to.hex());`}
+spacingRamp`}
 </TokenScriptCodeBlock>
 
 The interpreter enforces type compatibility (e.g., preventing unit mismatches) and offers methods on each symbol type (`join`, `to.hex`, etc.), making token derivations concise.
