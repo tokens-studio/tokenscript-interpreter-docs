@@ -9,6 +9,7 @@ import {
   FunctionsManager,
 } from '@tokens-studio/tokenscript-interpreter';
 import Prism from 'prismjs';
+import 'prismjs/components/prism-json';
 import tokenscriptLanguage from '@site/src/theme/prism-tokenscript';
 import OutputPanel from './OutputPanel';
 import styles from './styles.module.css';
