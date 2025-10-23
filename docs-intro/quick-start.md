@@ -341,9 +341,9 @@ variable colors: List = #FF0000, #00FF00, #0000FF;
 // Control flow
 variable condition: Boolean = true;
 if (condition) [
-  return "yes";
+    return "yes";
 ] else [
-  return "no";
+    return "no";
 ]`}
 </TokenScriptCodeBlock>
 
