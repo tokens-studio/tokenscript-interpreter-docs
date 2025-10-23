@@ -94,10 +94,10 @@ tokenscript parse_json --json tokens.json --output tokens-resolved.json
 
 :::info What Just Happened?
 TokenScript:
-1. ✅ Resolved all `{references}`
-2. ✅ Evaluated all expressions (`* 2`, `* 1.5`)
-3. ✅ Executed functions (`lighten()`)
-4. ✅ Output ready-to-use values
+1. Resolved all `{references}`
+2. Evaluated all expressions (`* 2`, `* 1.5`)
+3. Executed functions (`lighten()`)
+4. Output ready-to-use values
 :::
 
 ---
