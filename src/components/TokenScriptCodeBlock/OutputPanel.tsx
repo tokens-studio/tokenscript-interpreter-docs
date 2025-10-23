@@ -163,10 +163,6 @@ const ListOutput = ({
 
   return (
     <div className={styles.listOutput}>
-      <div className={styles.listHeader}>
-        <div className={styles.listLabel}>List</div>
-        <span className={styles.listCount}>({list.elements.length} items)</span>
-      </div>
       <div className={styles.listItems}>
         {list.elements.map((element, index) => (
           <SymbolOutput
