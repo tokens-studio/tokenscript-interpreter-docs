@@ -14,21 +14,21 @@ Color schemas dynamically implement color types in your tokenscript runtime. The
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "name": "SRGB",
-  "type": "color",
-  "schema": {
-    "type": "object",
-    "order": ["r", "g", "b"],
-    "required": ["r", "g", "b"],
-    "properties": {
-      "r": { "type": "number" },
-      "g": { "type": "number" },
-      "b": { "type": "number" }
-    }
-  },
-  "initializers": [],
-  "conversions": [],
-  "description": "RGB color"
+    "name": "SRGB",
+    "type": "color",
+    "schema": {
+      "type": "object",
+      "order": ["r", "g", "b"],
+      "required": ["r", "g", "b"],
+      "properties": {
+        "r": { "type": "number" },
+        "g": { "type": "number" },
+        "b": { "type": "number" }
+      }
+    },
+    "initializers": [],
+    "conversions": [],
+    "description": "RGB color"
 }`}
 </TokenScriptCodeBlock>
 
@@ -57,13 +57,13 @@ Initializers allow TokenScript users to initialize color objects from function c
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "title": "function",
-  "keyword": "srgb",
-  "schema": { "type": "string", "pattern": "^rgb\\\\((\\\\d{1,3}),\\\\s*(\\\\d{1,3}),\\\\s*(\\\\d{1,3})\\\\)$" },
-  "script": {
-    "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
-    "script": "variable color_parts: List = {input};\\nvariable output: Color.SRGB;\\noutput.r = color_parts.get(0);\\n..."
-  }
+   "title": "function",
+   "keyword": "srgb",
+   "schema": { "type": "string", "pattern": "^rgb\\\\((\\\\d{1,3}),\\\\s*(\\\\d{1,3}),\\\\s*(\\\\d{1,3})\\\\)$" },
+   "script": {
+     "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+     "script": "variable color_parts: List = {input};\\nvariable output: Color.SRGB;\\noutput.r = color_parts.get(0);\\n..."
+   }
 }`}
 </TokenScriptCodeBlock>
 
@@ -77,14 +77,14 @@ Conversions define `color.to.<Target_Identifier>()` methods:
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "description": "Converts HEX to RGB",
-  "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/hex-color/0/",
-  "target": "$self",
-  "lossless": true,
-  "script": {
-    "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
-    "script": "variable hex: String = {input};\\n..."
-  }
+    "description": "Converts HEX to RGB",
+    "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/hex-color/0/",
+    "target": "$self",
+    "lossless": true,
+    "script": {
+      "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+      "script": "variable hex: String = {input};\\n..."
+    }
 }`}
 </TokenScriptCodeBlock>
 
