@@ -163,15 +163,18 @@ const ListOutput = ({
 
   return (
     <div className={styles.listOutput}>
+      <div className={styles.listHeader}>
+        <div className={styles.listLabel}>List</div>
+        <span className={styles.listCount}>({list.elements.length} items)</span>
+      </div>
       <div className={styles.listItems}>
         {list.elements.map((element, index) => (
-          <div key={index} className={styles.listItem}>
-            <SymbolOutput
-              symbol={element} 
-              colorManager={colorManager} 
-              compact={true}
-            />
-          </div>
+          <SymbolOutput
+            key={index}
+            symbol={element} 
+            colorManager={colorManager} 
+            compact={true}
+          />
         ))}
       </div>
     </div>
@@ -226,9 +229,19 @@ const DictionaryOutput = ({
  * String/primitive output
  */
 const StringOutput = ({ str, compact = false }: { str: string; compact?: boolean }) => {
+  if (compact) {
+    return (
+      <div className={styles.stringOutputCompact}>
+        <div>
+          <div>{str}</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={compact ? styles.stringOutputCompact : styles.stringOutput}>
-      {str}
+    <div className={styles.stringOutput}>
+      <pre>{str}</pre>
     </div>
   );
 };
