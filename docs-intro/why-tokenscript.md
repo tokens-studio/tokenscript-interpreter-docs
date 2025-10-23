@@ -36,10 +36,10 @@ But real design systems need more:
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "spacing.base": "8px",
-  "spacing.large": "16px",    // manually keep in sync
-  "spacing.xlarge": "24px",   // hope nobody makes mistakes
-  "spacing.xxlarge": "32px"   // pray this scales correctly
+    "spacing.base": "8px",
+    "spacing.large": "16px",    // manually keep in sync
+    "spacing.xlarge": "24px",   // hope nobody makes mistakes
+    "spacing.xxlarge": "32px"   // pray this scales correctly
 }`}
 </TokenScriptCodeBlock>
 
