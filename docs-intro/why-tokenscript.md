@@ -129,14 +129,14 @@ Works with DTCG JSON - the emerging standard for design tokens:
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "spacing.base": {
-    "$type": "dimension",
-    "$value": "8px"
-  },
-  "spacing.large": {
-    "$type": "dimension",
-    "$value": "{spacing.base} * 2"
-  }
+    "spacing.base": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "spacing.large": {
+      "$type": "dimension",
+      "$value": "{spacing.base} * 2"
+    }
 }`}
 </TokenScriptCodeBlock>
 
