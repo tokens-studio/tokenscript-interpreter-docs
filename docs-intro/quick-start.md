@@ -47,30 +47,30 @@ Create a simple token file called `tokens.json`:
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "spacing": {
-    "base": {
-      "$type": "dimension",
-      "$value": "8px"
+    "spacing": {
+      "base": {
+        "$type": "dimension",
+        "$value": "8px"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "{spacing.base} * 2"
+      },
+      "xlarge": {
+        "$type": "dimension",
+        "$value": "{spacing.large} * 1.5"
+      }
     },
-    "large": {
-      "$type": "dimension",
-      "$value": "{spacing.base} * 2"
-    },
-    "xlarge": {
-      "$type": "dimension",
-      "$value": "{spacing.large} * 1.5"
+    "colors": {
+      "primary": {
+        "$type": "color",
+        "$value": "#0066FF"
+      },
+      "primaryLight": {
+        "$type": "color",
+        "$value": "lighten({colors.primary}, 20)"
+      }
     }
-  },
-  "colors": {
-    "primary": {
-      "$type": "color",
-      "$value": "#0066FF"
-    },
-    "primaryLight": {
-      "$type": "color",
-      "$value": "lighten({colors.primary}, 20)"
-    }
-  }
 }`}
 </TokenScriptCodeBlock>
 
@@ -84,11 +84,11 @@ tokenscript parse_json --json tokens.json --output tokens-resolved.json
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "spacing.base": "8px",
-  "spacing.large": "16px",          // Computed: 8px * 2
-  "spacing.xlarge": "24px",         // Computed: 16px * 1.5
-  "colors.primary": "#0066FF",
-  "colors.primaryLight": "#4D94FF"  // Computed: lightened version
+    "spacing.base": "8px",
+    "spacing.large": "16px",          // Computed: 8px * 2
+    "spacing.xlarge": "24px",         // Computed: 16px * 1.5
+    "colors.primary": "#0066FF",
+    "colors.primaryLight": "#4D94FF"  // Computed: lightened version
 }`}
 </TokenScriptCodeBlock>
 
