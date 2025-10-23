@@ -5,7 +5,6 @@ const sidebars: SidebarsConfig = {
     "getting-started",
     "tokenset-resolution",
     "configuration",
-    "performance-debugging",
     "compliance",
   ],
 };
