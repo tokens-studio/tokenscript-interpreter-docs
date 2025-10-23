@@ -157,7 +157,7 @@ const script = `
   variable lg: NumberWithUnit = md * scale;
   variable xl: NumberWithUnit = lg * scale;
   
-  return [xs, sm, md, lg, xl].join(", ");
+  return xs, sm, md, lg, xl;
 `;
 
 const lexer = new Lexer(script);
@@ -183,7 +183,7 @@ variable md: NumberWithUnit = sm * scale;
 variable lg: NumberWithUnit = md * scale;
 variable xl: NumberWithUnit = lg * scale;
 
-return [xs, sm, md, lg, xl].join(", ");`}
+return xs, sm, md, lg, xl;`}
 </TokenScriptCodeBlock>
 
 Run it:
