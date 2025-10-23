@@ -567,6 +567,34 @@ html[data-theme='dark'] .dictionaryKey {
   color: #60a5fa;
 }
 
+.dictionaryColorTile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dictionaryColorSwatch {
+  width: 2ch;
+  height: 2ch;
+  border-radius: 0.25rem;
+  border: 1px solid #d1d5db;
+  flex-shrink: 0;
+}
+
+html[data-theme='dark'] .dictionaryColorSwatch {
+  border-color: #4b5563;
+}
+
+.dictionaryColorValue {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.875rem;
+  color: #1f2937;
+}
+
+html[data-theme='dark'] .dictionaryColorValue {
+  color: #e5e7eb;
+}
+
 
 /* String Output Styles */
 .stringOutput {

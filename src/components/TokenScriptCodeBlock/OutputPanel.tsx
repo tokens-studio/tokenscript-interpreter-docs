@@ -201,6 +201,29 @@ const ListOutput = ({
 };
 
 /**
+ * Color tile for dictionary display - 2ch x 2ch with toString
+ */
+const DictionaryColorTile = ({ 
+  color, 
+  colorManager,
+}: { 
+  color: ColorSymbol; 
+  colorManager: ColorManager;
+}) => {
+  const cssColor = toCssColor(color, colorManager);
+  return (
+    <div className={styles.dictionaryColorTile}>
+      <div 
+        className={styles.dictionaryColorSwatch}
+        style={{ backgroundColor: cssColor }}
+        title={`Color: ${cssColor}`}
+      />
+      <div className={styles.dictionaryColorValue}>{color.toString()}</div>
+    </div>
+  );
+};
+
+/**
  * Dictionary output component
  */
 const DictionaryOutput = ({
@@ -227,11 +250,15 @@ const DictionaryOutput = ({
           <div key={key} className={styles.dictionaryItem}>
             <span className={styles.dictionaryKey}>{key}:</span>
 
+            {isColorSymbol(value) ? (
+              <DictionaryColorTile color={value} colorManager={colorManager} />
+            ) : (
               <SymbolOutput 
                 symbol={value} 
                 colorManager={colorManager} 
                 compact={true}
               />
+            )}
 
           </div>
         ))}
