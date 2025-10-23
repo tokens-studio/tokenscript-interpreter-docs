@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { ColorManager } from '@tokens-studio/tokenscript-interpreter';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-json';
 import styles from './styles.module.css';
+
+// Tokenscript theme colors for JSON syntax highlighting
+const tokenscriptThemeColors = {
+  jsonString: '#22c55e',
+  jsonNumber: '#3b82f6',
+  jsonBoolean: '#f97316',
+  jsonNull: '#8b5cf6',
+  jsonProperty: '#60a5fa',
+  jsonPunctuation: '#d1d5db',
+};
 
 // Type guards for interpreter symbols
 interface BaseSymbol {
@@ -321,11 +333,27 @@ const SymbolOutput = ({
  */
 const JsonOutput = ({ value }: { value: any }) => {
   const jsonString = typeof value === 'string' ? value : JSON.stringify(value, null, 2);
-  
+
+  useEffect(() => {
+    // Ensure theme colors are applied to CSS custom properties
+    const root = document.documentElement;
+    root.style.setProperty('--tokenscript-json-string', tokenscriptThemeColors.jsonString);
+    root.style.setProperty('--tokenscript-json-number', tokenscriptThemeColors.jsonNumber);
+    root.style.setProperty('--tokenscript-json-boolean', tokenscriptThemeColors.jsonBoolean);
+    root.style.setProperty('--tokenscript-json-null', tokenscriptThemeColors.jsonNull);
+    root.style.setProperty('--tokenscript-json-property', tokenscriptThemeColors.jsonProperty);
+    root.style.setProperty('--tokenscript-json-punctuation', tokenscriptThemeColors.jsonPunctuation);
+
+    Prism.highlightAll();
+  }, []);
+
   return (
-    <div className={styles.jsonOutput}>
-      <pre>
-        <code>{jsonString}</code>
+    <div
+      className="bg-gray-50 rounded p-3 text-sm font-mono overflow-auto"
+      data-testid="json-output"
+    >
+      <pre className="whitespace-pre-wrap">
+        <code className="language-json">{jsonString}</code>
       </pre>
     </div>
   );
