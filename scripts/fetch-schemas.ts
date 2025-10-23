@@ -82,6 +82,7 @@ async function main(): Promise<void> {
     'hsl-color',
     'srgb-color',
     'rgba-color',
+    'oklch-color',
   ];
   
   // Hardcoded CssColor schema (required for color conversions)

@@ -122,11 +122,11 @@ variable broken: NumberWithUnit = base + "hello";  // ❌ Error at evaluation!`}
 
 Work in any color space with automatic conversions:
 
-<TokenScriptCodeBlock mode="script" showResult={false}>
+<TokenScriptCodeBlock mode="script" lines={{ end: 5 }}>
 {`variable brand: Color = #667EEA;
-variable brandOklch: Color.Oklch = brand.to.oklch();
-variable lighter: Color = lighten(brandOklch, 20);
-variable hex: Color.Hex = lighter.to.hex();  // Back to hex for CSS`}
+variable lighter: Color.Hsl = lighten(brand, 20);
+return lighter.to.oklch();
+`}
 </TokenScriptCodeBlock>
 
 Supports: Hex, RGB, HSL, Oklch, P3, and custom color spaces.
@@ -135,7 +135,7 @@ Supports: Hex, RGB, HSL, Oklch, P3, and custom color spaces.
 
 Works with DTCG JSON - the emerging standard for design tokens:
 
-<TokenScriptCodeBlock mode="json" showResult={false}>
+<TokenScriptCodeBlock mode="json">
 {`{
     "spacing.base": {
       "$type": "dimension",
