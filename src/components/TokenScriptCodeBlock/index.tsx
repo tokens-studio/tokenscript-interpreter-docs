@@ -1,0 +1,217 @@
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { 
+  interpretTokens,
+  Lexer,
+  Parser,
+  Interpreter,
+  Config,
+  ColorManager,
+  FunctionsManager,
+} from '@tokens-studio/tokenscript-interpreter';
+import Prism from 'prismjs';
+import tokenscriptLanguage from '@site/src/theme/prism-tokenscript';
+import styles from './styles.module.css';
+import './prism-tokenscript-theme.css';
+
+// Register the TokenScript language with Prism
+if (typeof window !== 'undefined') {
+  tokenscriptLanguage(Prism);
+}
+
+interface TokenScriptCodeBlockProps {
+  code?: string;
+  children?: string;
+  showResult?: boolean;
+  title?: string;
+  mode?: 'json' | 'script';
+  input?: Record<string, any>;
+  colorSchemas?: Map<string, any>;
+  functionSchemas?: Map<string, any>;
+}
+
+export default function TokenScriptCodeBlock({ 
+  code: codeProp,
+  children,
+  showResult = true,
+  title,
+  mode = 'json',
+  input = {},
+  colorSchemas = new Map(),
+  functionSchemas = new Map(),
+}: TokenScriptCodeBlockProps) {
+  // Use children if provided, otherwise fall back to code prop
+  const code = children || codeProp || '';
+  const [copied, setCopied] = useState(false);
+  const codeRef = useRef<HTMLElement>(null);
+
+  // Apply Prism highlighting after render
+  useEffect(() => {
+    if (codeRef.current) {
+      Prism.highlightElement(codeRef.current);
+    }
+  }, [code, mode]);
+
+  // Execute code once and memoize the result
+  const { result, error } = useMemo(() => {
+    if (!showResult) {
+      return { result: null, error: null };
+    }
+
+    try {
+      let interpretedResult: any;
+
+      if (mode === 'script') {
+        // Script mode: use Lexer, Parser, and Interpreter
+        const colorManager = new ColorManager();
+        const functionsManager = new FunctionsManager();
+        
+        // Register color schemas
+        for (const [uri, spec] of colorSchemas.entries()) {
+          try {
+            colorManager.register(uri, spec);
+          } catch (error) {
+            console.warn(`Failed to register color schema ${uri}:`, error);
+          }
+        }
+        
+        // Register function schemas
+        for (const [uri, spec] of functionSchemas.entries()) {
+          try {
+            functionsManager.register(spec.keyword, spec);
+          } catch (error) {
+            console.warn(`Failed to register function schema ${uri}:`, error);
+          }
+        }
+        
+        const config = new Config({ colorManager, functionsManager });
+
+        const lexer = new Lexer(code);
+        const ast = new Parser(lexer).parse();
+        const interpreter = new Interpreter(ast, {
+          references: { input },
+          config,
+        });
+        interpretedResult = interpreter.interpret();
+      } else {
+        // JSON mode: use interpretTokens
+        interpretedResult = interpretTokens(code);
+      }
+      
+      return { result: interpretedResult, error: null };
+    } catch (err) {
+      return { 
+        result: null, 
+        error: err instanceof Error ? err.message : String(err) 
+      };
+    }
+  }, [code, showResult, mode, input, colorSchemas, functionSchemas]);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  const handleCopyResult = async () => {
+    if (!result) return;
+    try {
+      const resultText = formatResult(result);
+      await navigator.clipboard.writeText(resultText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  const formatResult = (value: any): string => {
+    if (value === null || value === undefined) {
+      return String(value);
+    }
+    if (typeof value === 'object') {
+      // Handle circular references and extract clean data
+      const replacer = (key: string, val: any) => {
+        // Skip internal config/manager references
+        if (key === 'config' || key === 'parentConfig' || key === 'colorManager' || key === 'functionsManager') {
+          return undefined;
+        }
+        // Extract primitive values from objects that have them
+        if (val && typeof val === 'object' && 'value' in val) {
+          return val.value;
+        }
+        return val;
+      };
+      
+      try {
+        return JSON.stringify(value, replacer, 2);
+      } catch (error) {
+        // Fallback if JSON.stringify still fails
+        return String(value);
+      }
+    }
+    return String(value);
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.codeBlock}>
+        {title && <div className={styles.codeTitle}>{title}</div>}
+        <div className={styles.codeHeader}>
+          <span className={styles.language}>
+            {mode === 'script' ? 'TokenScript' : 'JSON (Design Tokens)'}
+          </span>
+          <button 
+            className={styles.copyButton}
+            onClick={handleCopy}
+            aria-label="Copy code"
+          >
+            {copied ? '✓ Copied!' : '📋 Copy'}
+          </button>
+        </div>
+        <pre className={mode === 'script' ? 'language-tokenscript' : 'language-json'}>
+          <code 
+            ref={codeRef}
+            className={mode === 'script' ? 'language-tokenscript' : 'language-json'}
+          >
+            {code}
+          </code>
+        </pre>
+      </div>
+      
+      {showResult && (
+        <div className={styles.resultContainer}>
+          <div className={styles.resultHeader}>
+            <span>Result</span>
+            {!error && result && (
+              <button 
+                className={styles.copyButtonSmall}
+                onClick={handleCopyResult}
+                aria-label="Copy result"
+              >
+                {copied ? '✓' : '📋'}
+              </button>
+            )}
+          </div>
+          
+          {error && (
+            <div className={styles.error}>
+              <strong>❌ Error:</strong> {error}
+            </div>
+          )}
+          
+          {!error && result !== null && result !== undefined && (
+            <div className={styles.result}>
+              <pre>
+                <code>{formatResult(result)}</code>
+              </pre>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
