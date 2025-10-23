@@ -131,8 +131,6 @@ return lighter.to.oklch();
 
 #### 4. **Standards-Based** 📋
 
-Works with DTCG JSON - the emerging standard for design tokens:
-
 <TokenScriptCodeBlock mode="json">
 {`{
     "spacing.base": {
@@ -145,67 +143,6 @@ Works with DTCG JSON - the emerging standard for design tokens:
     }
 }`}
 </TokenScriptCodeBlock>
-
-TokenScript evaluates the expressions in `$value` fields.
-
-#### 5. **Embeddable Everywhere** 🔌
-
-Use it how you want:
-
-- **CLI**: `tokenscript parse_json --json tokens.json`
-- **Node.js**: `import { Interpreter } from '@tokens-studio/tokenscript-interpreter'`
-- **Build pipelines**: Integrate with webpack, vite, rollup, etc.
-- **Design tools**: Embed in Figma plugins, Sketch, etc.
-
----
-
-## When Should You Use TokenScript?
-
-### ✅ Perfect for:
-
-**1. Design Systems with Scale**
-- 100+ tokens that need to stay in sync
-- Multiple themes (light/dark, brand variations)
-- Computed values and relationships
-
-**2. Color-Heavy Applications**
-- Need color transformations (lighten, darken, mix)
-- Working across color spaces (sRGB, P3, Oklch)
-- Generating accessible color palettes
-
-**3. Multi-Platform Design Systems**
-- Tokens used in web, iOS, Android
-- Need unit conversions (px, pt, dp)
-- Single source of truth for all platforms
-
-**4. Design Token Automation**
-- Automated theme generation
-- CI/CD integration
-- Token validation and testing
-
-**5. Advanced Token Logic**
-- Conditional tokens based on context
-- Complex mathematical relationships
-- Type-safe token transformations
-
-### ⚠️ Maybe overkill for:
-
-**1. Tiny Projects**
-- < 20 static tokens
-- No computed values
-- Single theme only
-
-**2. Pure CSS Projects**
-- Only need CSS custom properties
-- No JavaScript/native platforms
-- Simple static values
-
-**3. No Token Logic**
-- All values are hardcoded
-- No relationships between tokens
-- No transformations needed
-
----
 
 ## Real-World Use Cases
 
@@ -226,7 +163,7 @@ variable darkText: Color = invert(lightText);
 
 // Ensure accessibility
 if (contrast(darkText, darkBg) < 4.5) [
-  darkText = lighten(darkText, 20);
+    darkText = lighten(darkText, 20);
 ]`}
 </TokenScriptCodeBlock>
 
@@ -290,28 +227,28 @@ variable remSpacing: NumberWithUnit = baseSpacing.convertTo("rem", 16);  // 1rem
 
 ## TokenScript vs. Alternatives
 
-| Feature | TokenScript | Style Dictionary | Theo | CSS Variables | Custom Scripts |
-|---------|-------------|------------------|------|---------------|----------------|
-| **Type Safety** | ✅ Built-in | ❌ No | ❌ No | ❌ No | 🟡 DIY |
-| **Color Spaces** | ✅ Oklch, P3+ | 🟡 Basic | 🟡 Basic | 🟡 Limited | 🟡 DIY |
-| **DTCG Standard** | ✅ Native | 🟡 Plugin | ❌ No | N/A | 🟡 DIY |
-| **Logic/Conditions** | ✅ Full language | 🟡 Transforms | 🟡 Limited | ❌ No | ✅ Yes (custom) |
-| **Embeddable** | ✅ CLI + API | 🟡 CLI mainly | 🟡 CLI mainly | N/A | 🟡 DIY |
-| **Learning Curve** | 🟡 Moderate | 🟡 Moderate | 🟢 Easy | 🟢 Easy | 🔴 High (custom) |
-| **Extensibility** | ✅ JSON schemas | 🟡 Transforms | 🟡 Limited | ❌ No | ✅ Full (custom) |
+| Feature              | TokenScript      | Style Dictionary | Theo          | CSS Variables | Custom Scripts   |
+|----------------------|------------------|------------------|---------------|---------------|------------------|
+| **Type Safety**      | ✅ Built-in      | ❌ No            | ❌ No         | ❌ No         | 🟡 DIY           |
+| **Color Spaces**     | ✅ Oklch, P3+    | 🟡 Basic         | 🟡 Basic      | 🟡 Limited    | 🟡 DIY           |
+| **DTCG Standard**    | ✅ Native        | 🟡 Plugin        | ❌ No         | N/A           | 🟡 DIY           |
+| **Logic/Conditions** | ✅ Full language | 🟡 Transforms    | 🟡 Limited    | ❌ No         | ✅ Yes (custom)  |
+| **Embeddable**       | ✅ CLI + API     | 🟡 CLI mainly    | 🟡 CLI mainly | N/A           | 🟡 DIY           |
+| **Learning Curve**   | 🟡 Moderate      | 🟡 Moderate      | 🟢 Easy       | 🟢 Easy       | 🔴 High (custom) |
+| **Extensibility**    | ✅ JSON schemas  | 🟡 Transforms    | 🟡 Limited    | ❌ No         | ✅ Full (custom) |
 
 ---
 
 ## What Can You Build With TokenScript?
 
-- ✅ **Design token resolvers** - Turn DTCG JSON into platform-specific formats
-- ✅ **Theme generators** - Auto-generate theme variations
-- ✅ **Color tools** - Build color palette generators
-- ✅ **Design system validators** - Check token consistency
-- ✅ **Build plugins** - Integrate with webpack, vite, rollup
-- ✅ **Design tool plugins** - Use in Figma, Sketch, etc.
-- ✅ **CLI tools** - Automate token workflows
-- ✅ **Token documentation** - Auto-generate docs from tokens
+-  **Design token resolvers** - Turn DTCG JSON into platform-specific formats
+-  **Theme generators** - Auto-generate theme variations
+-  **Color tools** - Build color palette generators
+-  **Design system validators** - Check token consistency
+-  **Build plugins** - Integrate with webpack, vite, rollup
+-  **Design tool plugins** - Use in Figma, Sketch, etc.
+-  **CLI tools** - Automate token workflows
+-  **Token documentation** - Auto-generate docs from tokens
 
 ---
 
@@ -321,32 +258,19 @@ Ready to try TokenScript? Here's how:
 
 ### 1. **Quick Start (5 minutes)** 
 ```bash
-npm install -g @tokens-studio/tokenscript-interpreter
-tokenscript parse_json --json your-tokens.json
+npm install @tokens-studio/tokenscript-interpreter
 ```
-[→ Follow the Quick Start Guide](/intro/quick-start)
+[Follow the Quick Start Guide](/intro/quick-start)
 
 ### 2. **Learn the Language**
 Write your first TokenScript and understand the syntax.
 
-[→ Language Tutorial](/language/tutorial)
+[Language Tutorial](/language/tutorial)
 
 ### 3. **Integrate in Your Project**
 Embed the interpreter in your build pipeline.
 
-[→ API & Integration Guide](/api/getting-started)
-
----
-
-## Still Have Questions?
-
-- **"Is this production-ready?"** - Yes! Used in production by design systems teams.
-- **"Can I extend it?"** - Absolutely! Add custom color spaces, units, and functions.
-- **"Does it work with [tool]?"** - If it can run Node.js or call a CLI, yes!
-- **"How's the performance?"** - Fast! Processes thousands of tokens in milliseconds.
-- **"Is there a community?"** - Growing! Join us on GitHub.
-
----
+[API & Integration Guide](/api/getting-started)
 
 ## Next Steps
 
