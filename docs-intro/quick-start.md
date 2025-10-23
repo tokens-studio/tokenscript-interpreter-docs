@@ -176,10 +176,10 @@ npx tsx generate-spacing.ts
 ```
 
 **Congratulations!** 🎉 You just:
-- ✅ Installed TokenScript
-- ✅ Resolved design tokens
-- ✅ Tried the interactive REPL
-- ✅ Wrote and executed TokenScript code
+- Installed TokenScript
+- Resolved design tokens
+- Tried the interactive REPL
+- Wrote and executed TokenScript code
 
 ---
 
