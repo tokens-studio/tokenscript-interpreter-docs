@@ -1,6 +1,6 @@
 ---
 title: Token Set Resolution
-description: Resolve interconnected design tokens using TokenSetResolver and DTCG adapters.
+description: Resolve interconnected design tokens using TokenSetResolver.
 sidebar_label: Token Set Resolution
 ---
 
@@ -40,19 +40,6 @@ const { resolvedTokens, warnings, errors } = resolver.resolve();
    - Propagate resolved values to dependents, removing edges until they can enter the queue.
 
 If cycles remain (e.g., `a` depends on `b` and `b` depends on `a`), the resolver reports warnings listing unresolved tokens.
-
-## Handling DTCG JSON
-
-The helper `interpretTokens` enables in-memory processing of DTCG-compliant JSON structures:
-
-- Detects whether the JSON contains themes (`$themes`).
-- Uses `utils/dtcg-adapter.ts` to flatten token sets while caching results for repeated sets.
-- Runs the resolver for each theme group, merging results back into a nested object.
-
-```ts
-const resolvedByTheme = interpretTokens(dtcgJson, config);
-console.log(resolvedByTheme["light"]["color.primary"]);
-```
 
 ## Themes & Permutations
 

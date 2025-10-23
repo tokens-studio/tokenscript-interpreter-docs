@@ -101,9 +101,6 @@ variable accent: Color = #FF9900;
 variable accentValue: String = "#0066FF";`}
 </TokenScriptCodeBlock>
 
-- Reassignments may target variables or attributes (`accent.value`).
-- Attribute chains (`foo.bar.baz`) are parsed as a single assignment target.
-
 ### Blocks
 
 - Statement blocks are wrapped in square brackets `[...]`. They can contain multiple statements separated by semicolons or newlines.

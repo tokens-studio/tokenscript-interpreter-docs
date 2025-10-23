@@ -6,7 +6,6 @@ const sidebars: SidebarsConfig = {
     "color-schemas",
     "unit-schemas",
     "functions",
-    "testing",
   ],
 };
 

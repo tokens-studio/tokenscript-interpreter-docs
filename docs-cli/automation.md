@@ -38,9 +38,6 @@ Example GitHub Actions step:
 - name: Resolve tokens
   run: npx tokenscript parse_json --json ./tokens/index.json --output ./dist/tokens.json
 
-- name: Run compliance suite
-  run: npx tokenscript evaluate_standard_compliance --test-dir ./data/compliance-suite/tests --output ./reports/compliance.json
-
 - name: Upload artifacts
   uses: actions/upload-artifact@v4
   with:
@@ -69,8 +66,8 @@ When complex orchestration is required, import helper functions directly:
 import { interpretTokens, processThemes } from "@tokens-studio/tokenscript-interpreter";
 
 async function buildTokens() {
-  const dtcgJson = await loadJson("./tokens/index.json");
-  const resolved = interpretTokens(dtcgJson);
+  const designtokens = await loadJson("./tokens/index.json");
+  const resolved = interpretTokens(designtokens);
   await fs.promises.writeFile("./dist/tokens.json", JSON.stringify(resolved, null, 2));
 }
 ```

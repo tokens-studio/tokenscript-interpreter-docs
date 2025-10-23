@@ -71,23 +71,6 @@ palette.set("onPrimary", palette.get("primary").to.srgb());
 return palette.get("onPrimary").r;`}
 </TokenScriptCodeBlock>
 
-- Demonstrates attribute access on structured colors.
-- Mirrored in `tests/interpreter/dictionary.test.ts`.
-
-## Compose Linear Gradients
-
-<TokenScriptCodeBlock mode="script" showResult={false}>
-{`variable gradient: String = linear-gradient(
-  45deg,
-  #FF6600,
-  rgba(255, 255, 255, 0)
-);
-
-return gradient;`}
-</TokenScriptCodeBlock>
-
-Leverages built-in `linear-gradient` and `rgba` functions to emit CSS-ready strings.
-
 ## Guard Against Null Values
 
 <TokenScriptCodeBlock mode="script" showResult={false}>
@@ -101,15 +84,6 @@ if (maybeToken == null) [
 </TokenScriptCodeBlock>
 
 Comparisons with `null` remain safe thanks to dedicated `NullSymbol` semantics.
-
-## Diagnose Type Issues
-
-<TokenScriptCodeBlock mode="script" showResult={false}>
-{`variable value: String = {mismatched_token};
-return type(value);`}
-</TokenScriptCodeBlock>
-
-Returns the runtime type (e.g., `"hex"`, `"string"`) using the built-in `type()` helper, making it easier to debug misconfigured tokens.
 
 ---
 

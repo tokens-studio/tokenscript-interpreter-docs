@@ -15,7 +15,6 @@ TokenScript is a statically typed domain-specific language (DSL) for manipulatin
 - **Design-native types:** Colors, numbers with units, lists, dictionaries, and token references are first-class citizens.
 - **Static safety:** Variable declarations capture explicit types, catching type mismatches at parse/interpret time.
 - **Composable transformations:** Control flow, functions, and methods allow designers and engineers to derive new tokens procedurally.
-- **Interop-first:** The interpreter consumes Design Token Community Group (DTCG) JSON and exposes hooks for custom schemas and conversions.
 - **Extensible runtime:** Color, unit, and function catalogs are data-driven, enabling organizations to ship bespoke conversions without forking the runtime.
 
 ## Core Workflow
