@@ -14,8 +14,6 @@ This guide walks through installing the TokenScript interpreter, evaluating simp
 npm install @tokens-studio/tokenscript-interpreter
 ```
 
-> The package ships ESM bundles built via `tsup`. Ensure your Node runtime is ≥ 16 as declared in `package.json`.
-
 ## 2. Evaluate Expressions Programmatically
 
 ```ts
