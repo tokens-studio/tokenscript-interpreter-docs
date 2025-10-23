@@ -149,7 +149,7 @@ export default function TokenScriptCodeBlock({
             onClick={handleCopy}
             aria-label="Copy code"
           >
-            {copied ? '✓ Copied!' : '📋 Copy'}
+            {copied ? 'Copied!' : 'Copy'}
           </button>
         </div>
         <pre className={mode === 'script' ? 'language-tokenscript' : 'language-json'}>
@@ -166,15 +166,6 @@ export default function TokenScriptCodeBlock({
         <div className={styles.resultContainer}>
           <div className={styles.resultHeader}>
             <span>Result</span>
-            {!error && result && (
-              <button 
-                className={styles.copyButtonSmall}
-                onClick={handleCopyResult}
-                aria-label="Copy result"
-              >
-                {copied ? '✓' : '📋'}
-              </button>
-            )}
           </div>
           
           <OutputPanel 
