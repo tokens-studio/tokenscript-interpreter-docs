@@ -9,11 +9,14 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "docusaurus.config.ts",
     "sidebars.ts",
-    "src/**/*"
+    "src/**/*",
+    "scripts/**/*"
   ]
 }

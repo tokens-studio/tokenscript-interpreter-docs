@@ -9,7 +9,8 @@
     "docusaurus:serve": "docusaurus serve",
     "docusaurus:clear": "docusaurus clear",
     "lint": "biome lint --config-path ../biome.json .",
-    "format": "biome format --config-path ../biome.json ."
+    "format": "biome format --config-path ../biome.json .",
+    "verify:tokenscript": "tsx scripts/verify-code-blocks.ts ."
   },
   "dependencies": {
     "@docusaurus/core": "^3.5.2",
@@ -21,10 +22,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.4",
+    "@tokens-studio/tokenscript-interpreter": "^0.5.3",
     "@tsconfig/docusaurus": "^2.0.3",
+    "@types/mdast": "^4.0.4",
     "@types/node": "^22.13.4",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.7",
+    "node-fetch": "^3.3.2",
+    "tsx": "^4.20.6",
     "typescript": "^5.7.3"
   },
   "engines": {
