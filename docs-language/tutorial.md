@@ -4,6 +4,8 @@ description: Learn TokenScript by writing your first scripts - from hello world 
 sidebar_label: Tutorial
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Your First TokenScript
 
 Welcome! In this tutorial, you'll learn TokenScript by writing real code. We'll start simple and build up to practical design system automation.
@@ -98,16 +100,29 @@ Output: `"16px"`
 
 ### Math Operations
 
-```tokenscript
-variable x: Number = 10;
+
+<TokenScriptCodeBlock
+  mode="script"
+  lines={{ end: 9 }}
+>
+{`variable x: Number = 10;
 variable y: Number = 5;
 
-variable sum: Number = x + y;          // 15
-variable difference: Number = x - y;    // 5
-variable product: Number = x * y;       // 50
-variable quotient: Number = x / y;      // 2
-variable power: Number = x ^ 2;         // 100
-```
+variable sum: Number = x + y;
+variable difference: Number = x - y;
+variable product: Number = x * y;
+variable quotient: Number = x / y;
+variable power: Number = x ^ 2;
+
+variable result: Dictionary;
+result.set("sum", sum);
+result.set("difference", difference);
+result.set("product", difference);
+result.set("quotient", difference);
+result.set("power", difference);
+result;
+`}
+</TokenScriptCodeBlock>
 
 ### Units Preserve Through Math
 

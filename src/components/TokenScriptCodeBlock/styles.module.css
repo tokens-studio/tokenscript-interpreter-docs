@@ -491,7 +491,6 @@ html[data-theme='dark'] .listCount {
 
 .listItemIndex {
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.8125rem;
   color: #4b5563;
   padding-top: 0.75rem;
   flex-shrink: 0;
@@ -512,9 +511,10 @@ html[data-theme='dark'] .emptyList {
 
 /* Dictionary Output Styles */
 .dictionaryOutput {
+  padding: 0.75rem;
+  font-size: 0.8125rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
 }
 
 .dictionaryHeader {
@@ -536,7 +536,6 @@ html[data-theme='dark'] .dictionaryLabel {
 
 .dictionaryCount {
   font-size: 0.875rem;
-  color: #4b5563;
 }
 
 html[data-theme='dark'] .dictionaryCount {
@@ -546,21 +545,14 @@ html[data-theme='dark'] .dictionaryCount {
 .dictionaryItems {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
 }
 
 .dictionaryItem {
   display: flex;
-  flex-direction: column;
   gap: 0.375rem;
-  padding: 0.75rem;
-  background: #f9fafb;
-  border-radius: 0.5rem;
-  border: 1px solid #e5e7eb;
 }
 
 html[data-theme='dark'] .dictionaryItem {
-  background: #1f2937;
   border-color: #374151;
 }
 
@@ -575,15 +567,11 @@ html[data-theme='dark'] .dictionaryKey {
   color: #60a5fa;
 }
 
-.dictionaryValue {
-  padding-left: 0.5rem;
-}
 
 /* String Output Styles */
 .stringOutput {
   color: #1f2937;
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.875rem;
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -599,20 +587,6 @@ html[data-theme='dark'] .stringOutput {
 
 html[data-theme='dark'] .stringOutputCompact {
   /* No background in dark mode either */
-}
-
-.stringOutputCompact > div {
-  flex: 1;
-  min-width: 0;
-}
-
-.stringOutputCompact > div > div {
-  font-size: 0.75rem;
-  color: #4b5563;
-  font-family: var(--ifm-font-family-monospace);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 html[data-theme='dark'] .stringOutputCompact > div > div {

@@ -222,21 +222,17 @@ const DictionaryOutput = ({
 
   return (
     <div className={styles.dictionaryOutput}>
-      <div className={styles.dictionaryHeader}>
-        <span className={styles.dictionaryLabel}>Dictionary</span>
-        <span className={styles.dictionaryCount}>({entries.length} keys)</span>
-      </div>
       <div className={styles.dictionaryItems}>
         {entries.map(([key, value]) => (
           <div key={key} className={styles.dictionaryItem}>
             <span className={styles.dictionaryKey}>{key}:</span>
-            <div className={styles.dictionaryValue}>
+
               <SymbolOutput 
                 symbol={value} 
                 colorManager={colorManager} 
                 compact={true}
               />
-            </div>
+
           </div>
         ))}
       </div>
