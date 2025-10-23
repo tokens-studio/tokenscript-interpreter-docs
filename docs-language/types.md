@@ -23,9 +23,9 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 - Default value: `null` (represented by `NumberSymbol.empty()`).
 - Methods:
 
-| Method | Signature | Description |
-| --- | --- | --- |
-| `to_stringg` | `Number.to_stringg(radix?: Number)` | Returns the numeric value as a string. Radix (2–36) is optional; base 16 rounds halves downward for color conversions. |
+| Method      | Signature                          | Description                                                                                                            |
+|-------------|------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| `to_string` | `Number.to_string(radix?: Number)` | Returns the numeric value as a string. Radix (2–36) is optional; base 16 rounds halves downward for color conversions. |
 
 - Attributes: `value` (read-only `Number`).
 
@@ -36,13 +36,13 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 - Default value: `null`.
 - Methods:
 
-| Method | Signature | Description |
-| --- | --- | --- |
-| `upper` | `String.upper()` | Converts to uppercase. |
-| `lower` | `String.lower()` | Converts to lowercase. |
-| `length` | `String.length()` | Returns length as `Number`. |
-| `concat` | `String.concat(other: String)` | Concatenates two strings. |
-| `split` | `String.split(delimiter?: String)` | Splits into a `List` of `String`; default delimiter splits into characters. |
+| Method   | Signature                          | Description                                                                 |
+|----------|------------------------------------|-----------------------------------------------------------------------------|
+| `upper`  | `String.upper()`                   | Converts to uppercase.                                                      |
+| `lower`  | `String.lower()`                   | Converts to lowercase.                                                      |
+| `length` | `String.length()`                  | Returns length as `Number`.                                                 |
+| `concat` | `String.concat(other: String)`     | Concatenates two strings.                                                   |
+| `split`  | `String.split(delimiter?: String)` | Splits into a `List` of `String`; default delimiter splits into characters. |
 
 ### Boolean
 
@@ -62,10 +62,11 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 - Declared with `NumberWithUnit` or a specific unit subtype (`NumberWithUnit.px`).
 - Methods:
 
-| Method | Signature | Description |
-| --- | --- | --- |
+| Method      | Signature                    | Description                                              |
+|-------------|------------------------------|----------------------------------------------------------|
 | `to_string` | `NumberWithUnit.to_string()` | Renders numeric value followed by unit (e.g., `"16px"`). |
-| `to_number` | `NumberWithUnit.to_number()` | Returns the unitless numeric value. |
+| `to_number` | `NumberWithUnit.to_number()` | Returns the unitless numeric value.                      |
+|             |                              |                                                          |
 
 - Attributes: `value` (`Number`).
 - Arithmetic operators respect units; the `UnitManager` converts compatible units or throws descriptive errors (e.g., mixing `px` and `deg`).
@@ -77,17 +78,17 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 - Created via comma-separated literals or dynamic operations.
 - Methods:
 
-| Method | Signature | Description |
-| --- | --- | --- |
-| `append` | `List.append(item)` | Adds an item to the end (returns the list). |
-| `extend` | `List.extend(...items)` | Appends items or lists. |
-| `insert` | `List.insert(index: Number, item)` | Inserts at position. |
-| `delete` | `List.delete(index: Number)` | Removes item at index. |
-| `length` | `List.length()` | Returns length as `Number`. |
-| `index` | `List.index(item)` | Returns first matching index or `-1`. |
-| `get` | `List.get(index: Number)` | Retrieves element. |
-| `update` | `List.update(index: Number, item)` | Replaces element. |
-| `join` | `List.join(separator?: String)` | Joins elements into a `String`. |
+| Method   | Signature                          | Description                                 |
+|----------|------------------------------------|---------------------------------------------|
+| `append` | `List.append(item)`                | Adds an item to the end (returns the list). |
+| `extend` | `List.extend(...items)`            | Appends items or lists.                     |
+| `insert` | `List.insert(index: Number, item)` | Inserts at position.                        |
+| `delete` | `List.delete(index: Number)`       | Removes item at index.                      |
+| `length` | `List.length()`                    | Returns length as `Number`.                 |
+| `index`  | `List.index(item)`                 | Returns first matching index or `-1`.       |
+| `get`    | `List.get(index: Number)`          | Retrieves element.                          |
+| `update` | `List.update(index: Number, item)` | Replaces element.                           |
+| `join`   | `List.join(separator?: String)`    | Joins elements into a `String`.             |
 
 - Lists preserve insertion order; some interpreter operations (e.g., implicit lists from color ramps) render without commas.
 
@@ -97,16 +98,16 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 - Declared with `Dictionary`.
 - Methods:
 
-| Method | Signature | Description |
-| --- | --- | --- |
-| `get` | `Dictionary.get(key: String)` | Returns the stored value or `null`. |
-| `set` | `Dictionary.set(key: String, value)` | Assigns a key and returns the dictionary. |
-| `delete` | `Dictionary.delete(key: String)` | Removes a key if present. |
-| `keys` | `Dictionary.keys()` | Returns keys as `List`. |
-| `values` | `Dictionary.values()` | Returns values as `List`. |
-| `key_exists` / `key_exists` | `Dictionary.keyexists(key: String)` | Returns `Boolean` flag. |
-| `length` | `Dictionary.length()` | Number of entries. |
-| `clear` | `Dictionary.clear()` | Removes all entries. |
+| Method                      | Signature                            | Description                               |
+|-----------------------------|--------------------------------------|-------------------------------------------|
+| `get`                       | `Dictionary.get(key: String)`        | Returns the stored value or `null`.       |
+| `set`                       | `Dictionary.set(key: String, value)` | Assigns a key and returns the dictionary. |
+| `delete`                    | `Dictionary.delete(key: String)`     | Removes a key if present.                 |
+| `keys`                      | `Dictionary.keys()`                  | Returns keys as `List`.                   |
+| `values`                    | `Dictionary.values()`                | Returns values as `List`.                 |
+| `key_exists` / `key_exists` | `Dictionary.keyexists(key: String)`  | Returns `Boolean` flag.                   |
+| `length`                    | `Dictionary.length()`                | Number of entries.                        |
+| `clear`                     | `Dictionary.clear()`                 | Removes all entries.                      |
 
 - Attribute access retrieves entries directly (`dictionary.someKey`), mirroring `get`.
 
@@ -119,10 +120,11 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
   - Schema-driven initializers (registered via `ColorManager`) can be invoked as functions (e.g., `srgb(255, 0, 0)` when provided by a schema).
 - Methods:
 
-| Method | Signature | Description |
-| --- | --- | --- |
-| `to_string` | `Color.to_string()` | Returns the underlying hex string or JSON payload. |
-| `to.<target>` | `color.to.oklch()` | Uses `ColorManager` conversion graph to produce a new color subtype. |
+| Method        | Signature           | Description                                                          |
+|---------------|---------------------|----------------------------------------------------------------------|
+| `to_string`   | `Color.to_string()` | Returns the underlying hex string or JSON payload.                   |
+| `to.<target>` | `color.to.oklch()`  | Uses `ColorManager` conversion graph to produce a new color subtype. |
+|               |                     |                                                                      |
 
 - Attribute access:
   - Hex colors expose no attributes.
