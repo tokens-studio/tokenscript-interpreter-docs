@@ -161,6 +161,29 @@ const ListOutput = ({
     );
   }
 
+  // Check if all elements are colors - if so, use grid layout
+  const allColors = list.elements.every(element => isColorSymbol(element));
+
+  if (allColors) {
+    return (
+      <div className={styles.colorGrid}>
+        {list.elements.map((element, index) => {
+          const color = element as ColorSymbol;
+          const cssColor = toCssColor(color, colorManager);
+          const typeName = color.getTypeName ? color.getTypeName() : color.type;
+          return (
+            <div 
+              key={index}
+              className={styles.colorTile}
+              style={{ backgroundColor: cssColor }}
+              title={`${typeName}: ${cssColor}`}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+
   return (
     <div className={styles.listOutput}>
       <div className={styles.listItems}>
