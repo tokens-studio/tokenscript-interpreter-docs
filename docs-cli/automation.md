@@ -16,11 +16,11 @@ Define reusable tasks in `package.json`:
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "scripts": {
-    "tokens:resolve": "tokenscript parse_json --json ./tokens/index.json --output ./dist/tokens.json",
-    "tokens:permutate": "tokenscript permutate_tokenset --tokenset ./exports/tokens.zip --permutate-on Mode --permutate-to Mode --output ./dist/permutations.json",
-    "tokens:compliance": "tokenscript evaluate_standard_compliance --test-dir ./data/compliance-suite/tests"
-  }
+    "scripts": {
+      "tokens:resolve": "tokenscript parse_json --json ./tokens/index.json --output ./dist/tokens.json",
+      "tokens:permutate": "tokenscript permutate_tokenset --tokenset ./exports/tokens.zip --permutate-on Mode --permutate-to Mode --output ./dist/permutations.json",
+      "tokens:compliance": "tokenscript evaluate_standard_compliance --test-dir ./data/compliance-suite/tests"
+    }
 }`}
 </TokenScriptCodeBlock>
 
