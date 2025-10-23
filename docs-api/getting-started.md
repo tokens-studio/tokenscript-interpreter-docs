@@ -94,4 +94,3 @@ const resolved = interpretTokens(designTokens);
 
 - Configure color/unit/function managers: see [Configuration Deep Dive](configuration.md).
 - Run the compliance suite to validate behavior against the official spec: see [Compliance](compliance.md).
-- Explore performance instrumentation: see [Performance & Debugging](performance-debugging.md).

@@ -60,4 +60,4 @@ These utilities back CLI commands such as `tokenscript permutate_tokenset`.
 
 - AST caching eliminates redundant parsing.
 - Reference sharing prevents cloning large objects; mutating the reference map updates the interpreter view.
-- Enable `PerformanceTracker` (see [Performance & Debugging](performance-debugging.md)) when processing large token sets or themes to gather timing metrics.
+- Enable `PerformanceTracker` for performance instrumentation when processing large token sets or themes to gather timing metrics.
