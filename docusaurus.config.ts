@@ -10,8 +10,12 @@ const config: Config = {
   organizationName: "tokens-studio",
   projectName: "tokenscript-docs",
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
   trailingSlash: false,
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
+  },
   i18n: {
     defaultLocale: "en",
     locales: ["en"],
