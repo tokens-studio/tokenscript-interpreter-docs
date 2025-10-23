@@ -115,9 +115,9 @@ import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
 {`variable condition: Boolean = true;
 
 if (condition) [
-  return 1;
+   return 1;
 ] else [
-  return 0;
+   return 0;
 ]`}
 </TokenScriptCodeBlock>
 
