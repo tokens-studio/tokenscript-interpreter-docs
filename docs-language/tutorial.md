@@ -147,13 +147,13 @@ Colors are first-class citizens in TokenScript!
 
 ### Creating Colors
 
-<TokenScriptCodeBlock mode="script">
+<TokenScriptCodeBlock mode="script" lines={{end: 1}}>
 {`variable brand: Color = #0066FF;
 brand`}
 </TokenScriptCodeBlock>
 
-<TokenScriptCodeBlock mode="script">
-{`variable red: Color = rgb(255, 0, 0);
+<TokenScriptCodeBlock mode="script" lines={{end: 1}}>
+{`variable red: Color.Srgb = srgb(255, 0, 0);
 red`}
 </TokenScriptCodeBlock>
 
@@ -163,13 +163,13 @@ TokenScript has powerful color functions:
 
 <TokenScriptCodeBlock mode="script">
 {`variable base: Color = #0066FF;
-variable lighter: Color = lighten(base, 20);
+variable lighter: Color.Hsl = lighten(base, 20);
 lighter`}
 </TokenScriptCodeBlock>
 
 <TokenScriptCodeBlock mode="script">
 {`variable base: Color = #0066FF;
-variable darker: Color = darken(base, 20);
+variable darker: Color.Hsl = darken(base, 20);
 darker`}
 </TokenScriptCodeBlock>
 
@@ -180,17 +180,17 @@ Create a full color ramp:
 <TokenScriptCodeBlock mode="script">
 {`variable brand: Color = #0066FF;
 
-variable brand100: Color = lighten(brand, 40);
-variable brand200: Color = lighten(brand, 30);
-variable brand300: Color = lighten(brand, 20);
-variable brand400: Color = lighten(brand, 10);
+variable brand100: Color.Hsl = lighten(brand, 40);
+variable brand200: Color.Hsl = lighten(brand, 30);
+variable brand300: Color.Hsl = lighten(brand, 20);
+variable brand400: Color.Hsl = lighten(brand, 10);
 variable brand500: Color = brand;
-variable brand600: Color = darken(brand, 10);
-variable brand700: Color = darken(brand, 20);
-variable brand800: Color = darken(brand, 30);
-variable brand900: Color = darken(brand, 40);
+variable brand600: Color.Hsl = darken(brand, 10);
+variable brand700: Color.Hsl = darken(brand, 20);
+variable brand800: Color.Hsl = darken(brand, 30);
+variable brand900: Color.Hsl = darken(brand, 40);
 
-brand100`}
+brand100, brand200, brand300, brand400, brand500, brand600, brand700, brand800, brand900`}
 </TokenScriptCodeBlock>
 
 ---
@@ -224,7 +224,7 @@ first`}
 ### Building Lists Dynamically
 
 <TokenScriptCodeBlock mode="script">
-{`variable items: List = [];
+{`variable items: List;
 items = items.append(1);
 items = items.append(2);
 items = items.append(3);
@@ -241,9 +241,9 @@ items`}
 {`variable isDark: Boolean = true;
 
 if (isDark) [
-  return "Use light text";
+    return "Use light text";
 ] else [
-  return "Use dark text";
+    return "Use dark text";
 ]`}
 </TokenScriptCodeBlock>
 
@@ -253,9 +253,9 @@ if (isDark) [
 {`variable size: Number = 100;
 
 if (size > 50) [
-  return "large";
+    return "large";
 ] else [
-  return "small";
+    return "small";
 ]`}
 </TokenScriptCodeBlock>
 
@@ -266,9 +266,9 @@ if (size > 50) [
 variable isLight: Boolean = lightness(bgColor) > 50;
 
 if (isLight) [
-  return #000000;  // dark text on light bg
+    return #000000;  // dark text on light bg
 ] else [
-  return #FFFFFF;  // light text on dark bg
+    return #FFFFFF;  // light text on dark bg
 ]`}
 </TokenScriptCodeBlock>
 
