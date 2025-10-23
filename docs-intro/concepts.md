@@ -4,6 +4,8 @@ description: Understand the fundamental concepts and terminology of TokenScript.
 sidebar_label: Core Concepts
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Core Concepts
 
 Before diving into TokenScript, let's establish the core concepts and terminology. Understanding these fundamentals will make everything else click into place.
@@ -12,14 +14,14 @@ Before diving into TokenScript, let's establish the core concepts and terminolog
 
 **Design tokens** are the atomic values that define a design system:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "color.primary": "#0066FF",
   "spacing.base": "8px",
   "font.size.body": "16px",
   "border.radius.small": "4px"
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 Think of them as the **design DNA** of your product - the single source of truth for colors, spacing, typography, and more.
 
@@ -53,22 +55,24 @@ Think of them as the **design DNA** of your product - the single source of truth
 ### Example: Static vs. Dynamic Tokens
 
 **Static (plain JSON):**
-```json
-{
+
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing.small": "8px",
   "spacing.medium": "16px",  // must maintain manually
   "spacing.large": "24px"    // must maintain manually
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 **Dynamic (with TokenScript):**
-```json
-{
+
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing.small": "8px",
   "spacing.medium": "{spacing.small} * 2",    // computed!
   "spacing.large": "{spacing.medium} * 1.5"   // computed!
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 Change `spacing.small` → entire scale updates automatically.
 
@@ -87,31 +91,34 @@ The **interpreter** is the engine that executes TokenScript code. It:
 Think of it like a calculator for design tokens.
 
 **Example:**
-```tokenscript
-variable base: NumberWithUnit = 8px;
+
+<TokenScriptCodeBlock mode="script">
+{`variable base: NumberWithUnit = 8px;
 variable large: NumberWithUnit = base * 2;
-return large;  // Interpreter returns "16px"
-```
+return large;`}
+</TokenScriptCodeBlock>
 
 ### 2. **Token Resolution**
 
 **Token resolution** is the process of turning token definitions with references into concrete values.
 
 **Before resolution:**
-```json
-{
+
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing.base": "8px",
   "spacing.large": "{spacing.base} * 2"
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 **After resolution:**
-```json
-{
+
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing.base": "8px",
   "spacing.large": "16px"
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 The TokenScript interpreter resolves `{spacing.base}` and evaluates `* 2`.
 
@@ -119,10 +126,10 @@ The TokenScript interpreter resolves `{spacing.base}` and evaluates `* 2`.
 
 **References** are placeholders that point to other values using curly brace syntax: `{name}`.
 
-```tokenscript
-variable primary: Color = {colors.brand};
-variable light: Color = lighten(primary, 20);
-```
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable primary: Color = {colors.brand};
+variable light: Color = lighten(primary, 20);`}
+</TokenScriptCodeBlock>
 
 References let you:
 - Reuse values
@@ -151,43 +158,51 @@ TokenScript is **statically typed** - every variable has a declared type.
 - `Dictionary` - Key-value pairs: `{name: "value"}`
 - `Null` - No value: `null`
 
-```tokenscript
-variable count: Number = 42;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable count: Number = 42;
 variable spacing: NumberWithUnit = 16px;
 variable brand: Color = #0066FF;
-variable items: List = 1, 2, 3, 4, 5;
-```
+variable items: List = 1, 2, 3, 4, 5;`}
+</TokenScriptCodeBlock>
 
 ### 5. **Expressions vs. Statements**
 
 **Expressions** produce values:
-```tokenscript
-8 * 2           // Expression: produces 16
+
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`8 * 2           // Expression: produces 16
+variable base: NumberWithUnit = 8px;
+variable offset: NumberWithUnit = 2px;
 base + offset   // Expression: produces sum
-lighten(color, 20)  // Expression: produces color
-```
+variable color: Color = #0066FF;
+lighten(color, 20)  // Expression: produces color`}
+</TokenScriptCodeBlock>
 
 **Statements** perform actions:
-```tokenscript
-variable x: Number = 10;    // Statement: declares variable
-if (x > 5) [ ... ]          // Statement: conditional
-return x * 2;               // Statement: returns value
-```
+
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable x: Number = 10;    // Statement: declares variable
+if (x > 5) [
+  return "greater";
+]          // Statement: conditional
+return x * 2;               // Statement: returns value`}
+</TokenScriptCodeBlock>
 
 ### 6. **DTCG (Design Token Community Group)**
 
 DTCG is the **emerging standard** for design tokens. TokenScript natively supports DTCG format.
 
 **DTCG example:**
-```json
-{
+
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing-base": {
     "$type": "dimension",
     "$value": "8px",
     "$description": "Base spacing unit"
   }
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 TokenScript can:
 - Read DTCG JSON
@@ -206,12 +221,12 @@ TokenScript operates in two distinct modes:
 
 In this mode, you write TokenScript to compute specific values:
 
-```tokenscript
-variable base: NumberWithUnit = 8px;
+<TokenScriptCodeBlock mode="script">
+{`variable base: NumberWithUnit = 8px;
 variable scale: Number = 1.5;
 variable result: NumberWithUnit = base * scale;
-return result;  // "12px"
-```
+return result;`}
+</TokenScriptCodeBlock>
 
 **Characteristics:**
 - ✅ Full language features (variables, control flow, functions)
@@ -230,12 +245,12 @@ return result;  // "12px"
 
 In this mode, TokenScript resolves expressions embedded in token definitions:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing.base": "8px",
   "spacing.large": "{spacing.base} * 2"
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 **Characteristics:**
 - ✅ Resolves references with dot notation: `{spacing.base}`
@@ -273,14 +288,15 @@ In this mode, TokenScript resolves expressions embedded in token definitions:
 ### Example: End-to-End
 
 **1. Define tokens** (`tokens.json`):
-```json
-{
+
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "color.brand": "#0066FF",
   "color.brandLight": "lighten({color.brand}, 20)",
   "spacing.base": "8px",
   "spacing.large": "{spacing.base} * 2"
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 **2. Resolve with TokenScript:**
 ```bash
@@ -288,14 +304,15 @@ tokenscript parse_json --json tokens.json --output tokens-resolved.json
 ```
 
 **3. Output:**
-```json
-{
+
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "color.brand": "#0066FF",
   "color.brandLight": "#4D94FF",    // Computed!
   "spacing.base": "8px",
   "spacing.large": "16px"            // Computed!
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 **4. Use in CSS:**
 ```css
@@ -313,8 +330,8 @@ tokenscript parse_json --json tokens.json --output tokens-resolved.json
 
 Think of design tokens as **variables in a design system program**:
 
-```tokenscript
-// Variables (tokens)
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`// Variables (tokens)
 variable baseColor: Color = #0066FF;
 variable scale: Number = 1.5;
 
@@ -323,12 +340,13 @@ variable lightColor: Color = lighten(baseColor, 20);
 variable largeSpacing: NumberWithUnit = 8px * scale;
 
 // Functions (token transformations)
+variable isDarkMode: Boolean = false;
 if (isDarkMode) [
   return invert(baseColor);
 ] else [
   return baseColor;
-]
-```
+]`}
+</TokenScriptCodeBlock>
 
 This is exactly what TokenScript does - it treats tokens as a **living system** with logic and relationships.
 
@@ -339,42 +357,42 @@ This is exactly what TokenScript does - it treats tokens as a **living system** 
 ### 1. **Single Source of Truth**
 Define base values once, compute everything else.
 
-```tokenscript
-variable base: NumberWithUnit = 8px;  // Source of truth
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable base: NumberWithUnit = 8px;  // Source of truth
 variable sm: NumberWithUnit = base * 1.5;    // Derived
 variable md: NumberWithUnit = base * 2;      // Derived
-variable lg: NumberWithUnit = base * 3;      // Derived
-```
+variable lg: NumberWithUnit = base * 3;      // Derived`}
+</TokenScriptCodeBlock>
 
 ### 2. **Type Safety**
 Catch errors before they break your design.
 
-```tokenscript
-variable spacing: NumberWithUnit = 8px;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable spacing: NumberWithUnit = 8px;
 variable scale: String = "large";
-variable result: NumberWithUnit = spacing * scale;  // ❌ Error! Can't multiply by string
-```
+variable result: NumberWithUnit = spacing * scale;  // ❌ Error! Can't multiply by string`}
+</TokenScriptCodeBlock>
 
 ### 3. **Explicitness Over Magic**
 TokenScript is explicit - you declare types and write clear expressions.
 
-```tokenscript
-// ✅ Clear and explicit
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`// ✅ Clear and explicit
 variable base: NumberWithUnit = 8px;
 variable large: NumberWithUnit = base * 2;
 
-// ❌ Magic would be: large = base.double() (what does double mean?)
-```
+// ❌ Magic would be: large = base.double() (what does double mean?)`}
+</TokenScriptCodeBlock>
 
 ### 4. **Composability**
 Build complex systems from simple pieces.
 
-```tokenscript
-variable base: Color = #0066FF;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable base: Color = #0066FF;
 variable light: Color = lighten(base, 20);
 variable lighter: Color = lighten(light, 20);
-variable lightest: Color = lighten(lighter, 20);
-```
+variable lightest: Color = lighten(lighter, 20);`}
+</TokenScriptCodeBlock>
 
 ---
 

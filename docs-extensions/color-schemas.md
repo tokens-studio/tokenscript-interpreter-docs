@@ -1,17 +1,19 @@
 ---
 title: Authoring Color Schemas
 description: Define color specifications, initializers, and conversions for the TokenScript runtime.
-sidebar_label: Color Schemas
+sidebar_label: Colors
 ---
+
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
 
 # Authoring Color Schemas
 
-Color schemas teach the interpreter how to instantiate, format, and convert color values. They are JSON documents validated by `ColorSpecificationSchema` (`src/interpreter/config/managers/color/schema.ts`) and executed by `ColorManager`.
+Color schemas dynamically implement color types in your tokenscript runtime. They are represented as JSON documents and define the data type itself as well as conversion path to multiple other color types. Colors are managed by the `ColorManager`.
 
 ## Schema Anatomy
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "name": "SRGB",
   "type": "color",
   "schema": {
@@ -24,13 +26,13 @@ Color schemas teach the interpreter how to instantiate, format, and convert colo
       "b": { "type": "number" }
     }
   },
-  "initializers": [ ... ],
-  "conversions": [ ... ],
+  "initializers": [],
+  "conversions": [],
   "description": "RGB color"
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
-- `name`: Human-readable identifier (also used as subtype label, e.g., `Color.SRGB`).
+- `name`: Human-readable identifier (also used as the subtype identifier, e.g., `Color.SRGB`).
 - `schema`: JSON schema describing attributes exposed for structured colors. `order` controls property formatting.
 - `initializers`: Functions that build a color from input values.
 - `conversions`: Conversion scripts to/from other color schemas.
@@ -49,24 +51,21 @@ colorManager.register(
 );
 ```
 
-- URIs must be unique and versioned (`/0/`, `/1.0.0/`, etc.). The manager resolves `/latest/` automatically.
-- Registering executes `initializers` and `conversions`, compiling them into interpreter ASTs.
-
 ## Initializers
 
-Initializers allow TokenScript users to call functions like `srgb(255, 0, 0)`:
+Initializers allow TokenScript users to initialize color objects from function calls. E.g. srgb(255, 0, 0) would then create a Color.SRGB object.
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "title": "function",
   "keyword": "srgb",
-  "schema": { "type": "string", "pattern": "^rgb\\((\\d{1,3}),\\s*(\\d{1,3}),\\s*(\\d{1,3})\\)$" },
+  "schema": { "type": "string", "pattern": "^rgb\\\\((\\\\d{1,3}),\\\\s*(\\\\d{1,3}),\\\\s*(\\\\d{1,3})\\\\)$" },
   "script": {
     "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
-    "script": "variable color_parts: List = {input};\nvariable output: Color.SRGB;\noutput.r = color_parts.get(0);\n..."
+    "script": "variable color_parts: List = {input};\\nvariable output: Color.SRGB;\\noutput.r = color_parts.get(0);\\n..."
   }
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `keyword` becomes the callable name in TokenScript.
 - `{input}` resolves to either the parsed function argument list or a pre-validated value.
@@ -74,43 +73,28 @@ Initializers allow TokenScript users to call functions like `srgb(255, 0, 0)`:
 
 ## Conversions
 
-Conversions define `color.to.<Target>()` methods:
+Conversions define `color.to.<Target_Identifier>()` methods:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "description": "Converts HEX to RGB",
   "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/hex-color/0/",
   "target": "$self",
   "lossless": true,
   "script": {
     "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
-    "script": "variable hex: String = {input};\n..."
+    "script": "variable hex: String = {input};\\n..."
   }
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `source`: URI of the input format. `$self` refers to the schema being registered.
 - `target`: URI of the output format. `$self` indicates identity conversions.
 - Scripts receive `{input}` as a `ColorSymbol`, and must return a `ColorSymbol`.
-- `lossless` flags reversible conversions, informing downstream tooling.
+- `lossless` flags implies no data loss during conversion. Which means that if you convert back to the source format you will get the exact same value. During pathfinding the interpreter prefers lossless conversions.
 
 ## Attribute Access & Validation
 
-- Attributes (`color.r`, `color.l`) map to schema properties. Setting an undefined attribute triggers `ColorManagerError.MISSING_SCHEMA`.
+- Attributes (`color.r`, `color.l`) map to schema properties. Setting an undefined attribute triggers an exception `ColorManagerError.MISSING_SCHEMA`. 
+
 - Type mismatches raise `ColorManagerError.INVALID_ATTRIBUTE_TYPE`.
-
-## Versioning & Resolution
-
-- URIs may contain semantic versions (`/0.0.1/`). The manager downgrades gracefully (`0.0.1` → `0.0` → `0` → `latest`).
-- Use `/latest/` aliases when distributing frequently updated specs, but always publish concrete versions for reproducibility.
-
-## Testing Schemas
-
-1. Load the schema into a custom `ColorManager`.
-2. Run targeted interpreter tests similar to `tests/interpreter/color-manager.test.ts`.
-3. Execute the compliance suite to ensure conversions and initializers behave consistently.
-
-## Distribution Tips
-
-- Store schema JSON alongside documentation (`docs/assets/`) or publish via HTTP(S) so they can be fetched dynamically (`fetchTokenScriptSchema` in `src/utils/schema-fetcher.ts`).
-- Provide human-friendly docs explaining accepted ranges and initializers to help TokenScript authors adopt new color spaces.

@@ -4,6 +4,8 @@ description: High-level introduction to the TokenScript language and its design 
 sidebar_label: Overview
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Language Overview
 
 TokenScript is a statically typed domain-specific language (DSL) for manipulating design tokens. It brings rich color management, unit-aware math, and reference resolution directly into the language so that token operations remain deterministic and reproducible across platforms.
@@ -13,7 +15,6 @@ TokenScript is a statically typed domain-specific language (DSL) for manipulatin
 - **Design-native types:** Colors, numbers with units, lists, dictionaries, and token references are first-class citizens.
 - **Static safety:** Variable declarations capture explicit types, catching type mismatches at parse/interpret time.
 - **Composable transformations:** Control flow, functions, and methods allow designers and engineers to derive new tokens procedurally.
-- **Interop-first:** The interpreter consumes Design Token Community Group (DTCG) JSON and exposes hooks for custom schemas and conversions.
 - **Extensible runtime:** Color, unit, and function catalogs are data-driven, enabling organizations to ship bespoke conversions without forking the runtime.
 
 ## Core Workflow
@@ -24,8 +25,8 @@ TokenScript is a statically typed domain-specific language (DSL) for manipulatin
 
 ## Hello TokenScript
 
-```tokenscript
-variable baseSpacing: NumberWithUnit = 4px;
+<TokenScriptCodeBlock mode="script">
+{`variable baseSpacing: NumberWithUnit = 4px;
 variable scale: Number = 1.5;
 
 variable spacingRamp: List = baseSpacing, baseSpacing * scale, baseSpacing * scale * scale;
@@ -33,8 +34,8 @@ variable spacingRamp: List = baseSpacing, baseSpacing * scale, baseSpacing * sca
 variable accent: Color = #44AAFF;
 variable accentOklch: Color.Oklch = accent.to.oklch();
 
-return spacingRamp.join(", ").concat(" / ").concat(accentOklch.to.hex());
-```
+return spacingRamp.join(", ").concat(" / ").concat(accentOklch.to.hex());`}
+</TokenScriptCodeBlock>
 
 The interpreter enforces type compatibility (e.g., preventing unit mismatches) and offers methods on each symbol type (`join`, `to.hex`, etc.), making token derivations concise.
 

@@ -10,7 +10,8 @@
     "docusaurus:clear": "docusaurus clear",
     "lint": "biome lint --config-path ../biome.json .",
     "format": "biome format --config-path ../biome.json .",
-    "verify:tokenscript": "tsx scripts/verify-code-blocks.ts ."
+    "verify:tokenscript": "tsx scripts/verify-code-blocks.ts .",
+    "fetch:schemas": "tsx scripts/fetch-schemas.ts"
   },
   "dependencies": {
     "@docusaurus/core": "^3.5.2",

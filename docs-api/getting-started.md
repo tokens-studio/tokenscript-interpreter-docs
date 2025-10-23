@@ -37,7 +37,7 @@ const result = interpreter.interpret();
 console.log(result?.toString()); // "12px"
 ```
 
-- `Interpreter` accepts either a `Parser`, an AST, or `null` (for later `setAst` calls).
+- `Interpreter` accepts either a `Parser`, an AST, or `null`.
 - Results are TokenScript symbols (e.g., `NumberWithUnitSymbol`); call `toString()` or `value` accessor methods for host-friendly representations.
 
 ## 3. Provide References
@@ -79,18 +79,17 @@ console.log(warnings); // [] (unless circular references are detected)
 
 `TokenSetResolver` parses each token, builds a dependency graph, and iteratively evaluates expressions while caching ASTs for performance (`src/tokenset-processor.ts`).
 
-## 5. Load Design Tokens (DTCG JSON)
+## 5. Resolve Design Tokens
 
-Use the high-level helper when working with DTCG-compliant JSON:
+Use the high-level helper when working with your design tokens:
 
 ```ts
 import { interpretTokens } from "@tokens-studio/tokenscript-interpreter";
 
-const dtcgJson = await fs.readFile("tokens.json", "utf8").then(JSON.parse);
-const resolved = interpretTokens(dtcgJson);
+const designTokens = await fs.readFile("tokens.json", "utf8").then(JSON.parse);
+const resolved = interpretTokens(designTokens);
 ```
 
-- Nested token sets are flattened via `utils/dtcg-adapter.ts`.
 - When themes are present (`$themes` array), the helper processes each theme configuration automatically.
 
 ## 6. Next Steps

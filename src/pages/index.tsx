@@ -3,6 +3,8 @@ import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import Heading from "@theme/Heading";
 import CodeBlock from "@theme/CodeBlock";
+import TokenScriptCodeBlock from "@site/src/components/TokenScriptCodeBlock";
+import { COLOR_SCHEMAS, FUNCTION_SCHEMAS } from "@site/src/lib/schemas.generated";
 import styles from "./index.module.css";
 
 function HomepageHeader(): JSX.Element {
@@ -48,8 +50,12 @@ function CodeExampleSection(): JSX.Element {
         </p>
         <div className="row" style={{ justifyContent: "center" }}>
           <div className="col col--8">
-            <CodeBlock language="tokenscript">
-{`// Generate a 9-step color ramp from a brand color
+            <TokenScriptCodeBlock 
+              mode="script" 
+              colorSchemas={COLOR_SCHEMAS}
+              functionSchemas={FUNCTION_SCHEMAS}
+            >
+                {`// Generate a 9-step color ramp from a brand color
 variable brand: Color = #3B82F6;
 variable brandHsl: Color.Hsl = brand.to.hsl();
 variable ramp: List;
@@ -66,9 +72,10 @@ while (step <= 9) [
   step = step + 1;
 ]
 
+
 return ramp;
-// Generates: 9 perfectly balanced color values from light to dark`}
-            </CodeBlock>
+`}
+            </TokenScriptCodeBlock>
           </div>
         </div>
         <p style={{ textAlign: "center", marginTop: "2rem", fontSize: "0.875rem", color: "var(--ifm-color-emphasis-600)" }}>

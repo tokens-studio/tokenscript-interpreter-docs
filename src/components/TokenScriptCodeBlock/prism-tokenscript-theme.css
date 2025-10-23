@@ -1,0 +1,93 @@
+/* TokenScript syntax highlighting theme for Prism.js */
+/* Matches the Docusaurus Prism theme */
+
+:root {
+  --prism-ts-keyword: #818cf8;
+  --prism-ts-type: #818cf8;
+  --prism-ts-function: #f472b6;
+  --prism-ts-variable: #a5f3fc;
+  --prism-ts-string: #7dd3fc;
+  --prism-ts-number: #a5f3fc;
+  --prism-ts-hex-color: #a5f3fc;
+  --prism-ts-comment: #64748b;
+  --prism-ts-operator: #cbd5e1;
+  --prism-ts-punctuation: #cbd5e1;
+  --prism-ts-plain: #e2e8f0;
+}
+
+html[data-theme="dark"] {
+  --prism-ts-keyword: #818cf8;
+  --prism-ts-type: #818cf8;
+  --prism-ts-function: #f472b6;
+  --prism-ts-variable: #a5f3fc;
+  --prism-ts-string: #7dd3fc;
+  --prism-ts-number: #a5f3fc;
+  --prism-ts-hex-color: #a5f3fc;
+  --prism-ts-comment: #64748b;
+  --prism-ts-operator: #cbd5e1;
+  --prism-ts-punctuation: #cbd5e1;
+  --prism-ts-plain: #e2e8f0;
+}
+
+/* TokenScript language tokens */
+.token.keyword {
+  color: var(--prism-ts-keyword);
+}
+
+.token.type,
+.token.class-name,
+.token.color-type {
+  color: var(--prism-ts-type);
+}
+
+.token.function {
+  color: var(--prism-ts-function);
+}
+
+.token.reference,
+.token.variable {
+  color: var(--prism-ts-variable);
+}
+
+.token.string {
+  color: var(--prism-ts-string);
+}
+
+.token.number,
+.token.number-with-unit,
+.token.hex-color {
+  color: var(--prism-ts-number);
+}
+
+.token.comment {
+  color: var(--prism-ts-comment);
+  font-style: italic;
+}
+
+.token.operator {
+  color: var(--prism-ts-operator);
+}
+
+.token.punctuation {
+  color: var(--prism-ts-punctuation);
+}
+
+.token.method,
+.token.property {
+  color: var(--prism-ts-variable);
+}
+
+/* Make sure colors apply to tokenscript code blocks */
+code[class*="language-tokenscript"],
+pre[class*="language-tokenscript"] {
+  color: var(--prism-ts-plain);
+  text-shadow: none;
+}
+
+code[class*="language-json"],
+pre[class*="language-json"] {
+  color: var(--prism-ts-plain);
+  text-shadow: none;
+}
+
+

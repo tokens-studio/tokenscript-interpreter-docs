@@ -6,7 +6,7 @@ sidebar_label: Compliance
 
 # Compliance Suite Integration
 
-The TokenScript interpreter ships with tooling to run the [TokenScript Standard Compliance Test Suite](https://github.com/tokens-studio/tokenscript-compliance-suite). Use it to confirm that runtime changes or custom extensions honor the language specification.
+The TokenScript interpreter ships with tooling to run the [TokenScript Standard Compliance Test Suite](https://github.com/tokens-studio/tokenscript-compliance-suite). Use it to confirm that runtime changes or custom implementations honor the language specification.
 
 ## CLI Usage
 
@@ -49,10 +49,12 @@ for (const result of report.results) {
 
 ## Test Format Overview
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 Each JSON file contains either a single test object or an array of tests:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "name": "should convert hex to SRGB",
   "input": "return #FF6600.to.srgb().r",
   "expectedOutput": "255",
@@ -61,10 +63,10 @@ Each JSON file contains either a single test object or an array of tests:
   "schemas": [
     "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0/"
   ]
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
-- `inline: true` instructs the parser to use inline mode (for single-expression tests).
+- `inline: true` instructs the parser to use inline mode (for single-expression tests - executed like inside a single token).
 - `context` injects references.
 - Errors are reported with `actualOutputType: "Error"` and the interpreter’s message.
 

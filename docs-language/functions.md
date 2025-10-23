@@ -41,7 +41,6 @@ TokenScript exposes a standard library of functions supplied by the `FunctionsMa
 |-------------------|-----------------------------|-------------------------------------------------------------------------------|
 | `pi`              | `pi()`                      | Returns π as a `Number`.                                                      |
 | `type`            | `type(value)`               | Returns lowercase string of the symbol’s subtype (e.g., `"hex"`, `"string"`). |
-| `linear-gradient` | `linear-gradient(...stops)` | Joins arguments into a CSS-style `linear-gradient(...)` string.               |
 | `rgba`            | `rgba(r, g, b, a?)`         | Returns `String` formatted as `rgba(...)` from provided arguments.            |
 
 ## Custom Functions

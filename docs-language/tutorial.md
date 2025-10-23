@@ -4,6 +4,8 @@ description: Learn TokenScript by writing your first scripts - from hello world 
 sidebar_label: Tutorial
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Your First TokenScript
 
 Welcome! In this tutorial, you'll learn TokenScript by writing real code. We'll start simple and build up to practical design system automation.
@@ -34,9 +36,10 @@ tokenscript interactive
 ```
 
 Now type:
-```tokenscript
-variable message: String = "Hello, TokenScript!";
-```
+
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable message: String = "Hello, TokenScript!";`}
+</TokenScriptCodeBlock>
 
 Press Enter. You just declared your first variable!
 
@@ -48,35 +51,27 @@ Press Enter. You just declared your first variable!
 
 ### Try It: Numbers
 
-```tokenscript
-variable count: Number = 42;
-count
-```
+<TokenScriptCodeBlock mode="script">
+{`variable count: Number = 42;
+count`}
+</TokenScriptCodeBlock>
 
-Output: `42`
-
-```tokenscript
-variable price: Number = 19.99;
-price
-```
-
-Output: `19.99`
+<TokenScriptCodeBlock mode="script">
+{`variable price: Number = 19.99;
+price`}
+</TokenScriptCodeBlock>
 
 ### Try It: Numbers with Units
 
-```tokenscript
-variable spacing: NumberWithUnit = 8px;
-spacing
-```
+<TokenScriptCodeBlock mode="script">
+{`variable spacing: NumberWithUnit = 8px;
+spacing`}
+</TokenScriptCodeBlock>
 
-Output: `"8px"`
-
-```tokenscript
-variable angle: NumberWithUnit = 45deg;
-angle
-```
-
-Output: `"45deg"`
+<TokenScriptCodeBlock mode="script">
+{`variable angle: NumberWithUnit = 45deg;
+angle`}
+</TokenScriptCodeBlock>
 
 :::tip Type Matters!
 Notice how `Number` and `NumberWithUnit` are different types. TokenScript is **statically typed** - you declare types explicitly.
@@ -88,51 +83,61 @@ Notice how `Number` and `NumberWithUnit` are different types. TokenScript is **s
 
 Variables can use expressions:
 
-```tokenscript
-variable base: NumberWithUnit = 8px;
+<TokenScriptCodeBlock mode="script">
+{`variable base: NumberWithUnit = 8px;
 variable large: NumberWithUnit = base * 2;
-large
-```
-
-Output: `"16px"`
+large`}
+</TokenScriptCodeBlock>
 
 ### Math Operations
 
-```tokenscript
-variable x: Number = 10;
+
+<TokenScriptCodeBlock
+  mode="script"
+  lines={{ end: 9 }}
+>
+{`variable x: Number = 10;
 variable y: Number = 5;
 
-variable sum: Number = x + y;          // 15
-variable difference: Number = x - y;    // 5
-variable product: Number = x * y;       // 50
-variable quotient: Number = x / y;      // 2
-variable power: Number = x ^ 2;         // 100
-```
+variable sum: Number = x + y;
+variable difference: Number = x - y;
+variable product: Number = x * y;
+variable quotient: Number = x / y;
+variable power: Number = x ^ 2;
+
+variable result: Dictionary;
+result.set("sum", sum);
+result.set("difference", difference);
+result.set("product", difference);
+result.set("quotient", difference);
+result.set("power", difference);
+result;
+`}
+</TokenScriptCodeBlock>
 
 ### Units Preserve Through Math
 
-```tokenscript
-variable base: NumberWithUnit = 4px;
+<TokenScriptCodeBlock mode="script">
+{`variable base: NumberWithUnit = 4px;
 variable result: NumberWithUnit = base * 3 + 2px;
-result
-```
+result`}
+</TokenScriptCodeBlock>
 
 Output: `"14px"`  (Math: 4 × 3 + 2 = 14)
 
 ### Try It Yourself
 
 Create a spacing scale:
-```tokenscript
-variable base: NumberWithUnit = 8px;
+
+<TokenScriptCodeBlock mode="script">
+{`variable base: NumberWithUnit = 8px;
 variable sm: NumberWithUnit = base * 1.5;
 variable md: NumberWithUnit = base * 2;
 variable lg: NumberWithUnit = base * 3;
 variable xl: NumberWithUnit = base * 4;
 
-xl
-```
-
-Output: `"32px"`
+xl`}
+</TokenScriptCodeBlock>
 
 ---
 
@@ -142,45 +147,38 @@ Colors are first-class citizens in TokenScript!
 
 ### Creating Colors
 
-```tokenscript
-variable brand: Color = #0066FF;
-brand
-```
+<TokenScriptCodeBlock mode="script">
+{`variable brand: Color = #0066FF;
+brand`}
+</TokenScriptCodeBlock>
 
-Output: `"#0066FF"`
-
-```tokenscript
-variable red: Color = rgb(255, 0, 0);
-red
-```
-
-Output: `"#FF0000"` (converted to hex)
+<TokenScriptCodeBlock mode="script">
+{`variable red: Color = rgb(255, 0, 0);
+red`}
+</TokenScriptCodeBlock>
 
 ### Color Functions
 
 TokenScript has powerful color functions:
 
-```tokenscript
-variable base: Color = #0066FF;
+<TokenScriptCodeBlock mode="script">
+{`variable base: Color = #0066FF;
 variable lighter: Color = lighten(base, 20);
-lighter
-```
+lighter`}
+</TokenScriptCodeBlock>
 
-Output: `"#4D94FF"` (lighter version)
-
-```tokenscript
+<TokenScriptCodeBlock mode="script">
+{`variable base: Color = #0066FF;
 variable darker: Color = darken(base, 20);
-darker
-```
-
-Output: `"#0042A6"` (darker version)
+darker`}
+</TokenScriptCodeBlock>
 
 ### Try It: Color Ramp
 
 Create a full color ramp:
 
-```tokenscript
-variable brand: Color = #0066FF;
+<TokenScriptCodeBlock mode="script">
+{`variable brand: Color = #0066FF;
 
 variable brand100: Color = lighten(brand, 40);
 variable brand200: Color = lighten(brand, 30);
@@ -192,10 +190,8 @@ variable brand700: Color = darken(brand, 20);
 variable brand800: Color = darken(brand, 30);
 variable brand900: Color = darken(brand, 40);
 
-brand100
-```
-
-Output: `"#99BBFF"` (lightest)
+brand100`}
+</TokenScriptCodeBlock>
 
 ---
 
@@ -203,44 +199,37 @@ Output: `"#99BBFF"` (lightest)
 
 Lists hold multiple values:
 
-```tokenscript
-variable numbers: List = 1, 2, 3, 4, 5;
-numbers
-```
-
-Output: `[1, 2, 3, 4, 5]`
+<TokenScriptCodeBlock mode="script">
+{`variable numbers: List = 1, 2, 3, 4, 5;
+numbers`}
+</TokenScriptCodeBlock>
 
 ### List Methods
 
-```tokenscript
-variable colors: List = #FF0000, #00FF00, #0000FF;
+<TokenScriptCodeBlock mode="script">
+{`variable colors: List = #FF0000, #00FF00, #0000FF;
 
 // Get length
 variable count: Number = colors.length();
-count
-```
+count`}
+</TokenScriptCodeBlock>
 
-Output: `3`
-
-```tokenscript
+<TokenScriptCodeBlock mode="script">
+{`variable colors: List = #FF0000, #00FF00, #0000FF;
 // Get item by index (0-based)
 variable first: Color = colors.get(0);
-first
-```
-
-Output: `"#FF0000"`
+first`}
+</TokenScriptCodeBlock>
 
 ### Building Lists Dynamically
 
-```tokenscript
-variable items: List = [];
+<TokenScriptCodeBlock mode="script">
+{`variable items: List = [];
 items = items.append(1);
 items = items.append(2);
 items = items.append(3);
-items
-```
-
-Output: `[1, 2, 3]`
+items`}
+</TokenScriptCodeBlock>
 
 ---
 
@@ -248,44 +237,40 @@ Output: `[1, 2, 3]`
 
 ### If Statements
 
-```tokenscript
-variable isDark: Boolean = true;
+<TokenScriptCodeBlock mode="script">
+{`variable isDark: Boolean = true;
 
 if (isDark) [
   return "Use light text";
 ] else [
   return "Use dark text";
-]
-```
-
-Output: `"Use light text"`
+]`}
+</TokenScriptCodeBlock>
 
 ### Comparisons
 
-```tokenscript
-variable size: Number = 100;
+<TokenScriptCodeBlock mode="script">
+{`variable size: Number = 100;
 
 if (size > 50) [
   return "large";
 ] else [
   return "small";
-]
-```
-
-Output: `"large"`
+]`}
+</TokenScriptCodeBlock>
 
 ### Try It: Conditional Colors
 
-```tokenscript
-variable bgColor: Color = #000000;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable bgColor: Color = #000000;
 variable isLight: Boolean = lightness(bgColor) > 50;
 
 if (isLight) [
   return #000000;  // dark text on light bg
 ] else [
   return #FFFFFF;  // light text on dark bg
-]
-```
+]`}
+</TokenScriptCodeBlock>
 
 Output: `"#FFFFFF"` (white text for dark background)
 
@@ -539,8 +524,8 @@ Ready to practice? Try these challenges:
 
 Generate a typography scale using a modular scale:
 
-```tokenscript
-variable base: NumberWithUnit = 16px;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable base: NumberWithUnit = 16px;
 variable ratio: Number = 1.25;  // Major third
 
 // Generate scale (smaller to larger)
@@ -549,15 +534,15 @@ variable sm: NumberWithUnit = base / ratio;
 variable md: NumberWithUnit = base;
 variable lg: NumberWithUnit = base * ratio;
 variable xl: NumberWithUnit = base * (ratio ^ 2);
-variable xxl: NumberWithUnit = base * (ratio ^ 3);
-```
+variable xxl: NumberWithUnit = base * (ratio ^ 3);`}
+</TokenScriptCodeBlock>
 
 ### Exercise 2: Semantic Colors
 
 Create semantic colors from brand colors:
 
-```tokenscript
-variable brand: Color = #0066FF;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable brand: Color = #0066FF;
 
 variable success: Color = #22C55E;
 variable error: Color = #EF4444;
@@ -568,19 +553,19 @@ variable info: Color = brand;
 variable successBg: Color = lighten(success, 40);
 variable errorBg: Color = lighten(error, 40);
 variable warningBg: Color = lighten(warning, 40);
-variable infoBg: Color = lighten(info, 40);
-```
+variable infoBg: Color = lighten(info, 40);`}
+</TokenScriptCodeBlock>
 
 ### Exercise 3: Responsive Breakpoints
 
 Generate responsive spacing that scales with viewport:
 
-```tokenscript
-variable mobile: NumberWithUnit = 16px;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable mobile: NumberWithUnit = 16px;
 variable tablet: NumberWithUnit = mobile * 1.25;
 variable desktop: NumberWithUnit = mobile * 1.5;
-variable wide: NumberWithUnit = mobile * 1.75;
-```
+variable wide: NumberWithUnit = mobile * 1.75;`}
+</TokenScriptCodeBlock>
 
 ---
 

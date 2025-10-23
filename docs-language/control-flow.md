@@ -4,6 +4,8 @@ description: Statement execution order, branching, looping, and return semantics
 sidebar_label: Control Flow
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Control Flow & Execution Model
 
 TokenScript executes statements sequentially within a single global scope. The interpreter maintains one `SymbolTable` (`src/interpreter/symbolTable.ts`), so variables declared in any block remain available globally unless reassigned later.
@@ -14,8 +16,9 @@ TokenScript executes statements sequentially within a single global scope. The i
 - Expressions that produce a symbol value can appear as standalone statements; their result becomes the current block result.
 - `return` raises an internal `ReturnSignal`, unwinding the current block (`src/interpreter/interpreter.ts`).
 
-```tokenscript
-variable result: Number;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable result: Number;
+variable condition: Boolean = true;
 
 if (condition) [
   result = 1;
@@ -23,8 +26,8 @@ if (condition) [
   result = 0;
 ];
 
-return result;
-```
+return result;`}
+</TokenScriptCodeBlock>
 
 ## Branching
 
@@ -35,34 +38,37 @@ return result;
 - The first truthy condition executes; remaining branches are skipped.
 - `else` is optional; omitted when not needed.
 
-```tokenscript
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable size: String = "medium";
+variable padding: NumberWithUnit;
+
 if (size == "small") [
-  variable padding: NumberWithUnit = 8px;
+  padding = 8px;
 ] elif (size == "large") [
-  variable padding: NumberWithUnit = 24px;
+  padding = 24px;
 ] else [
-  variable padding: NumberWithUnit = 16px;
-];
-```
+  padding = 16px;
+];`}
+</TokenScriptCodeBlock>
 
 ### Truthiness
 
-- Only `Boolean` values are accepted in conditions. Passing other types raises an `InterpreterError`.
+- Only expressions that result in `Boolean` values are accepted in conditions. Passing other types raises an `InterpreterError`.
 - `Boolean` symbols wrapping `null` are treated as invalid.
 
 ## Loops
 
 - TokenScript supports `while` loops:
 
-```tokenscript
-variable i: Number = 0;
-variable values: List = ;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable i: Number = 0;
+variable values: List = [];
 
 while (i < 5) [
-  values.append(i);
+  values = values.append(i);
   i = i + 1;
-];
-```
+];`}
+</TokenScriptCodeBlock>
 
 - Loop conditions re-evaluate at the start of each iteration.
 - The interpreter enforces a guard `MAX_ITERATIONS` (default `1000`, configurable via `Config.languageOptions`) to prevent infinite loops. Exceeding the limit throws an `InterpreterError`.
@@ -73,13 +79,13 @@ while (i < 5) [
 - `return expression;` ends the current block immediately and yields the evaluated expression.
 - Using `return` at the top level short-circuits evaluation of remaining statements.
 
-```tokenscript
-variable palette: List = "#FF0000", "#00FF00", "#0000FF";
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable palette: List = #FF0000, #00FF00, #0000FF;
 
 return palette.length();
 
-// Statements here will not execute.
-```
+// Statements here will not execute.`}
+</TokenScriptCodeBlock>
 
 ## Attribute Assignment
 

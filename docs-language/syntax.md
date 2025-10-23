@@ -4,6 +4,8 @@ description: Tokenization rules, keywords, literals, and statement structure for
 sidebar_label: Syntax
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Lexical Syntax
 
 TokenScript uses a lightweight, whitespace-insensitive syntax optimized for expressing token derivations. This chapter outlines the lexical rules enforced by the lexer (`src/interpreter/lexer.ts`) and the structural expectations enforced by the parser (`src/interpreter/parser.ts`).
@@ -23,10 +25,10 @@ TokenScript uses a lightweight, whitespace-insensitive syntax optimized for expr
 
 - Single-line comments start with `//` and run to the end of the line. Block comments are not currently supported.
 
-```tokenscript
-// A single-line comment
-variable spacing: NumberWithUnit = 4px; // Trailing comments are allowed
-```
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`// A single-line comment
+variable spacing: NumberWithUnit = 4px; // Trailing comments are allowed`}
+</TokenScriptCodeBlock>
 
 ## Literals
 
@@ -45,10 +47,10 @@ variable spacing: NumberWithUnit = 4px; // Trailing comments are allowed
 
 Numbers may be suffixed with a unit from `src/types.ts#SupportedFormats`, including `px`, `em`, `rem`, `vw`, `vh`, `pt`, `in`, `cm`, `mm`, `deg`, `%`. The lexer emits a `FORMAT` token, which the parser combines with the preceding numeric literal to produce an `ElementWithUnitNode`. At runtime the interpreter constructs a `NumberWithUnitSymbol`.
 
-```tokenscript
-variable padding: NumberWithUnit = 1.5rem;
-variable angle: NumberWithUnit = 45deg;
-```
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable padding: NumberWithUnit = 1.5rem;
+variable angle: NumberWithUnit = 45deg;`}
+</TokenScriptCodeBlock>
 
 ## References
 
@@ -56,11 +58,11 @@ Wrap token names in braces to read values from the reference map provided to the
 
 // TODO: in interpreter mode you can't use dot notation
 
-```tokenscript
-// Dot notation works in token resolution
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`// Dot notation works in token resolution
 variable primaryColor: Color = {colors.primary};
-variable spacingLg: NumberWithUnit = {spacing.base} * 3;
-```
+variable spacingLg: NumberWithUnit = {spacing.base} * 3;`}
+</TokenScriptCodeBlock>
 
 Nested references (e.g., `{theme.primary.color}`) are flattened during lexing.
 
@@ -80,40 +82,41 @@ The following keywords cannot be used as identifiers:
 
 ### Variable Declarations
 
-```tokenscript
-variable name: Type = expression;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable name: String = "example";
 variable accent: Color.Hex = #FF9900;
-variable ramp: List.Color = accent, accent.to.oklch();
-```
+variable ramp: List = accent, accent.to.oklch();`}
+</TokenScriptCodeBlock>
 
 - Type annotations are required (`Type` or `Type.SubType`).
 - Initializers are optional; without an initializer, variables start with the type’s `empty()` value.
 
 ### Assignments & Reassignments
 
-```tokenscript
-variable scale: Number = 1.5;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable scale: Number = 1.5;
 scale = scale + 0.5;
 
-accent.to = "hex";
-accent.value = "#0066FF";
-```
-
-- Reassignments may target variables or attributes (`accent.value`).
-- Attribute chains (`foo.bar.baz`) are parsed as a single assignment target.
+variable accent: Color = #FF9900;
+variable accentValue: String = "#0066FF";`}
+</TokenScriptCodeBlock>
 
 ### Blocks
 
 - Statement blocks are wrapped in square brackets `[...]`. They can contain multiple statements separated by semicolons or newlines.
 
-```tokenscript
+<TokenScriptCodeBlock
+  mode="script"
+  lines={{ start: 3, end: 7 }}
+>
+{`variable condition: Boolean = true;
+
 if (condition) [
-  variable scoped: Number = 1;
-  return scoped;
+   return 1;
 ] else [
-  return 0;
-]
-```
+   return 0;
+]`}
+</TokenScriptCodeBlock>
 
 ### Expressions
 

@@ -4,6 +4,8 @@ description: Integrate TokenScript CLI commands into build systems and CI pipeli
 sidebar_label: Automation
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Automation Strategies
 
 TokenScript’s CLI commands are composable and script-friendly. This chapter outlines patterns for integrating them into continuous integration (CI) pipelines, build systems, and local developer tooling.
@@ -12,15 +14,15 @@ TokenScript’s CLI commands are composable and script-friendly. This chapter ou
 
 Define reusable tasks in `package.json`:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "scripts": {
     "tokens:resolve": "tokenscript parse_json --json ./tokens/index.json --output ./dist/tokens.json",
     "tokens:permutate": "tokenscript permutate_tokenset --tokenset ./exports/tokens.zip --permutate-on Mode --permutate-to Mode --output ./dist/permutations.json",
     "tokens:compliance": "tokenscript evaluate_standard_compliance --test-dir ./data/compliance-suite/tests"
   }
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - Developers can run `npm run tokens:resolve` before committing token changes.
 - Pair with tools like `npm-run-all` or `turbo` to orchestrate multiple tasks.
@@ -35,9 +37,6 @@ Example GitHub Actions step:
 
 - name: Resolve tokens
   run: npx tokenscript parse_json --json ./tokens/index.json --output ./dist/tokens.json
-
-- name: Run compliance suite
-  run: npx tokenscript evaluate_standard_compliance --test-dir ./data/compliance-suite/tests --output ./reports/compliance.json
 
 - name: Upload artifacts
   uses: actions/upload-artifact@v4
@@ -67,8 +66,8 @@ When complex orchestration is required, import helper functions directly:
 import { interpretTokens, processThemes } from "@tokens-studio/tokenscript-interpreter";
 
 async function buildTokens() {
-  const dtcgJson = await loadJson("./tokens/index.json");
-  const resolved = interpretTokens(dtcgJson);
+  const designtokens = await loadJson("./tokens/index.json");
+  const resolved = interpretTokens(designtokens);
   await fs.promises.writeFile("./dist/tokens.json", JSON.stringify(resolved, null, 2));
 }
 ```

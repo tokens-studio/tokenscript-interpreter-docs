@@ -18,8 +18,8 @@ The CLI is built with Commander (`src/cli.ts`) and ships the following commands:
 
 ## `tokenscript interactive`
 
-| Option | Description |
-| --- | --- |
+| Option   | Description                         |
+|----------|-------------------------------------|
 | *(none)* | Starts an interactive REPL session. |
 
 - Use `set_variables` to inject references.
@@ -28,42 +28,43 @@ The CLI is built with Commander (`src/cli.ts`) and ships the following commands:
 
 ## `tokenscript parse_tokenset`
 
-| Option | Description |
-| --- | --- |
-| `--tokenset <path>` | Path to a ZIP archive containing DTCG token sets. |
-| `--output <path>` | Output file for resolved tokens (`output.json` default). |
+| Option              | Description                                              |
+|---------------------|----------------------------------------------------------|
+| `--tokenset <path>` | Path to a ZIP archive containing DTCG token sets.        |
+| `--output <path>`   | Output file for resolved tokens (`output.json` default). |
 
 Unzips the token set, resolves tokens using `TokenSetResolver`, and writes the result.
 
 ## `tokenscript permutate_tokenset`
 
-| Option | Description |
-| --- | --- |
-| `--tokenset <path>` | Path to the token set ZIP. |
-| `--permutate-on <themes...>` | Theme groups to permute (space separated). |
-| `--permutate-to <theme>` | Target theme group. |
-| `--output <path>` | Output file for generated permutations (`permutations.json` default). |
+| Option                       | Description                                                           |
+|------------------------------|-----------------------------------------------------------------------|
+| `--tokenset <path>`          | Path to the token set ZIP.                                            |
+| `--permutate-on <themes...>` | Theme groups to permute (space separated).                            |
+| `--permutate-to <theme>`     | Target theme group.                                                   |
+| `--output <path>`            | Output file for generated permutations (`permutations.json` default). |
 
 Generates permutations across theme dimensions and resolves each variation.
 
 ## `tokenscript parse_json`
 
-| Option | Description |
-| --- | --- |
-| `--json <path>` | Path to a DTCG JSON file. |
+| Option            | Description                          |
+|-------------------|--------------------------------------|
+| `--json <path>`   | Path to a DTCG JSON file.            |
 | `--output <path>` | Output file (`output.json` default). |
 
 Resolves tokens directly from a JSON file without packaging into a ZIP.
 
 ## `tokenscript evaluate_standard_compliance`
 
-| Option | Description |
-| --- | --- |
-| `--test-dir <path>` | Directory containing compliance JSON tests. |
-| `--test-file <path>` | Single test file to run. |
-| `--output <path>` | Output file for report (prints to console if omitted). |
+| Option               | Description                                            |
+|----------------------|--------------------------------------------------------|
+| `--test-dir <path>`  | Directory containing compliance JSON tests.            |
+| `--test-file <path>` | Single test file to run.                               |
+| `--output <path>`    | Output file for report (prints to console if omitted). |
 
 Runs the TokenScript compliance suite and reports pass/fail counts.
+You need to download the compliance tests separately.
 
 ## General Tips
 
