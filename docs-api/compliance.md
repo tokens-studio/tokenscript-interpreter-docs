@@ -49,10 +49,12 @@ for (const result of report.results) {
 
 ## Test Format Overview
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 Each JSON file contains either a single test object or an array of tests:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "name": "should convert hex to SRGB",
   "input": "return #FF6600.to.srgb().r",
   "expectedOutput": "255",
@@ -61,8 +63,8 @@ Each JSON file contains either a single test object or an array of tests:
   "schemas": [
     "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0/"
   ]
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `inline: true` instructs the parser to use inline mode (for single-expression tests).
 - `context` injects references.

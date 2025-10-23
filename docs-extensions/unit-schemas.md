@@ -4,14 +4,16 @@ description: Extend TokenScript with custom measurement units and conversions.
 sidebar_label: Unit Schemas
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Authoring Unit Schemas
 
 Unit schemas define measurement keywords (e.g., `rem`, `%`) and conversion rules. The `UnitManager` (`src/interpreter/config/managers/unit/manager.ts`) consumes these specs and exposes conversions to arithmetic operators and built-in functions.
 
 ## Schema Structure
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "name": "root em",
   "type": "absolute",
   "keyword": "rem",
@@ -24,8 +26,8 @@ Unit schemas define measurement keywords (e.g., `rem`, `%`) and conversion rules
       "description": "Convert rem to pixel based on a root font size of 16px."
     }
   ]
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `name`: Human-readable label.
 - `type`: `"absolute"` or `"relative"`.
@@ -59,11 +61,11 @@ unitManager.register("https://example.com/schema/my-unit/1.0.0/", customUnit);
 
 Relative units (type `"relative"`) require a `to_absolute` script:
 
-```json
-"to_absolute": {
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`"to_absolute": {
   "script": "return {other_value} * ({relative_value} / 100);"
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `{relative_value}`: Numeric percent (e.g., `50`).
 - `{other_value}`: The absolute operand participating in the operation.

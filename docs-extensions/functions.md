@@ -4,14 +4,16 @@ description: Extend TokenScript with project-specific functions via JSON specifi
 sidebar_label: Functions
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Registering Custom Functions
 
 Custom functions enable higher-level abstractions without modifying the interpreter. The `FunctionsManager` consumes JSON specs validated by `FunctionSpecificationSchema` (`src/interpreter/config/managers/functions/schema.ts`) and exposes them as TokenScript functions.
 
 ## Specification Layout
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "name": "Linear Interpolation",
   "type": "function",
   "keyword": "lerp",
@@ -21,8 +23,8 @@ Custom functions enable higher-level abstractions without modifying the interpre
     "script": "return {start} + ({end} - {start}) * {t};"
   },
   "requirements": []
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `name`: Friendly label.
 - `keyword`: Call name inside TokenScript (`lerp(0, 10, 0.5)`).

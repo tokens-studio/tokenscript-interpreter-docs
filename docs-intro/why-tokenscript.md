@@ -4,6 +4,8 @@ description: Understand the problems TokenScript solves and when to use it in yo
 sidebar_label: Why TokenScript
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Why TokenScript?
 
 TokenScript is a domain-specific language for design tokens that brings logic, type safety, and automation to your design system. It solves the fundamental problem of **static tokens in dynamic systems**.
@@ -12,13 +14,13 @@ TokenScript is a domain-specific language for design tokens that brings logic, t
 
 ### Design tokens started simple...
 
-```json
-{
-  "color.primary": "#0066FF",
-  "spacing.base": "8px",
-  "spacing.large": "16px"
-}
-```
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
+    "color.primary": "#0066FF",
+    "spacing.base": "8px",
+    "spacing.large": "16px"
+}`}
+</TokenScriptCodeBlock>
 
 But real design systems need more:
 
@@ -31,14 +33,15 @@ But real design systems need more:
 ### The current workarounds
 
 **Option 1: Manual maintenance** 😫
-```json
-{
+
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing.base": "8px",
   "spacing.large": "16px",    // manually keep in sync
   "spacing.xlarge": "24px",   // hope nobody makes mistakes
   "spacing.xxlarge": "32px"   // pray this scales correctly
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 **Problems:**
 - ❌ Error-prone manual updates
@@ -86,12 +89,12 @@ TokenScript is a **type-safe language for design token logic** that integrates s
 
 Colors, units, and design concepts are first-class citizens:
 
-```tokenscript
-variable primary: Color = #0066FF;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable primary: Color = #0066FF;
 variable lighter: Color = lighten(primary, 20);
 variable spacing: NumberWithUnit = 8px;
-variable large: NumberWithUnit = spacing * 2;
-```
+variable large: NumberWithUnit = spacing * 2;`}
+</TokenScriptCodeBlock>
 
 No string parsing. No unit confusion. Just works.
 
@@ -99,24 +102,24 @@ No string parsing. No unit confusion. Just works.
 
 Catch errors before they break your design:
 
-```tokenscript
-variable base: NumberWithUnit = 8px;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable base: NumberWithUnit = 8px;
 variable scale: Number = 1.5;
 variable result: NumberWithUnit = base * scale;  // ✅ Works! Result: 12px
 
-variable broken: NumberWithUnit = base + "hello";  // ❌ Error at evaluation!
-```
+variable broken: NumberWithUnit = base + "hello";  // ❌ Error at evaluation!`}
+</TokenScriptCodeBlock>
 
 #### 3. **Powerful Color Management** 🌈
 
 Work in any color space with automatic conversions:
 
-```tokenscript
-variable brand: Color = #667EEA;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable brand: Color = #667EEA;
 variable brandOklch: Color.Oklch = brand.to.oklch();
 variable lighter: Color = lighten(brandOklch, 20);
-variable hex: Color.Hex = lighter.to.hex();  // Back to hex for CSS
-```
+variable hex: Color.Hex = lighter.to.hex();  // Back to hex for CSS`}
+</TokenScriptCodeBlock>
 
 Supports: Hex, RGB, HSL, Oklch, P3, and custom color spaces.
 
@@ -124,8 +127,8 @@ Supports: Hex, RGB, HSL, Oklch, P3, and custom color spaces.
 
 Works with DTCG JSON - the emerging standard for design tokens:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing.base": {
     "$type": "dimension",
     "$value": "8px"
@@ -134,8 +137,8 @@ Works with DTCG JSON - the emerging standard for design tokens:
     "$type": "dimension",
     "$value": "{spacing.base} * 2"
   }
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 TokenScript evaluates the expressions in `$value` fields.
 
@@ -206,8 +209,8 @@ Use it how you want:
 
 **Solution:** Generate dark theme from light theme automatically:
 
-```tokenscript
-// Light theme (source of truth)
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`// Light theme (source of truth)
 variable lightBg: Color = #FFFFFF;
 variable lightText: Color = #000000;
 
@@ -218,8 +221,8 @@ variable darkText: Color = invert(lightText);
 // Ensure accessibility
 if (contrast(darkText, darkBg) < 4.5) [
   darkText = lighten(darkText, 20);
-]
-```
+]`}
+</TokenScriptCodeBlock>
 
 ### Use Case 2: Responsive Spacing Scale
 
@@ -227,16 +230,16 @@ if (contrast(darkText, darkBg) < 4.5) [
 
 **Solution:** Define once, compute everywhere:
 
-```tokenscript
-variable baseSpacing: NumberWithUnit = 4px;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable baseSpacing: NumberWithUnit = 4px;
 variable scale: Number = 1.5;
 
 variable xs: NumberWithUnit = baseSpacing;
 variable sm: NumberWithUnit = baseSpacing * scale;
 variable md: NumberWithUnit = sm * scale;
 variable lg: NumberWithUnit = md * scale;
-variable xl: NumberWithUnit = lg * scale;
-```
+variable xl: NumberWithUnit = lg * scale;`}
+</TokenScriptCodeBlock>
 
 Change `baseSpacing` once → entire scale updates automatically.
 
@@ -246,15 +249,15 @@ Change `baseSpacing` once → entire scale updates automatically.
 
 **Solution:** Generate programmatically:
 
-```tokenscript
-variable brand: Color = #0066FF;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable brand: Color = #0066FF;
 
 variable brand50: Color = lighten(brand, 45);
 variable brand100: Color = lighten(brand, 40);
 variable brand200: Color = lighten(brand, 30);
 // ... compute all 9 shades
-variable brand900: Color = darken(brand, 40);
-```
+variable brand900: Color = darken(brand, 40);`}
+</TokenScriptCodeBlock>
 
 Update brand color once → all shades regenerate.
 
@@ -264,8 +267,8 @@ Update brand color once → all shades regenerate.
 
 **Solution:** Convert automatically:
 
-```tokenscript
-variable baseSpacing: NumberWithUnit = 16px;
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`variable baseSpacing: NumberWithUnit = 16px;
 
 // For iOS (1pt = 1px on 1x displays)
 variable iosSpacing: NumberWithUnit = baseSpacing;  // 16pt
@@ -274,8 +277,8 @@ variable iosSpacing: NumberWithUnit = baseSpacing;  // 16pt
 variable androidSpacing: NumberWithUnit = baseSpacing;  // 16dp
 
 // Can also do explicit conversions
-variable remSpacing: NumberWithUnit = baseSpacing.convertTo("rem", 16);  // 1rem
-```
+variable remSpacing: NumberWithUnit = baseSpacing.convertTo("rem", 16);  // 1rem`}
+</TokenScriptCodeBlock>
 
 ---
 

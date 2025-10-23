@@ -4,14 +4,16 @@ description: Define color specifications, initializers, and conversions for the 
 sidebar_label: Color Schemas
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # Authoring Color Schemas
 
 Color schemas teach the interpreter how to instantiate, format, and convert color values. They are JSON documents validated by `ColorSpecificationSchema` (`src/interpreter/config/managers/color/schema.ts`) and executed by `ColorManager`.
 
 ## Schema Anatomy
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "name": "SRGB",
   "type": "color",
   "schema": {
@@ -24,11 +26,11 @@ Color schemas teach the interpreter how to instantiate, format, and convert colo
       "b": { "type": "number" }
     }
   },
-  "initializers": [ ... ],
-  "conversions": [ ... ],
+  "initializers": [],
+  "conversions": [],
   "description": "RGB color"
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `name`: Human-readable identifier (also used as subtype label, e.g., `Color.SRGB`).
 - `schema`: JSON schema describing attributes exposed for structured colors. `order` controls property formatting.
@@ -56,17 +58,17 @@ colorManager.register(
 
 Initializers allow TokenScript users to call functions like `srgb(255, 0, 0)`:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "title": "function",
   "keyword": "srgb",
-  "schema": { "type": "string", "pattern": "^rgb\\((\\d{1,3}),\\s*(\\d{1,3}),\\s*(\\d{1,3})\\)$" },
+  "schema": { "type": "string", "pattern": "^rgb\\\\((\\\\d{1,3}),\\\\s*(\\\\d{1,3}),\\\\s*(\\\\d{1,3})\\\\)$" },
   "script": {
     "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
-    "script": "variable color_parts: List = {input};\nvariable output: Color.SRGB;\noutput.r = color_parts.get(0);\n..."
+    "script": "variable color_parts: List = {input};\\nvariable output: Color.SRGB;\\noutput.r = color_parts.get(0);\\n..."
   }
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `keyword` becomes the callable name in TokenScript.
 - `{input}` resolves to either the parsed function argument list or a pre-validated value.
@@ -76,18 +78,18 @@ Initializers allow TokenScript users to call functions like `srgb(255, 0, 0)`:
 
 Conversions define `color.to.<Target>()` methods:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "description": "Converts HEX to RGB",
   "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/hex-color/0/",
   "target": "$self",
   "lossless": true,
   "script": {
     "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
-    "script": "variable hex: String = {input};\n..."
+    "script": "variable hex: String = {input};\\n..."
   }
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 - `source`: URI of the input format. `$self` refers to the schema being registered.
 - `target`: URI of the output format. `$self` indicates identity conversions.

@@ -4,6 +4,8 @@ description: Get TokenScript running and resolve your first design tokens in 5 m
 sidebar_label: Quick Start
 ---
 
+import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
+
 # 5-Minute Quick Start
 
 Get TokenScript up and running in 5 minutes. You'll install the CLI, resolve your first tokens, and understand the basics.
@@ -43,8 +45,8 @@ Don't want to install globally? Use `npx tokenscript` instead of `tokenscript` i
 
 Create a simple token file called `tokens.json`:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing": {
     "base": {
       "$type": "dimension",
@@ -69,8 +71,8 @@ Create a simple token file called `tokens.json`:
       "$value": "lighten({colors.primary}, 20)"
     }
   }
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 Now resolve all the references and expressions:
 
@@ -80,15 +82,15 @@ tokenscript parse_json --json tokens.json --output tokens-resolved.json
 
 **That's it!** Check `tokens-resolved.json`:
 
-```json
-{
+<TokenScriptCodeBlock mode="json" showResult={false}>
+{`{
   "spacing.base": "8px",
   "spacing.large": "16px",          // Computed: 8px * 2
   "spacing.xlarge": "24px",         // Computed: 16px * 1.5
   "colors.primary": "#0066FF",
   "colors.primaryLight": "#4D94FF"  // Computed: lightened version
-}
-```
+}`}
+</TokenScriptCodeBlock>
 
 :::info What Just Happened?
 TokenScript:
@@ -110,29 +112,30 @@ tokenscript interactive
 
 Now try some expressions:
 
-```tokenscript
-> variable base: NumberWithUnit = 8px;
-> base * 2
-"16px"
+<TokenScriptCodeBlock mode="script">
+{`variable base: NumberWithUnit = 8px;
+base * 2`}
+</TokenScriptCodeBlock>
 
-> variable color: Color = #0066FF;
-> lighten(color, 20)
-"#4D94FF"
+<TokenScriptCodeBlock mode="script">
+{`variable color: Color = #0066FF;
+lighten(color, 20)`}
+</TokenScriptCodeBlock>
 
-> variable nums: List = 1, 2, 3, 4, 5;
-> sum(nums)
-15
-```
+<TokenScriptCodeBlock mode="script">
+{`variable nums: List = 1, 2, 3, 4, 5;
+sum(nums)`}
+</TokenScriptCodeBlock>
 
 Type `exit` when you're done.
 
 :::tip REPL Pro Tip
 Use `set_variables` to define reusable references:
-```tokenscript
-> set_variables spacing.base=8px
-> {spacing.base} * 3
-"24px"
-```
+
+<TokenScriptCodeBlock mode="script">
+{`variable spacing_base: NumberWithUnit = 8px;
+spacing_base * 3`}
+</TokenScriptCodeBlock>
 :::
 
 ---
@@ -167,6 +170,21 @@ const result = interpreter.interpret();
 console.log(result?.toString());
 // Output: "8px, 12px, 18px, 27px, 40.5px"
 ```
+
+Or try it directly:
+
+<TokenScriptCodeBlock mode="script">
+{`variable base: NumberWithUnit = 8px;
+variable scale: Number = 1.5;
+
+variable xs: NumberWithUnit = base;
+variable sm: NumberWithUnit = base * scale;
+variable md: NumberWithUnit = sm * scale;
+variable lg: NumberWithUnit = md * scale;
+variable xl: NumberWithUnit = lg * scale;
+
+return [xs, sm, md, lg, xl].join(", ");`}
+</TokenScriptCodeBlock>
 
 Run it:
 
@@ -305,28 +323,29 @@ tokenscript evaluate_standard_compliance --test-dir ./tests
 
 ### Common TokenScript Patterns
 
-```tokenscript
-# Variables with types
+<TokenScriptCodeBlock mode="script" showResult={false}>
+{`// Variables with types
 variable spacing: NumberWithUnit = 8px;
 variable scale: Number = 1.5;
 
-# Expressions
+// Expressions
 variable large: NumberWithUnit = spacing * scale;
 
-# Functions
+// Functions
 variable lighter: Color = lighten(#0066FF, 20);
 variable rounded: Number = round(3.14159, 2);
 
-# Lists
+// Lists
 variable colors: List = #FF0000, #00FF00, #0000FF;
 
-# Control flow
+// Control flow
+variable condition: Boolean = true;
 if (condition) [
   return "yes";
 ] else [
   return "no";
-]
-```
+]`}
+</TokenScriptCodeBlock>
 
 ---
 
