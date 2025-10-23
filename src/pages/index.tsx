@@ -72,8 +72,9 @@ while (step <= 9) [
   step = step + 1;
 ]
 
+
 return ramp;
-// Generates: 9 perfectly balanced color values from light to dark`}
+`}
             </TokenScriptCodeBlock>
           </div>
         </div>
