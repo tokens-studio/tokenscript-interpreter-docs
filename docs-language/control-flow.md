@@ -21,9 +21,9 @@ TokenScript executes statements sequentially within a single global scope. The i
 variable condition: Boolean = true;
 
 if (condition) [
-  result = 1;
+    result = 1;
 ] else [
-  result = 0;
+    result = 0;
 ];
 
 return result;`}
@@ -43,11 +43,11 @@ return result;`}
 variable padding: NumberWithUnit;
 
 if (size == "small") [
-  padding = 8px;
+    padding = 8px;
 ] elif (size == "large") [
-  padding = 24px;
+    padding = 24px;
 ] else [
-  padding = 16px;
+    padding = 16px;
 ];`}
 </TokenScriptCodeBlock>
 
@@ -65,8 +65,8 @@ if (size == "small") [
 variable values: List = [];
 
 while (i < 5) [
-  values = values.append(i);
-  i = i + 1;
+   values = values.append(i);
+   i = i + 1;
 ];`}
 </TokenScriptCodeBlock>
 
