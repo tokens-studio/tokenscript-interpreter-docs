@@ -80,7 +80,6 @@ async function main(): Promise<void> {
   // Essential schemas needed for the docs
   const essentialColorSchemas = [
     'hsl-color',
-    'hex-color',
     'srgb-color',
     'rgba-color',
   ];
