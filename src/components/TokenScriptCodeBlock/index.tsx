@@ -10,6 +10,7 @@ import {
 } from '@tokens-studio/tokenscript-interpreter';
 import Prism from 'prismjs';
 import tokenscriptLanguage from '@site/src/theme/prism-tokenscript';
+import OutputPanel from './OutputPanel';
 import styles from './styles.module.css';
 import './prism-tokenscript-theme.css';
 
@@ -52,23 +53,24 @@ export default function TokenScriptCodeBlock({
   }, [code, mode]);
 
   // Execute code once and memoize the result
-  const { result, error } = useMemo(() => {
+  const { result, error, colorManager } = useMemo(() => {
     if (!showResult) {
-      return { result: null, error: null };
+      return { result: null, error: null, colorManager: undefined };
     }
 
     try {
       let interpretedResult: any;
+      let managerInstance: ColorManager | undefined;
 
       if (mode === 'script') {
         // Script mode: use Lexer, Parser, and Interpreter
-        const colorManager = new ColorManager();
+        const colorMgr = new ColorManager();
         const functionsManager = new FunctionsManager();
         
         // Register color schemas
         for (const [uri, spec] of colorSchemas.entries()) {
           try {
-            colorManager.register(uri, spec);
+            colorMgr.register(uri, spec);
           } catch (error) {
             console.warn(`Failed to register color schema ${uri}:`, error);
           }
@@ -83,7 +85,7 @@ export default function TokenScriptCodeBlock({
           }
         }
         
-        const config = new Config({ colorManager, functionsManager });
+        const config = new Config({ colorManager: colorMgr, functionsManager });
 
         const lexer = new Lexer(code);
         const ast = new Parser(lexer).parse();
@@ -92,16 +94,18 @@ export default function TokenScriptCodeBlock({
           config,
         });
         interpretedResult = interpreter.interpret();
+        managerInstance = colorMgr;
       } else {
         // JSON mode: use interpretTokens
         interpretedResult = interpretTokens(code);
       }
       
-      return { result: interpretedResult, error: null };
+      return { result: interpretedResult, error: null, colorManager: managerInstance };
     } catch (err) {
       return { 
         result: null, 
-        error: err instanceof Error ? err.message : String(err) 
+        error: err instanceof Error ? err.message : String(err),
+        colorManager: undefined
       };
     }
   }, [code, showResult, mode, input, colorSchemas, functionSchemas]);
@@ -119,7 +123,9 @@ export default function TokenScriptCodeBlock({
   const handleCopyResult = async () => {
     if (!result) return;
     try {
-      const resultText = formatResult(result);
+      const resultText = typeof result === 'object' && 'toString' in result 
+        ? result.toString() 
+        : JSON.stringify(result, null, 2);
       await navigator.clipboard.writeText(resultText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -128,33 +134,7 @@ export default function TokenScriptCodeBlock({
     }
   };
 
-  const formatResult = (value: any): string => {
-    if (value === null || value === undefined) {
-      return String(value);
-    }
-    if (typeof value === 'object') {
-      // Handle circular references and extract clean data
-      const replacer = (key: string, val: any) => {
-        // Skip internal config/manager references
-        if (key === 'config' || key === 'parentConfig' || key === 'colorManager' || key === 'functionsManager') {
-          return undefined;
-        }
-        // Extract primitive values from objects that have them
-        if (val && typeof val === 'object' && 'value' in val) {
-          return val.value;
-        }
-        return val;
-      };
-      
-      try {
-        return JSON.stringify(value, replacer, 2);
-      } catch (error) {
-        // Fallback if JSON.stringify still fails
-        return String(value);
-      }
-    }
-    return String(value);
-  };
+
 
   return (
     <div className={styles.container}>
@@ -197,19 +177,12 @@ export default function TokenScriptCodeBlock({
             )}
           </div>
           
-          {error && (
-            <div className={styles.error}>
-              <strong>❌ Error:</strong> {error}
-            </div>
-          )}
-          
-          {!error && result !== null && result !== undefined && (
-            <div className={styles.result}>
-              <pre>
-                <code>{formatResult(result)}</code>
-              </pre>
-            </div>
-          )}
+          <OutputPanel 
+            result={result}
+            error={error}
+            mode={mode}
+            colorManager={colorManager}
+          />
         </div>
       )}
     </div>

@@ -85,6 +85,160 @@ async function main(): Promise<void> {
     'rgba-color',
   ];
   
+  // Hardcoded CssColor schema (required for color conversions)
+  const cssColorSchema = {
+    "name": "CssColor",
+    "type": "color",
+    "description": "CSS color string representation",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "input": {
+          "type": "color"
+        }
+      },
+      "required": ["value", "input"],
+      "order": ["value", "input"],
+      "additionalProperties": false
+    },
+    "initializers": [],
+    "conversions": [
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/hex-color/0/",
+        "target": "$self",
+        "description": "Converts Hex to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable output: Color.CssColor;\noutput.value = {input};\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/rgb-color/0.0.1/",
+        "target": "$self",
+        "description": "Converts RGB to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"rgb(\" {input}.r \", \" {input}.g \", \" {input}.b \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input}\n;\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0.1.0/",
+        "target": "$self",
+        "description": "Converts SRGB to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"rgb(\" {input}.r \", \" {input}.g \", \" {input}.b \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input}\n;\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/rgba-color/0.0.1/",
+        "target": "$self",
+        "description": "Converts RGBA to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"rgba(\" {input}.r \", \" {input}.g \", \" {input}.b \", \" {input}.a \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input}\n;\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/hsl-color/0.0.1/",
+        "target": "$self",
+        "description": "Converts HSL to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"hsl(\" {input}.h \", \" {input}.s \"%, \" {input}.l \"%)\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input};\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/lrgb-color/0.0.1/",
+        "target": "$self",
+        "description": "Converts LRGB to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable r: Number = {input}.r * 255;\nvariable g: Number = {input}.g * 255;\nvariable b: Number = {input}.b * 255;\nvariable outputs: List = \"rgb(\" r \", \" g \", \" b \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input}\n;\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/rgb-color/0/",
+        "target": "$self",
+        "description": "Converts RGB to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"rgb(\" {input}.r \", \" {input}.g \", \" {input}.b \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input}\n;\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0.1.0/",
+        "target": "$self",
+        "description": "Converts SRGB to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"rgb(\" {input}.r \", \" {input}.g \", \" {input}.b \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input}\n;\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/rgba-color/0.0.1/",
+        "target": "$self",
+        "description": "Converts RGBA to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"rgba(\" {input}.r \", \" {input}.g \", \" {input}.b \", \" {input}.a \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input}\n;\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/hsl-color/0/",
+        "target": "$self",
+        "description": "Converts HSL to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"hsl(\" {input}.h \", \" {input}.s \"%, \" {input}.l \"%)\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input};\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/lrgb-color/0/",
+        "target": "$self",
+        "description": "Converts LRGB to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable r: Number = {input}.r * 255;\nvariable g: Number = {input}.g * 255;\nvariable b: Number = {input}.b * 255;\nvariable outputs: List = \"rgb(\" r \", \" g \", \" b \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input}\n;\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/oklch-color/0.0.1/",
+        "target": "$self",
+        "description": "Converts OKLCH to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"oklch(\" {input}.l \" \" {input}.c \" \" {input}.h \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input};\nreturn output;"
+        }
+      },
+      {
+        "source": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/oklch-color/0/",
+        "target": "$self",
+        "description": "Converts OKLCH to CssColor",
+        "lossless": true,
+        "script": {
+          "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+          "script": "variable outputs: List = \"oklch(\" {input}.l \" \" {input}.c \" \" {input}.h \")\";\nvariable output: Color.CssColor;\noutput.value = outputs.join();\noutput.input = {input};\nreturn output;"
+        }
+      }
+    ]
+  };
+  
   // Fetch essential color schemas
   const colorSchemasMap = new Map<string, any>();
   console.log('Fetching color schemas:');
@@ -96,6 +250,10 @@ async function main(): Promise<void> {
       console.log(`  ✓ ${slug}`);
     }
   }
+  
+  // Add the hardcoded CssColor schema
+  colorSchemasMap.set('https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/css-color/0/', cssColorSchema);
+  console.log('  ✓ css-color (hardcoded)');
   
   // Fetch function schemas (empty for now)
   const functionSchemasMap = new Map<string, any>();
