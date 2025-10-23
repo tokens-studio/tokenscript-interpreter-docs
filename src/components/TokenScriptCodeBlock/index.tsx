@@ -119,7 +119,9 @@ export default function TokenScriptCodeBlock({
         managerInstance = colorMgr;
       } else {
         // JSON mode: use interpretTokens
-        interpretedResult = interpretTokens(fullCode);
+        // Parse JSON string to object first
+        const parsedJson = JSON.parse(fullCode);
+        interpretedResult = interpretTokens(parsedJson);
       }
       
       return { result: interpretedResult, error: null, colorManager: managerInstance };
