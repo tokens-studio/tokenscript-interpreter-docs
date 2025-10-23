@@ -16,10 +16,10 @@ Before diving into TokenScript, let's establish the core concepts and terminolog
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "color.primary": "#0066FF",
-  "spacing.base": "8px",
-  "font.size.body": "16px",
-  "border.radius.small": "4px"
+    "color.primary": "#0066FF",
+    "spacing.base": "8px",
+    "font.size.body": "16px",
+    "border.radius.small": "4px"
 }`}
 </TokenScriptCodeBlock>
 
@@ -58,9 +58,9 @@ Think of them as the **design DNA** of your product - the single source of truth
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "spacing.small": "8px",
-  "spacing.medium": "16px",  // must maintain manually
-  "spacing.large": "24px"    // must maintain manually
+    "spacing.small": "8px",
+    "spacing.medium": "16px",  // must maintain manually
+    "spacing.large": "24px"    // must maintain manually
 }`}
 </TokenScriptCodeBlock>
 
@@ -68,9 +68,9 @@ Think of them as the **design DNA** of your product - the single source of truth
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "spacing.small": "8px",
-  "spacing.medium": "{spacing.small} * 2",    // computed!
-  "spacing.large": "{spacing.medium} * 1.5"   // computed!
+    "spacing.small": "8px",
+    "spacing.medium": "{spacing.small} * 2",    // computed!
+    "spacing.large": "{spacing.medium} * 1.5"   // computed!
 }`}
 </TokenScriptCodeBlock>
 
@@ -102,21 +102,10 @@ return large;`}
 
 **Token resolution** is the process of turning token definitions with references into concrete values.
 
-**Before resolution:**
-
-<TokenScriptCodeBlock mode="json" showResult={false}>
+<TokenScriptCodeBlock mode="json">
 {`{
-  "spacing.base": "8px",
-  "spacing.large": "{spacing.base} * 2"
-}`}
-</TokenScriptCodeBlock>
-
-**After resolution:**
-
-<TokenScriptCodeBlock mode="json" showResult={false}>
-{`{
-  "spacing.base": "8px",
-  "spacing.large": "16px"
+    "spacing.base": "8px",
+    "spacing.large": "{spacing.base} * 2"
 }`}
 </TokenScriptCodeBlock>
 
@@ -196,11 +185,11 @@ DTCG is the **emerging standard** for design tokens. TokenScript natively suppor
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "spacing-base": {
-    "$type": "dimension",
-    "$value": "8px",
-    "$description": "Base spacing unit"
-  }
+    "spacing-base": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$description": "Base spacing unit"
+    }
 }`}
 </TokenScriptCodeBlock>
 
@@ -247,8 +236,8 @@ In this mode, TokenScript resolves expressions embedded in token definitions:
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "spacing.base": "8px",
-  "spacing.large": "{spacing.base} * 2"
+    "spacing.base": "8px",
+    "spacing.large": "{spacing.base} * 2"
 }`}
 </TokenScriptCodeBlock>
 
@@ -291,10 +280,10 @@ In this mode, TokenScript resolves expressions embedded in token definitions:
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "color.brand": "#0066FF",
-  "color.brandLight": "lighten({color.brand}, 20)",
-  "spacing.base": "8px",
-  "spacing.large": "{spacing.base} * 2"
+    "color.brand": "#0066FF",
+    "color.brandLight": "lighten({color.brand}, 20)",
+    "spacing.base": "8px",
+    "spacing.large": "{spacing.base} * 2"
 }`}
 </TokenScriptCodeBlock>
 
@@ -307,10 +296,10 @@ tokenscript parse_json --json tokens.json --output tokens-resolved.json
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
-  "color.brand": "#0066FF",
-  "color.brandLight": "#4D94FF",    // Computed!
-  "spacing.base": "8px",
-  "spacing.large": "16px"            // Computed!
+    "color.brand": "#0066FF",
+    "color.brandLight": "#4D94FF",    // Computed!
+    "spacing.base": "8px",
+    "spacing.large": "16px"            // Computed!
 }`}
 </TokenScriptCodeBlock>
 
@@ -342,9 +331,9 @@ variable largeSpacing: NumberWithUnit = 8px * scale;
 // Functions (token transformations)
 variable isDarkMode: Boolean = false;
 if (isDarkMode) [
-  return invert(baseColor);
+    return invert(baseColor);
 ] else [
-  return baseColor;
+    return baseColor;
 ]`}
 </TokenScriptCodeBlock>
 
