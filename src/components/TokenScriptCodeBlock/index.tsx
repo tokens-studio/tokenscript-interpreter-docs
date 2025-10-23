@@ -14,6 +14,8 @@ import tokenscriptLanguage from '@site/src/theme/prism-tokenscript';
 import OutputPanel from './OutputPanel';
 import styles from './styles.module.css';
 import './prism-tokenscript-theme.css';
+import { COLOR_SCHEMAS, FUNCTION_SCHEMAS } from "@site/src/lib/schemas.generated";
+
 
 // Register the TokenScript language with Prism
 if (typeof window !== 'undefined') {
@@ -39,8 +41,8 @@ export default function TokenScriptCodeBlock({
   title,
   mode = 'json',
   input = {},
-  colorSchemas = new Map(),
-  functionSchemas = new Map(),
+  colorSchemas = COLOR_SCHEMAS,
+  functionSchemas = FUNCTION_SCHEMAS,
   lines,
 }: TokenScriptCodeBlockProps) {
   // Use children if provided, otherwise fall back to code prop
@@ -93,8 +95,8 @@ export default function TokenScriptCodeBlock({
             console.warn(`Failed to register color schema ${uri}:`, error);
           }
         }
-        
         // Register function schemas
+        
         for (const [uri, spec] of functionSchemas.entries()) {
           try {
             functionsManager.register(spec.keyword, spec);
@@ -104,6 +106,8 @@ export default function TokenScriptCodeBlock({
         }
         
         const config = new Config({ colorManager: colorMgr, functionsManager });
+
+        console.log(config);
 
         const lexer = new Lexer(fullCode);
         const ast = new Parser(lexer).parse();

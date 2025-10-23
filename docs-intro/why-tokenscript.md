@@ -89,11 +89,19 @@ TokenScript is a **type-safe language for design token logic** that integrates s
 
 Colors, units, and design concepts are first-class citizens:
 
-<TokenScriptCodeBlock mode="script" showResult={false}>
+<TokenScriptCodeBlock mode="script" lines={{ end: 5 }}>
 {`variable primary: Color = #0066FF;
-variable lighter: Color = lighten(primary, 20);
+variable lighter: Color.Hsl = lighten(primary, 20);
 variable spacing: NumberWithUnit = 8px;
-variable large: NumberWithUnit = spacing * 2;`}
+variable large: NumberWithUnit = spacing * 2;
+
+variable output: Dictionary;
+output.set("primary", primary);
+output.set("lighter", lighter);
+output.set("spacing", spacing);
+output.set("large", large);
+output;
+`}
 </TokenScriptCodeBlock>
 
 No string parsing. No unit confusion. Just works.

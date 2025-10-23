@@ -254,9 +254,72 @@ async function main(): Promise<void> {
   colorSchemasMap.set('https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/css-color/0/', cssColorSchema);
   console.log('  ✓ css-color (hardcoded)');
   
-  // Fetch function schemas (empty for now)
+  // Function schemas for color manipulation
   const functionSchemasMap = new Map<string, any>();
-  console.log('\nFunction schemas: 0 (none configured yet)');
+  
+  // Relative Darken function
+  const relativeDarkenSchema = {
+    "name": "Relative Darken",
+    "type": "function",
+    "input": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "color",
+          "description": "The base color to darken."
+        },
+        "percentage": {
+          "type": "number",
+          "description": "The percentage amount to darken the color (0-100)."
+        }
+      }
+    },
+    "script": {
+      "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+      "script": "variable input: List = {input};\nvariable baseColor: Color = input.get(0);\nvariable percentage: Number = input.get(1);\n\n// Convert to HSL for lightness manipulation\nvariable hslColor: Color.Hsl = baseColor.to.hsl();\n\n// Calculate new lightness (reduce by percentage)\nvariable currentLightness: Number = hslColor.l;\nvariable darkenAmount: Number = currentLightness * (percentage / 100);\nvariable newLightness: Number = currentLightness - darkenAmount;\n\n// Ensure lightness doesn't go below 0\nif (newLightness < 0) [\n    newLightness = 0;\n]\n\n// Create and return the darkened color\nvariable darkenedColor: Color.Hsl = hsl(hslColor.h, hslColor.s, newLightness);\nreturn darkenedColor;"
+    },
+    "keyword": "darken",
+    "description": "Darkens a color by a relative percentage amount by reducing its lightness value.",
+    "requirements": [
+      "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/hsl-color/0.0.1/",
+      "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0.0.1/"
+    ]
+  };
+  
+  // Relative Lighten function
+  const relativeLightenSchema = {
+    "name": "Relative Lighten",
+    "type": "function",
+    "input": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "color",
+          "description": "The base color to lighten."
+        },
+        "percentage": {
+          "type": "number",
+          "description": "The percentage amount to lighten the color (0-100)."
+        }
+      }
+    },
+    "script": {
+      "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
+      "script": "variable input: List = {input};\nvariable baseColor: Color = input.get(0);\nvariable percentage: Number = input.get(1);\n\n// Convert to HSL for lightness manipulation\nvariable hslColor: Color.Hsl = baseColor.to.hsl();\n\n// Calculate new lightness (increase by percentage)\nvariable currentLightness: Number = hslColor.l;\nvariable lightenAmount: Number = (100 - currentLightness) * (percentage / 100);\nvariable newLightness: Number = currentLightness + lightenAmount;\n\n// Ensure lightness doesn't go above 100\nif (newLightness > 100) [\n    newLightness = 100;\n]\n\n// Create and return the lightened color\nvariable output: Color.Hsl;\noutput.h = hslColor.h;\noutput.s = hslColor.s;\noutput.l = newLightness;\nreturn output;"
+    },
+    "keyword": "lighten",
+    "description": "Lightens a color by a relative percentage amount by increasing its lightness value.",
+    "requirements": [
+      "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/hsl-color/0.0.1/",
+      "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0.0.1/"
+    ]
+  };
+  
+  functionSchemasMap.set('https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/function/relative-darken/0/', relativeDarkenSchema);
+  functionSchemasMap.set('https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/function/relative-lighten/0/', relativeLightenSchema);
+  console.log('\nFunction schemas:');
+  console.log('  ✓ relative-darken');
+  console.log('  ✓ relative-lighten');
   
   // Generate TypeScript file content
   const fileContent = `// Auto-generated file - DO NOT EDIT
