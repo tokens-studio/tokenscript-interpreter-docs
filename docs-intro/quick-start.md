@@ -122,23 +122,6 @@ base * 2`}
 lighten(color, 20)`}
 </TokenScriptCodeBlock>
 
-<TokenScriptCodeBlock mode="script">
-{`variable nums: List = 1, 2, 3, 4, 5;
-sum(nums)`}
-</TokenScriptCodeBlock>
-
-Type `exit` when you're done.
-
-:::tip REPL Pro Tip
-Use `set_variables` to define reusable references:
-
-<TokenScriptCodeBlock mode="script">
-{`variable spacing_base: NumberWithUnit = 8px;
-spacing_base * 3`}
-</TokenScriptCodeBlock>
-:::
-
----
 
 ## Step 4: Write Your First Script
 
