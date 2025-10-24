@@ -177,11 +177,7 @@ if (x > 5) [
 return x * 2;               // Statement: returns value`}
 </TokenScriptCodeBlock>
 
-### 6. **DTCG (Design Token Community Group)**
-
-DTCG is the **emerging standard** for design tokens. TokenScript natively supports DTCG format.
-
-**DTCG example:**
+### 6. **JSON**
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
@@ -194,7 +190,7 @@ DTCG is the **emerging standard** for design tokens. TokenScript natively suppor
 </TokenScriptCodeBlock>
 
 TokenScript can:
-- Read DTCG JSON
+- Read JSON
 - Evaluate expressions in `$value` fields
 - Preserve `$type`, `$description`, and other metadata
 
@@ -230,7 +226,7 @@ return result;`}
 
 ### Mode 2: Token Resolution Mode
 
-**Use case:** Resolving design token files (DTCG JSON)
+**Use case:** Resolving design token files
 
 In this mode, TokenScript resolves expressions embedded in token definitions:
 
@@ -249,7 +245,7 @@ In this mode, TokenScript resolves expressions embedded in token definitions:
 - 🟡 Limited to expressions (no multi-line scripts)
 
 **When to use:**
-- Processing DTCG JSON files
+- Processing JSON files
 - Resolving token sets
 - Build-time token generation
 
@@ -397,7 +393,7 @@ variable lightest: Color = lighten(lighter, 20);`}
 **Reality:** Even small projects benefit from computed tokens and type safety.
 
 ### ❌ "I can't use my existing tokens"
-**Reality:** TokenScript reads standard DTCG JSON. Your existing tokens work as-is.
+**Reality:** TokenScript reads standard JSON. Your existing tokens work as-is.
 
 ---
 

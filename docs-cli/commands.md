@@ -30,7 +30,7 @@ The CLI is built with Commander (`src/cli.ts`) and ships the following commands:
 
 | Option              | Description                                              |
 |---------------------|----------------------------------------------------------|
-| `--tokenset <path>` | Path to a ZIP archive containing DTCG token sets.        |
+| `--tokenset <path>` | Path to a ZIP archive containing token sets.             |
 | `--output <path>`   | Output file for resolved tokens (`output.json` default). |
 
 Unzips the token set, resolves tokens using `TokenSetResolver`, and writes the result.
@@ -50,7 +50,7 @@ Generates permutations across theme dimensions and resolves each variation.
 
 | Option            | Description                          |
 |-------------------|--------------------------------------|
-| `--json <path>`   | Path to a DTCG JSON file.            |
+| `--json <path>`   | Path to a JSON file.                 |
 | `--output <path>` | Output file (`output.json` default). |
 
 Resolves tokens directly from a JSON file without packaging into a ZIP.

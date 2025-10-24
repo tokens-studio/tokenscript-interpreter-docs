@@ -425,7 +425,7 @@ console.log(result?.toString());  // "[16px, 24px]"
 
 :::tip References in Different Modes
 - **Interpreter mode** (like above): References are simple names: `{baseSpacing}`
-- **Token resolution mode** (DTCG JSON): References can use dots: `{spacing.base}`
+- **Token resolution mode** References can use dots: `{spacing.base}`
 
 [Learn more about modes](/intro/concepts#two-modes-of-operation)
 :::

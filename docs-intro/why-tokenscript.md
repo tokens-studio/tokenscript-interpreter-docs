@@ -75,13 +75,12 @@ $spacing-large: $spacing-base * 2;
 - ❌ Can't use in JavaScript, native apps, etc.
 - ❌ No color space conversions
 - ❌ Poor tooling for design tokens
-- ❌ Not DTCG compliant
 
 ---
 
 ## The Solution: TokenScript
 
-TokenScript is a **type-safe language for design token logic** that integrates seamlessly with DTCG (Design Token Community Group) standards.
+TokenScript is a **type-safe language for design token logic** that integrates seamlessly with token files.
 
 ### What makes TokenScript different?
 
@@ -231,7 +230,7 @@ variable remSpacing: NumberWithUnit = baseSpacing.convertTo("rem", 16);  // 1rem
 |----------------------|------------------|------------------|---------------|---------------|------------------|
 | **Type Safety**      | ✅ Built-in      | ❌ No            | ❌ No         | ❌ No         | 🟡 DIY           |
 | **Color Spaces**     | ✅ Oklch, P3+    | 🟡 Basic         | 🟡 Basic      | 🟡 Limited    | 🟡 DIY           |
-| **DTCG Standard**    | ✅ Native        | 🟡 Plugin        | ❌ No         | N/A           | 🟡 DIY           |
+| **JSON**             | ✅ Native        | 🟡 Plugin        | ❌ No         | N/A           | 🟡 DIY           |
 | **Logic/Conditions** | ✅ Full language | 🟡 Transforms    | 🟡 Limited    | ❌ No         | ✅ Yes (custom)  |
 | **Embeddable**       | ✅ CLI + API     | 🟡 CLI mainly    | 🟡 CLI mainly | N/A           | 🟡 DIY           |
 | **Learning Curve**   | 🟡 Moderate      | 🟡 Moderate      | 🟢 Easy       | 🟢 Easy       | 🔴 High (custom) |
@@ -241,7 +240,7 @@ variable remSpacing: NumberWithUnit = baseSpacing.convertTo("rem", 16);  // 1rem
 
 ## What Can You Build With TokenScript?
 
--  **Design token resolvers** - Turn DTCG JSON into platform-specific formats
+-  **Design token resolvers** - Turn JSON into platform-specific formats
 -  **Theme generators** - Auto-generate theme variations
 -  **Color tools** - Build color palette generators
 -  **Design system validators** - Check token consistency

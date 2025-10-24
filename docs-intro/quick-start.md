@@ -203,7 +203,7 @@ npx tsx generate-spacing.ts
 
 #### 1. Resolve Your Own Tokens
 
-Replace `tokens.json` with your actual DTCG token file:
+Replace `tokens.json` with your actual JSON token file:
 
 ```bash
 tokenscript parse_json --json ./your-tokens.json --output ./dist/resolved.json
