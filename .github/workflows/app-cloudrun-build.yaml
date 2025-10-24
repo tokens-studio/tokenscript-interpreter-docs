@@ -67,7 +67,6 @@ jobs:
         SERVICE_PREFIX="${{ inputs.service-name-prefix }}"
         BASE_NAME="${{vars.SERVICE_NAME}}"
         SENTRY_AUTH_TOKEN=${{secrets.SENTRY_AUTH_TOKEN}}
-        GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
         # Convert all GitHub vars to build args
         BUILD_ARGS=""
         for var in $(echo '${{ toJSON(vars) }}' | jq -r 'to_entries | .[] | @base64'); do
@@ -87,6 +86,6 @@ jobs:
         echo "Building image with args: $BUILD_ARGS"
     
         IMAGE="${REPO}/${SERVICE_PREFIX:+$SERVICE_PREFIX-}${BASE_NAME}"
-        eval docker build -t ${IMAGE}:${SHA} . --file ${{ inputs.dockerfile }} --secret github_token=${GITHUB_TOKEN} ${BUILD_ARGS}
+        eval docker build -t ${IMAGE}:${SHA} . --file ${{ inputs.dockerfile }} ${BUILD_ARGS}
         docker push ${IMAGE}:${SHA} 
         echo "image_tag=${IMAGE}:${SHA}" >> $GITHUB_OUTPUT
