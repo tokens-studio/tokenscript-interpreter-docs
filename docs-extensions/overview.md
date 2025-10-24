@@ -33,12 +33,6 @@ All extensions are defined in **pure JSON** - no code compilation required. This
 - ✅ Version-controllable
 - ✅ Product-specific without forking
 
-## Testing Extensions
-
-Learn how to test your custom extensions:
-
-[→ Testing Guide](./testing)
-
 ## Coming Soon
 
 More detailed guides and examples are being added. Check back soon!
