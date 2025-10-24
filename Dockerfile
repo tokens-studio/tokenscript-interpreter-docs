@@ -9,8 +9,7 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Install dependencies with GitHub token authentication
-RUN npm config set @tokens-studio:registry https://npm.pkg.github.com && \
-    npm install --no-audit --no-fund
+RUN npm install --no-audit --no-fund
 
 # Copy source files
 COPY . .
