@@ -12,7 +12,7 @@ TokenScript is a domain-specific language for design tokens that brings logic, t
 
 ## The Problem: Static Tokens Aren't Enough
 
-### Design tokens started simple...
+### Design tokens started simple…
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
@@ -32,7 +32,7 @@ But real design systems need more:
 
 ### The current workarounds
 
-**Option 1: Manual maintenance** 😫
+**Option 1: Manual maintenance**
 
 <TokenScriptCodeBlock mode="json" showResult={false}>
 {`{
@@ -44,12 +44,14 @@ But real design systems need more:
 </TokenScriptCodeBlock>
 
 **Problems:**
+
 - ❌ Error-prone manual updates
 - ❌ No single source of truth
 - ❌ Scales poorly (100+ tokens = chaos)
 - ❌ Hard to maintain consistency
 
-**Option 2: Build-time scripts** 🤷
+**Option 2: Build-time scripts**
+
 ```javascript
 // tokens-build.js
 const tokens = require('./tokens.json');
@@ -58,25 +60,25 @@ tokens['spacing.large'] = parseInt(tokens['spacing.base']) * 2 + 'px';
 ```
 
 **Problems:**
+
 - ❌ Custom code for every project
 - ❌ No type safety (easy to break)
-- ❌ Hard to share/reuse
+- ❌ Hard to share & reuse
 - ❌ Debugging is painful
 - ❌ No standard format
 
-**Option 3: CSS/SCSS variables** 🎨
-```scss
-$spacing-base: 8px;
-$spacing-large: $spacing-base * 2;
+**Option 3: CSS variables**
+
+```css
+--spacing-base: 8px;
+--spacing-large: calc(var(--spacing-base) * 2);
 ```
 
 **Problems:**
+
 - ❌ Limited to CSS/SCSS ecosystems
-- ❌ Can't use in JavaScript, native apps, etc.
 - ❌ No color space conversions
 - ❌ Poor tooling for design tokens
-
----
 
 ## The Solution: TokenScript
 
@@ -84,7 +86,7 @@ TokenScript is a **type-safe language for design token logic** that integrates s
 
 ### What makes TokenScript different?
 
-#### 1. **Design-Native Types** 🎨
+#### 1. **Design-Native Types**
 
 Colors, units, and design concepts are first-class citizens:
 
@@ -105,7 +107,7 @@ output;
 
 No string parsing. No unit confusion. Just works.
 
-#### 2. **Type Safety** ✅
+#### 2. **Type Safety**
 
 Catch errors before they break your design:
 
@@ -117,7 +119,7 @@ variable result: NumberWithUnit = base * scale;  // ✅ Works! Result: 12px
 variable broken: NumberWithUnit = base + "hello";  // ❌ Error at evaluation!`}
 </TokenScriptCodeBlock>
 
-#### 3. **Powerful Color Management** 🌈
+#### 3. **Powerful Color Management**
 
 Work in any color space with automatic conversions:
 
@@ -128,7 +130,7 @@ return lighter.to.oklch();
 `}
 </TokenScriptCodeBlock>
 
-#### 4. **Standards-Based** 📋
+#### 4. **Standards-Based**
 
 <TokenScriptCodeBlock mode="json">
 {`{
@@ -143,15 +145,15 @@ return lighter.to.oklch();
 }`}
 </TokenScriptCodeBlock>
 
-## Real-World Use Cases
+## Use Cases
 
-### Use Case 1: Automated Theme Generation
+### Automated Theme Generation
 
 **Problem:** Manually maintaining light and dark themes is error-prone.
 
 **Solution:** Generate dark theme from light theme automatically:
 
-<TokenScriptCodeBlock mode="script" showResult={false}>
+<TokenScriptCodeBlock mode="script">
 {`// Light theme (source of truth)
 variable lightBg: Color = #FFFFFF;
 variable lightText: Color = #000000;
@@ -166,13 +168,13 @@ if (contrast(darkText, darkBg) < 4.5) [
 ]`}
 </TokenScriptCodeBlock>
 
-### Use Case 2: Responsive Spacing Scale
+### Responsive Spacing Scale
 
 **Problem:** Spacing needs to scale proportionally across breakpoints.
 
 **Solution:** Define once, compute everywhere:
 
-<TokenScriptCodeBlock mode="script" showResult={false}>
+<TokenScriptCodeBlock mode="script" lines={{ end: 8 }}>
 {`variable baseSpacing: NumberWithUnit = 4px;
 variable scale: Number = 1.5;
 
@@ -180,12 +182,20 @@ variable xs: NumberWithUnit = baseSpacing;
 variable sm: NumberWithUnit = baseSpacing * scale;
 variable md: NumberWithUnit = sm * scale;
 variable lg: NumberWithUnit = md * scale;
-variable xl: NumberWithUnit = lg * scale;`}
+variable xl: NumberWithUnit = lg * scale;
+
+variable output: Dictionary;
+output.set("xs", xs);
+output.set("sm", sm);
+output.set("md", md);
+output.set("lg", lg);
+output.set("xl", xl);
+return output;`}
 </TokenScriptCodeBlock>
 
 Change `baseSpacing` once → entire scale updates automatically.
 
-### Use Case 3: Color Ramps
+### Color Ramps
 
 **Problem:** Need 9 shades of each color, consistently.
 
@@ -203,7 +213,7 @@ variable brand900: Color = darken(brand, 40);`}
 
 Update brand color once → all shades regenerate.
 
-### Use Case 4: Unit Conversion for Multi-Platform
+### Unit Conversion for Multi-Platform
 
 **Problem:** iOS needs `pt`, Android needs `dp`, web needs `px`.
 
@@ -222,22 +232,6 @@ variable androidSpacing: NumberWithUnit = baseSpacing;  // 16dp
 variable remSpacing: NumberWithUnit = baseSpacing.convertTo("rem", 16);  // 1rem`}
 </TokenScriptCodeBlock>
 
----
-
-## TokenScript vs. Alternatives
-
-| Feature              | TokenScript      | Style Dictionary | Theo          | CSS Variables | Custom Scripts   |
-|----------------------|------------------|------------------|---------------|---------------|------------------|
-| **Type Safety**      | ✅ Built-in      | ❌ No            | ❌ No         | ❌ No         | 🟡 DIY           |
-| **Color Spaces**     | ✅ Oklch, P3+    | 🟡 Basic         | 🟡 Basic      | 🟡 Limited    | 🟡 DIY           |
-| **JSON**             | ✅ Native        | 🟡 Plugin        | ❌ No         | N/A           | 🟡 DIY           |
-| **Logic/Conditions** | ✅ Full language | 🟡 Transforms    | 🟡 Limited    | ❌ No         | ✅ Yes (custom)  |
-| **Embeddable**       | ✅ CLI + API     | 🟡 CLI mainly    | 🟡 CLI mainly | N/A           | 🟡 DIY           |
-| **Learning Curve**   | 🟡 Moderate      | 🟡 Moderate      | 🟢 Easy       | 🟢 Easy       | 🔴 High (custom) |
-| **Extensibility**    | ✅ JSON schemas  | 🟡 Transforms    | 🟡 Limited    | ❌ No         | ✅ Full (custom) |
-
----
-
 ## What Can You Build With TokenScript?
 
 -  **Design token resolvers** - Turn JSON into platform-specific formats
@@ -249,15 +243,13 @@ variable remSpacing: NumberWithUnit = baseSpacing.convertTo("rem", 16);  // 1rem
 -  **CLI tools** - Automate token workflows
 -  **Token documentation** - Auto-generate docs from tokens
 
----
-
 ## Getting Started
 
 Ready to try TokenScript? Here's how:
 
 ### 1. **Quick Start (5 minutes)** 
 ```bash
-npm install @tokens-studio/tokenscript-interpreter
+npm install --save @tokens-studio/tokenscript-interpreter
 ```
 [Follow the Quick Start Guide](/intro/quick-start)
 
@@ -277,12 +269,4 @@ Embed the interpreter in your build pipeline.
   <a href="/intro/quick-start" class="button button--primary button--lg">
     Try the 5-Minute Quick Start
   </a>
-  <a href="/intro/installation" class="button button--secondary button--lg">
-    Installation Guide
-  </a>
 </div>
-
----
-
-**TokenScript**: Turn your design tokens into a living, type-safe system. 🚀
-
