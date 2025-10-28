@@ -90,7 +90,7 @@ TokenScript is a **type-safe language for design token logic** that integrates s
 
 Colors, units, and design concepts are first-class citizens:
 
-<TokenScriptCodeBlock mode="script" lines={{ end: 5 }}>
+<TokenScriptCodeBlock mode="script" showResult={false} lines={{ end: 5 }}>
 {`variable primary: Color = #0066FF;
 variable lighter: Color.Hsl = lighten(primary, 20);
 variable spacing: NumberWithUnit = 8px;
