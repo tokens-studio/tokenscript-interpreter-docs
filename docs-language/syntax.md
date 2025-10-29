@@ -8,13 +8,11 @@ import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
 
 # Lexical Syntax
 
-TokenScript uses a lightweight, whitespace-insensitive syntax optimized for expressing token derivations. This chapter outlines the lexical rules enforced by the lexer (`src/interpreter/lexer.ts`) and the structural expectations enforced by the parser (`src/interpreter/parser.ts`).
-
 ## Character Set & Identifiers
 
-- Source code is UTF-8. Identifiers may include standard ASCII letters, digits, hyphen (`-`), underscore (`_`), and extended Unicode characters (e.g., emoji).
+- Identifiers may include standard ASCII letters, digits, hyphen (`-`), underscore (`_`), and extended Unicode characters (e.g., emoji).
 - Identifiers must begin with an alphabetic or non-ASCII character (numbers are not allowed in the first position).
-- Identifiers are case-sensitive (`primaryColor` and `PrimaryColor` are distinct).
+- Identifiers are case-insensitive (`primaryColor` and `PrimaryColor` are treated equally).
 
 ## Whitespace & Newlines
 
@@ -23,7 +21,7 @@ TokenScript uses a lightweight, whitespace-insensitive syntax optimized for expr
 
 ## Comments
 
-- Single-line comments start with `//` and run to the end of the line. Block comments are not currently supported.
+- Single-line comments start with `//` and run to the end of the line. 
 
 <TokenScriptCodeBlock mode="script" showResult={false}>
 {`// A single-line comment
@@ -40,13 +38,11 @@ variable spacing: NumberWithUnit = 4px; // Trailing comments are allowed`}
 | Explicit Strings | `"quoted value"` or `'alternate quotes'` | Preserve whitespace and special characters. |
 | Booleans | `true`, `false` | Reserved keywords mapped to `Boolean`. |
 | Null | `null` | Reserved keyword mapped to `Null`. |
-| Undefined | `undefined` | Reserved keyword; the interpreter currently treats it as a literal string when encountered. |
 | Lists | `value1, value2, value3` | Comma-separated sequence; implicit lists use spaces when built by certain operations. |
 
 ## Units
 
-Numbers may be suffixed with a unit from `src/types.ts#SupportedFormats`, including `px`, `em`, `rem`, `vw`, `vh`, `pt`, `in`, `cm`, `mm`, `deg`, `%`. The lexer emits a `FORMAT` token, which the parser combines with the preceding numeric literal to produce an `ElementWithUnitNode`. At runtime the interpreter constructs a `NumberWithUnitSymbol`.
-
+Numbers may be suffixed with a units like `px`, `em`, `rem`, `vw`, `vh`, `pt`, `in`, `cm`, `mm`, `deg`, `%`.
 <TokenScriptCodeBlock mode="script" showResult={false}>
 {`variable padding: NumberWithUnit = 1.5rem;
 variable angle: NumberWithUnit = 45deg;`}
@@ -54,29 +50,24 @@ variable angle: NumberWithUnit = 45deg;`}
 
 ## References
 
-Wrap token names in braces to read values from the reference map provided to the interpreter or resolver:
-
-// TODO: in interpreter mode you can't use dot notation
+Wrap token paths in braces to read values from the references.
 
 <TokenScriptCodeBlock mode="script" showResult={false}>
-{`// Dot notation works in token resolution
-variable primaryColor: Color = {colors.primary};
+{`variable primaryColor: Color = {colors.primary};
 variable spacingLg: NumberWithUnit = {spacing.base} * 3;`}
 </TokenScriptCodeBlock>
-
-Nested references (e.g., `{theme.primary.color}`) are flattened during lexing.
 
 ## Reserved Keywords
 
 The following keywords cannot be used as identifiers:
 
-| Keyword | Purpose |
-| --- | --- |
-| `variable` | Starts a variable declaration. |
-| `if`, `elif`, `else` | Control flow branches. |
-| `while` | Loop construct. |
-| `return` | Exits the current block/expression. |
-| `true`, `false`, `null`, `undefined` | Literal values. |
+| Keyword                 | Purpose                             |
+|-------------------------|-------------------------------------|
+| `variable`              | Starts a variable declaration.      |
+| `if`, `elif`, `else`    | Control flow branches.              |
+| `while`                 | Loop construct.                     |
+| `return`                | Exits the current block/expression. |
+| `true`, `false`, `null` | Literal values.                     |
 
 ## Statement Forms
 
@@ -89,7 +80,9 @@ variable ramp: List = accent, accent.to.oklch();`}
 </TokenScriptCodeBlock>
 
 - Type annotations are required (`Type` or `Type.SubType`).
-- Initializers are optional; without an initializer, variables start with the type’s `empty()` value.
+- Initializers are optional; without an initializer, variables start with the type’s `empty()` value, which in most symbols is `null`
+  - For [Dictionary](/language/types#dictionary) its an empty dictionary.
+  - For [List](/language/types#list) its an empty list.
 
 ### Assignments & Reassignments
 
@@ -104,6 +97,7 @@ variable accentValue: String = "#0066FF";`}
 ### Blocks
 
 - Statement blocks are wrapped in square brackets `[...]`. They can contain multiple statements separated by semicolons or newlines.
+- Variable declaration in blocks are not allowed.
 
 <TokenScriptCodeBlock
   mode="script"
@@ -112,9 +106,9 @@ variable accentValue: String = "#0066FF";`}
 {`variable condition: Boolean = true;
 
 if (condition) [
-   return 1;
+    return 1;
 ] else [
-   return 0;
+    return 0;
 ]`}
 </TokenScriptCodeBlock>
 

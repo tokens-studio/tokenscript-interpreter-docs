@@ -42,10 +42,10 @@ const config: Config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "intro",
-        path: "./docs-intro",
-        routeBasePath: "intro",
-        sidebarPath: "./sidebars-intro.ts",
+        id: "about",
+        path: "./docs-about",
+        routeBasePath: "about",
+        sidebarPath: "./sidebars-about.ts",
         editUrl: undefined,
         showLastUpdateAuthor: false,
         showLastUpdateTime: false,
@@ -113,9 +113,9 @@ const config: Config = {
         {
           type: "doc",
           docId: "why-tokenscript",
-          docsPluginId: "intro",
+          docsPluginId: "about",
           position: "left",
-          label: "Introduction",
+          label: "About",
         },
         {
           type: "doc",
@@ -160,11 +160,11 @@ const config: Config = {
           items: [
             {
               label: "Why TokenScript",
-              to: "/intro/why-tokenscript",
+              to: "/about/why-tokenscript",
             },
             {
               label: "Quick Start",
-              to: "/intro/quick-start",
+              to: "/about/quick-start",
             },
           ],
         },
