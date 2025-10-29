@@ -427,7 +427,6 @@ console.log(result?.toString());  // "[16px, 24px]"
 - **Interpreter mode** (like above): References are simple names: `{baseSpacing}`
 - **Token resolution mode** References can use dots: `{spacing.base}`
 
-[Learn more about modes](/intro/concepts#two-modes-of-operation)
 :::
 
 ---

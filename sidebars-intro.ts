@@ -1,12 +1,7 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 const sidebars: SidebarsConfig = {
-  introSidebar: [
-    "why-tokenscript",
-    "quick-start",
-    "concepts",
-  ],
+  introSidebar: ["why-tokenscript", "quick-start"],
 };
 
 export default sidebars;
-

@@ -30,7 +30,10 @@ const config: Config = {
           path: "src/pages",
         },
         theme: {
-          customCss: ["./src/css/custom.css", "./src/css/prism-tokenscript-theme.css"],
+          customCss: [
+            "./src/css/custom.css",
+            "./src/css/prism-tokenscript-theme.css",
+          ],
         },
       } satisfies Preset.Options,
     ],
@@ -163,10 +166,6 @@ const config: Config = {
               label: "Quick Start",
               to: "/intro/quick-start",
             },
-            {
-              label: "Core Concepts",
-              to: "/intro/concepts",
-            },
           ],
         },
         {
@@ -207,7 +206,7 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Tokens Studio. Built with Docusaurus.`,
     },
     prism: {
-      additionalLanguages: ['tokenscript'],
+      additionalLanguages: ["tokenscript"],
       theme: {
         plain: {
           color: "#e2e8f0",
@@ -240,7 +239,18 @@ const config: Config = {
             },
           },
           {
-            types: ["entity", "url", "symbol", "number", "boolean", "variable", "constant", "property", "regex", "inserted"],
+            types: [
+              "entity",
+              "url",
+              "symbol",
+              "number",
+              "boolean",
+              "variable",
+              "constant",
+              "property",
+              "regex",
+              "inserted",
+            ],
             style: {
               color: "#a5f3fc",
             },
@@ -303,7 +313,18 @@ const config: Config = {
             },
           },
           {
-            types: ["entity", "url", "symbol", "number", "boolean", "variable", "constant", "property", "regex", "inserted"],
+            types: [
+              "entity",
+              "url",
+              "symbol",
+              "number",
+              "boolean",
+              "variable",
+              "constant",
+              "property",
+              "regex",
+              "inserted",
+            ],
             style: {
               color: "#a5f3fc",
             },
