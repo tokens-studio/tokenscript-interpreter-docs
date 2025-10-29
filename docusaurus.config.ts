@@ -119,7 +119,7 @@ const config: Config = {
         },
         {
           type: "doc",
-          docId: "tutorial",
+          docId: "overview",
           docsPluginId: "language",
           position: "left",
           label: "Language",
@@ -171,10 +171,6 @@ const config: Config = {
         {
           title: "Learn",
           items: [
-            {
-              label: "Language Tutorial",
-              to: "/language/tutorial",
-            },
             {
               label: "Language Reference",
               to: "/language/overview",

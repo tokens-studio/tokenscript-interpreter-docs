@@ -271,28 +271,4 @@ Update brand color once → all shades regenerate.
 
 ## Getting Started
 
-Ready to try TokenScript? Here's how:
-
-### 1. **Quick Start (5 minutes)** 
-```bash
-npm install --save @tokens-studio/tokenscript-interpreter
-```
 [Follow the Quick Start Guide](/intro/quick-start)
-
-### 2. **Learn the Language**
-Write your first TokenScript and understand the syntax.
-
-[Language Tutorial](/language/tutorial)
-
-### 3. **Integrate in Your Project**
-Embed the interpreter in your build pipeline.
-
-[API & Integration Guide](/api/getting-started)
-
-## Next Steps
-
-<div class="button-group">
-  <a href="/intro/quick-start" class="button button--primary button--lg">
-    Try the 5-Minute Quick Start
-  </a>
-</div>
