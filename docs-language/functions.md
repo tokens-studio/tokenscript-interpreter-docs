@@ -12,9 +12,9 @@ TokenScript exposes a standard library of functions supplied by the `FunctionsMa
 
 | Function    | Signature                                     | Description                                                         |
 |-------------|-----------------------------------------------|---------------------------------------------------------------------|
-| `min`       | `min(...values: Number | NumberWithUnit)`     | Returns the smallest numeric value (units allowed when compatible). |
-| `max`       | `max(...values: Number | NumberWithUnit)`     | Returns the largest numeric value.                                  |
-| `sum`       | `sum(...values: Number | NumberWithUnit)`     | Adds values, converting units via `UnitManager` when available.     |
+| `min`       | `min(...values: Number \| NumberWithUnit)`    | Returns the smallest numeric value (units allowed when compatible). |
+| `max`       | `max(...values: Number \| NumberWithUnit)`    | Returns the largest numeric value.                                  |
+| `sum`       | `sum(...values: Number \| NumberWithUnit)`    | Adds values, converting units via `UnitManager` when available.     |
 | `average`   | `average(...values: Number)`                  | Arithmetic mean of numeric arguments.                               |
 | `mod`       | `mod(a: Number, b: Number)`                   | Modulo operation with safe handling for negatives.                  |
 | `round`     | `round(value: Number)`                        | Bankers rounding (0.5 rounds to nearest even).                      |
@@ -47,10 +47,3 @@ TokenScript exposes a standard library of functions supplied by the `FunctionsMa
 
 - The `FunctionsManager` loads additional functions from JSON specifications (see `docs/extensions/functions.md`, to be authored).
 - Spec-defined functions use the same validation pipeline and become available immediately after registration.
-
-## Error Handling
-
-- Functions validate argument counts and types. Violations produce descriptive error messages, e.g., `"log() base must be positive and not equal to 1."`
-- Unit-aware functions (`sum`, arithmetic operators) rely on `UnitManager`; missing conversions trigger conversion errors.
-
-Next, review [Error Handling](errors.md) for interpreter and parser diagnostics.

@@ -133,5 +133,3 @@ Parentheses `()` override precedence as expected.
 ## Error Reporting
 
 The parser provides context-aware errors with line/column highlighting when encountering unexpected tokens, missing delimiters, or malformed type declarations. Runtime type mismatches and method resolution errors raise `InterpreterError` instances, reported with the source token metadata.
-
-Proceed to [Types and Symbols](types.md) for a complete catalog of runtime types and their methods.

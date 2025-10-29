@@ -10,6 +10,8 @@ import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
 
 TokenScript executes statements sequentially within a single global scope. The interpreter maintains one `SymbolTable` (`src/interpreter/symbolTable.ts`), so variables declared in any block remain available globally unless reassigned later.
 
+Each execution in schemas (types, functions) has it's own scope and cannot access the parents variables.
+
 ## Statement Evaluation
 
 - Programs consist of a top-level list of statements. The interpreter walks the list and keeps the most recent non-null value as the block result.
@@ -97,5 +99,3 @@ return palette.length();
 
 - Syntax errors (unexpected tokens, missing brackets) are raised during parsing with annotated source snippets.
 - Runtime errors (type mismatches, invalid method calls, excessive loop iterations) raise `InterpreterError` with the line number of the offending token.
-
-Continue to [Built-in Functions](functions.md) for available runtime helpers and math utilities.
