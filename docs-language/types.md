@@ -6,12 +6,12 @@ sidebar_label: Types
 
 # Types and Symbols
 
-Every TokenScript variable declaration specifies a type using `Type` or `Type.SubType` notation. The interpreter enforces type correctness during assignment and method calls by instantiating corresponding `Symbol` classes (`src/interpreter/symbols.ts`). This chapter documents each built-in type.
+Every TokenScript variable declaration specifies a type using `Type` or `Type.SubType` notation. The interpreter enforces type correctness during assignment and method calls by instantiating corresponding `Symbol` classes.
 
 ## Declarations & Defaults
 
 - `variable name: Type;` initializes `name` with the type’s `empty()` value, if no initializer is provided.
-- Subtypes (`Type.SubType`) are primarily used for colors. For other types, the interpreter treats `Type` and `Type.Something` equivalently unless extension managers add meaning.
+- Subtypes (`Type.SubType`) are primarily used for colors. 
 - Reassignments must respect the declared type; the interpreter throws an `InterpreterError` on mismatch.
 
 ## Primitive Types
@@ -26,8 +26,6 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 | Method      | Signature                          | Description                                                                                                            |
 |-------------|------------------------------------|------------------------------------------------------------------------------------------------------------------------|
 | `to_string` | `Number.to_string(radix?: Number)` | Returns the numeric value as a string. Radix (2–36) is optional; base 16 rounds halves downward for color conversions. |
-
-- Attributes: `value` (read-only `Number`).
 
 ### String
 
@@ -68,13 +66,10 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 | `to_number` | `NumberWithUnit.to_number()` | Returns the unitless numeric value.                      |
 |             |                              |                                                          |
 
-- Attributes: `value` (`Number`).
-- Arithmetic operators respect units; the `UnitManager` converts compatible units or throws descriptive errors (e.g., mixing `px` and `deg`).
-
 ## List
 
 - Heterogeneous ordered collection.
-- Declared with `List`. Subtype hints (e.g., `List.String`) are allowed syntactically but not enforced at runtime.
+- Declared with `List`. 
 - Created via comma-separated literals or dynamic operations.
 - Methods:
 
@@ -94,22 +89,20 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 
 ## Dictionary
 
-- Map of string keys to symbol values.
+- Ordered Map of string keys to symbol values.
 - Declared with `Dictionary`.
 - Methods:
 
-| Method                      | Signature                            | Description                               |
-|-----------------------------|--------------------------------------|-------------------------------------------|
-| `get`                       | `Dictionary.get(key: String)`        | Returns the stored value or `null`.       |
-| `set`                       | `Dictionary.set(key: String, value)` | Assigns a key and returns the dictionary. |
-| `delete`                    | `Dictionary.delete(key: String)`     | Removes a key if present.                 |
-| `keys`                      | `Dictionary.keys()`                  | Returns keys as `List`.                   |
-| `values`                    | `Dictionary.values()`                | Returns values as `List`.                 |
-| `key_exists` / `key_exists` | `Dictionary.keyexists(key: String)`  | Returns `Boolean` flag.                   |
-| `length`                    | `Dictionary.length()`                | Number of entries.                        |
-| `clear`                     | `Dictionary.clear()`                 | Removes all entries.                      |
-
-- Attribute access retrieves entries directly (`dictionary.someKey`), mirroring `get`.
+| Method       | Signature                            | Description                               |
+|--------------|--------------------------------------|-------------------------------------------|
+| `get`        | `Dictionary.get(key: String)`        | Returns the stored value or `null`.       |
+| `set`        | `Dictionary.set(key: String, value)` | Assigns a key and returns the dictionary. |
+| `delete`     | `Dictionary.delete(key: String)`     | Removes a key if present.                 |
+| `keys`       | `Dictionary.keys()`                  | Returns keys as `List`.                   |
+| `values`     | `Dictionary.values()`                | Returns values as `List`.                 |
+| `key_exists` | `Dictionary.key_exists(key: String)` | Returns `Boolean` flag.                   |
+| `length`     | `Dictionary.length()`                | Number of entries.                        |
+| `clear`      | `Dictionary.clear()`                 | Removes all entries.                      |
 
 ## Color
 
@@ -133,7 +126,7 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 
 ## References
 
-- Reference literals (`{token.name}`) resolve to values from the interpreter’s reference map or the shared map used by `TokenSetResolver`.
+- Reference literals (`{token.name}`) resolve to values from the interpreter’s reference map.
 - References do not introduce a distinct type; they evaluate to whichever symbol is stored for the token.
 
 ## Type Equality & Coercion
@@ -141,5 +134,3 @@ Every TokenScript variable declaration specifies a type using `Type` or `Type.Su
 - Equality comparisons require operands of the same type (with special cases for `Null` and hex colors).
 - `Number` and `NumberWithUnit` interoperate in math operations via `UnitManager` conversions.
 - Attempting to mix incompatible units, compare unlike types, or call undefined methods results in an `InterpreterError` with the originating token metadata.
-
-Proceed to [Control Flow](control-flow.md) to learn how statements execute and how loops are guarded against infinite execution.

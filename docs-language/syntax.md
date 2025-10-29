@@ -115,7 +115,7 @@ if (condition) [
 ### Expressions
 
 - Expression grammar supports binary operations (`+`, `-`, `*`, `/`, `^`), comparisons (`==`, `!=`, `>`, `<`, `>=`, `<=`), logical operators (`&&`, `||`, `!`), function calls, method calls, list literals, and attribute access.
-- Method chaining uses dots: `color.to.oklch().values()`.
+- Method chaining uses dots: `color.to.oklch().to_string()`.
 
 ## Operator Precedence (High to Low)
 
