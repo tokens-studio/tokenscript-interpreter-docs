@@ -113,7 +113,7 @@ html[data-theme="dark"] {
 }
 
 body {
-  font-feature-settings: "kern", "liga", "calt";
+  font-feature-settings: "normal";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffffff;
@@ -483,6 +483,16 @@ html[data-theme="dark"] .markdown strong {
 }
 
 /* ===== CODE BLOCKS ===== */
+code,
+pre,
+.markdown code,
+.markdown pre code,
+code[class*="language-"],
+pre[class*="language-"] {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+}
+
 .markdown code {
   background-color: var(--ifm-code-background);
   color: var(--ifm-code-color);
