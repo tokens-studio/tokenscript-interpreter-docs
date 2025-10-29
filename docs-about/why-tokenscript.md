@@ -271,4 +271,4 @@ Update brand color once → all shades regenerate.
 
 ## Getting Started
 
-[Follow the Quick Start Guide](/intro/quick-start)
+[Follow the Quick Start Guide](/about/quick-start)

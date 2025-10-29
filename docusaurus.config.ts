@@ -63,42 +63,6 @@ const config: Config = {
         showLastUpdateTime: false,
       },
     ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "cli",
-        path: "./docs-cli",
-        routeBasePath: "cli",
-        sidebarPath: "./sidebars-cli.ts",
-        editUrl: undefined,
-        showLastUpdateAuthor: false,
-        showLastUpdateTime: false,
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "api",
-        path: "./docs-api",
-        routeBasePath: "api",
-        sidebarPath: "./sidebars-api.ts",
-        editUrl: undefined,
-        showLastUpdateAuthor: false,
-        showLastUpdateTime: false,
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "extensions",
-        path: "./docs-extensions",
-        routeBasePath: "extensions",
-        sidebarPath: "./sidebars-extensions.ts",
-        editUrl: undefined,
-        showLastUpdateAuthor: false,
-        showLastUpdateTime: false,
-      },
-    ],
   ],
   themeConfig: {
     colorMode: {
@@ -123,27 +87,6 @@ const config: Config = {
           docsPluginId: "language",
           position: "left",
           label: "Language",
-        },
-        {
-          type: "doc",
-          docId: "overview",
-          docsPluginId: "cli",
-          position: "left",
-          label: "CLI",
-        },
-        {
-          type: "doc",
-          docId: "getting-started",
-          docsPluginId: "api",
-          position: "left",
-          label: "API",
-        },
-        {
-          type: "doc",
-          docId: "overview",
-          docsPluginId: "extensions",
-          position: "left",
-          label: "Extensions",
         },
         {
           href: "https://github.com/tokens-studio/tokenscript",
@@ -175,23 +118,11 @@ const config: Config = {
               label: "Language Reference",
               to: "/language/syntax",
             },
-            {
-              label: "CLI Commands",
-              to: "/cli/commands",
-            },
           ],
         },
         {
-          title: "Integrate",
+          title: "Community",
           items: [
-            {
-              label: "API Guide",
-              to: "/api/getting-started",
-            },
-            {
-              label: "Extensions",
-              to: "/extensions/color-schemas",
-            },
             {
               label: "GitHub",
               href: "https://github.com/tokens-studio/tokenscript",

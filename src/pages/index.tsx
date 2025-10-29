@@ -26,10 +26,10 @@ function HomepageHeader(): JSX.Element {
           and design system workflows.
         </p>
         <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/intro/quick-start">
+          <Link className="button button--secondary button--lg" to="/about/quick-start">
             Get Started
           </Link>
-          <Link className="button button--outline button--lg" to="/intro/why-tokenscript">
+          <Link className="button button--outline button--lg" to="/about/why-tokenscript">
             Why TokenScript?
           </Link>
         </div>
@@ -93,21 +93,21 @@ function FeaturesSection(): JSX.Element {
       icon: "📖",
       description:
         "Complete reference for syntax, types, control flow, and functions. Learn how the interpreter executes your token logic.",
-      link: "/language/overview",
+      link: "/language/syntax",
     },
     {
-      title: "Integration Guides",
+      title: "Why TokenScript?",
       icon: "🔌",
       description:
-        "Embed the interpreter in your design system pipelines. Resolve token sets and automate transformations in CI/CD.",
-      link: "/api/getting-started",
+        "Understand the problems TokenScript solves and when to use it in your design system workflow.",
+      link: "/about/why-tokenscript",
     },
     {
-      title: "Extensible Runtime",
+      title: "Quick Start",
       icon: "⚡",
       description:
-        "Register custom color spaces, units, and functions without forking. Ship product-specific extensions in pure JSON.",
-      link: "/extensions/overview",
+        "Get started with TokenScript in minutes. Install, write your first script, and start automating your token workflows.",
+      link: "/about/quick-start",
     },
   ];
 
@@ -201,7 +201,7 @@ function CTASection(): JSX.Element {
         <p>
           Explore our quickstart guide and start automating your design token workflows in 5 minutes.
         </p>
-        <Link className="button button--lg" to="/intro/quick-start">
+        <Link className="button button--lg" to="/about/quick-start">
           Get Started Now
         </Link>
       </div>
