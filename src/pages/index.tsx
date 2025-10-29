@@ -127,83 +127,11 @@ function FeaturesSection(): JSX.Element {
                 <div className={styles.featureIcon}>{feature.icon}</div>
                 <Heading as="h3">{feature.title}</Heading>
                 <p>{feature.description}</p>
-                <Link to={feature.link}>Learn more →</Link>
+                <Link to={feature.link}>Learn more</Link>
               </div>
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function ValuePropsSection(): JSX.Element {
-  const valueProps = [
-    {
-      title: "Design-Native Language",
-      items: [
-        "First-class colors, units, lists, dictionaries, and references",
-        "Deterministic evaluation with strong typing",
-        "Method chaining for elegant transformations",
-      ],
-    },
-    {
-      title: "Production-Ready Tooling",
-      items: [
-        "CLI commands for parsing, validation, and compliance",
-        "Performance instrumentation and debugging",
-        "Token set resolution with dependency graphs",
-      ],
-    },
-    {
-      title: "Flexible Architecture",
-      items: [
-        "Register custom functions and color spaces in JSON",
-        "Clone and compose interpreter configurations",
-        "Safely embed in any JavaScript environment",
-      ],
-    },
-  ];
-
-  return (
-    <section className={styles.valueSection}>
-      <div className="container">
-        <Heading as="h2" className={styles.sectionTitle}>
-          Why TokenScript?
-        </Heading>
-        <p className={styles.sectionSubtitle}>
-          Built specifically for design token workflows with modern teams in mind.
-        </p>
-        <div className="row">
-          {valueProps.map((prop, idx) => (
-            <div key={idx} className="col col--4">
-              <div className={styles.valueCard}>
-                <Heading as="h3">{prop.title}</Heading>
-                <ul>
-                  {prop.items.map((item, itemIdx) => (
-                    <li key={itemIdx}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CTASection(): JSX.Element {
-  return (
-    <section className={styles.ctaSection}>
-      <div className="container">
-        <Heading as="h2">Ready to Get Started?</Heading>
-        <p>
-          Explore our quickstart guide and start automating your design token workflows in 5 minutes.
-        </p>
-        <Link className="button button--lg" to="/about/quick-start">
-          Get Started Now
-        </Link>
       </div>
     </section>
   );
@@ -219,8 +147,6 @@ export default function Home(): JSX.Element {
       <main>
         <CodeExampleSection />
         <FeaturesSection />
-        <ValuePropsSection />
-        <CTASection />
       </main>
     </Layout>
   );
