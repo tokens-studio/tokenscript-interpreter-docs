@@ -159,13 +159,17 @@ variable lightBg: Color = #FFFFFF;
 variable lightText: Color = #000000;
 
 // Auto-generate dark theme
-variable darkBg: Color = invert(lightBg);
-variable darkText: Color = invert(lightText);
+variable darkBg: Color.Srgb = invert(lightBg);
+variable darkText: Color = lightText;
 
 // Ensure accessibility
-if (contrast(darkText, darkBg) < 4.5) [
-    darkText = lighten(darkText, 20);
-]`}
+while (contrast(darkText, darkBg) < 65) [
+    darkText = lighten(darkText, 10);
+]
+
+return darkBg, darkText;
+`}
+
 </TokenScriptCodeBlock>
 
 ### Responsive Spacing Scale

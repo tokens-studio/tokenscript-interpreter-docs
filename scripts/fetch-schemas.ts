@@ -2,7 +2,7 @@
 
 /**
  * Script to fetch TokenScript schemas at build time
- * 
+ *
  * This script:
  * 1. Fetches color and function schemas from the registry
  * 2. Writes them to a generated TypeScript file
@@ -29,16 +29,16 @@ async function fetchSchemaRegistry(): Promise<SchemaInfo[]> {
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
-    
+
     const response = await fetch('https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema?format=json', {
       signal: controller.signal
     });
     clearTimeout(timeout);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch schema registry: ${response.statusText}`);
     }
-    
+
     const data = await response.json() as SchemaRegistryResponse;
     return data.schemas || [];
   } catch (error) {
@@ -55,14 +55,14 @@ async function fetchSchema(slug: string): Promise<[string, any] | null> {
     const controller = new AbortController();
     const url = `https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/${slug}`;
     const timeout = setTimeout(() => controller.abort(), 10000);
-    
+
     const response = await fetch(`${url}/latest?format=json`, { signal: controller.signal });
     clearTimeout(timeout);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    
+
     const json = await response.json();
     return [url, json.content];
   } catch (error) {
@@ -76,7 +76,7 @@ async function fetchSchema(slug: string): Promise<[string, any] | null> {
  */
 async function main(): Promise<void> {
   console.log('Fetching TokenScript schemas...\n');
-  
+
   // Essential schemas needed for the docs
   const essentialColorSchemas = [
     'hsl-color',
@@ -84,7 +84,7 @@ async function main(): Promise<void> {
     'rgba-color',
     'oklch-color',
   ];
-  
+
   // Hardcoded CssColor schema (required for color conversions)
   const cssColorSchema = {
     "name": "CssColor",
@@ -238,7 +238,7 @@ async function main(): Promise<void> {
       }
     ]
   };
-  
+
   // Fetch essential color schemas
   const colorSchemasMap = new Map<string, any>();
   console.log('Fetching color schemas:');
@@ -250,14 +250,14 @@ async function main(): Promise<void> {
       console.log(`  ✓ ${slug}`);
     }
   }
-  
+
   // Add the hardcoded CssColor schema
   colorSchemasMap.set('https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/css-color/0/', cssColorSchema);
   console.log('  ✓ css-color (hardcoded)');
-  
+
   // Function schemas for color manipulation
   const functionSchemasMap = new Map<string, any>();
-  
+
   // Relative Darken function
   const relativeDarkenSchema = {
     "name": "Relative Darken",
@@ -277,16 +277,16 @@ async function main(): Promise<void> {
     },
     "script": {
       "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
-      "script": "variable input: List = {input};\nvariable baseColor: Color = input.get(0);\nvariable percentage: Number = input.get(1);\n\n// Convert to HSL for lightness manipulation\nvariable hslColor: Color.Hsl = baseColor.to.hsl();\n\n// Calculate new lightness (reduce by percentage)\nvariable currentLightness: Number = hslColor.l;\nvariable darkenAmount: Number = currentLightness * (percentage / 100);\nvariable newLightness: Number = currentLightness - darkenAmount;\n\n// Ensure lightness doesn't go below 0\nif (newLightness < 0) [\n    newLightness = 0;\n]\n\n// Create and return the darkened color\nvariable darkenedColor: Color.Hsl = hsl(hslColor.h, hslColor.s, newLightness);\nreturn darkenedColor;"
+      "script": "variable input: List = {input};\nvariable percentage: Number = input.get(1);\n\n// Convert to HSL for lightness manipulation\nvariable hslColor: Color.Hsl = input.get(0).to.hsl();\n\n// Calculate new lightness (reduce by percentage)\nvariable currentLightness: Number = hslColor.l;\nvariable darkenAmount: Number = currentLightness * (percentage / 100);\nvariable newLightness: Number = currentLightness - darkenAmount;\n\n// Ensure lightness doesn't go below 0\nif (newLightness < 0) [\n    newLightness = 0;\n]\n\n// Create and return the darkened color\nvariable darkenedColor: Color.Hsl = hsl(hslColor.h, hslColor.s, newLightness);\nreturn darkenedColor;"
     },
     "keyword": "darken",
     "description": "Darkens a color by a relative percentage amount by reducing its lightness value.",
     "requirements": [
       "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/hsl-color/0.0.1/",
-      "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0.0.1/"
+      "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0.1.0/"
     ]
   };
-  
+
   // Relative Lighten function
   const relativeLightenSchema = {
     "name": "Relative Lighten",
@@ -306,22 +306,39 @@ async function main(): Promise<void> {
     },
     "script": {
       "type": "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/core/tokenscript/0/",
-      "script": "variable input: List = {input};\nvariable baseColor: Color = input.get(0);\nvariable percentage: Number = input.get(1);\n\n// Convert to HSL for lightness manipulation\nvariable hslColor: Color.Hsl = baseColor.to.hsl();\n\n// Calculate new lightness (increase by percentage)\nvariable currentLightness: Number = hslColor.l;\nvariable lightenAmount: Number = (100 - currentLightness) * (percentage / 100);\nvariable newLightness: Number = currentLightness + lightenAmount;\n\n// Ensure lightness doesn't go above 100\nif (newLightness > 100) [\n    newLightness = 100;\n]\n\n// Create and return the lightened color\nvariable output: Color.Hsl;\noutput.h = hslColor.h;\noutput.s = hslColor.s;\noutput.l = newLightness;\nreturn output;"
+      "script": "variable input: List = {input};\nvariable percentage: Number = input.get(1);\n\n// Convert to HSL for lightness manipulation\nvariable hslColor: Color.Hsl = input.get(0).to.hsl();\n\n// Calculate new lightness (increase by percentage)\nvariable currentLightness: Number = hslColor.l;\nvariable lightenAmount: Number = (100 - currentLightness) * (percentage / 100);\nvariable newLightness: Number = currentLightness + lightenAmount;\n\n// Ensure lightness doesn't go above 100\nif (newLightness > 100) [\n    newLightness = 100;\n]\n\n// Create and return the lightened color\nvariable output: Color.Hsl;\noutput.h = hslColor.h;\noutput.s = hslColor.s;\noutput.l = newLightness;\nreturn output;"
     },
     "keyword": "lighten",
     "description": "Lightens a color by a relative percentage amount by increasing its lightness value.",
     "requirements": [
       "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/hsl-color/0.0.1/",
-      "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0.0.1/"
+      "https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/schema/srgb-color/0.1.0/"
     ]
   };
-  
+
   functionSchemasMap.set('https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/function/relative-darken/0/', relativeDarkenSchema);
   functionSchemasMap.set('https://schema.tokenscript.dev.gcp.tokens.studio/api/v1/function/relative-lighten/0/', relativeLightenSchema);
+
   console.log('\nFunction schemas:');
   console.log('  ✓ relative-darken');
   console.log('  ✓ relative-lighten');
-  
+
+  // Fetch invert function schema
+  const invertResult = await fetchSchema('invert');
+  if (invertResult) {
+    const [url, spec] = invertResult;
+    functionSchemasMap.set(`${url}/0/`, spec);
+    console.log('  ✓ invert');
+  }
+
+  // Fetch contrast function schema
+  const contrastResult = await fetchSchema('contrast');
+  if (contrastResult) {
+    const [url, spec] = contrastResult;
+    functionSchemasMap.set(`${url}/0/`, spec);
+    console.log('  ✓ contrast');
+  }
+
   // Generate TypeScript file content
   const fileContent = `// Auto-generated file - DO NOT EDIT
 // Generated at: ${new Date().toISOString()}
@@ -329,14 +346,14 @@ async function main(): Promise<void> {
 
 export const COLOR_SCHEMAS = new Map<string, any>([
 ${Array.from(colorSchemasMap.entries())
-  .map(([url, spec]) => `  ['${url}', ${JSON.stringify(spec)}]`)
-  .join(',\n')}
+      .map(([url, spec]) => `  ['${url}', ${JSON.stringify(spec)}]`)
+      .join(',\n')}
 ]);
 
 export const FUNCTION_SCHEMAS = new Map<string, any>([
 ${Array.from(functionSchemasMap.entries())
-  .map(([url, spec]) => `  ['${url}', ${JSON.stringify(spec)}]`)
-  .join(',\n')}
+      .map(([url, spec]) => `  ['${url}', ${JSON.stringify(spec)}]`)
+      .join(',\n')}
 ]);
 
 export function getColorSchema(url: string): any | undefined {
@@ -347,20 +364,20 @@ export function getFunctionSchema(url: string): any | undefined {
   return FUNCTION_SCHEMAS.get(url);
 }
 `;
-  
+
   // Write to file
   const fs = await import('fs');
   const path = await import('path');
   const outputDir = path.resolve(process.cwd(), 'src/lib');
   const outputPath = path.join(outputDir, 'schemas.generated.ts');
-  
+
   // Ensure directory exists
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
-  
+
   fs.writeFileSync(outputPath, fileContent, 'utf-8');
-  
+
   console.log(`\n✓ Schemas written to: ${outputPath}`);
   console.log(`  Color schemas: ${colorSchemasMap.size}`);
   console.log(`  Function schemas: ${functionSchemasMap.size}`);

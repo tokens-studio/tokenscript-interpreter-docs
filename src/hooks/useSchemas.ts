@@ -22,6 +22,34 @@ const COLOR_SCHEMA_SLUGS = [
   'srgb-color',
 ];
 
+const FUNCTION_SCHEMA_SLUGS = [
+  'invert',
+];
+
+async function fetchSchemasBySlugs(slugs: string[]): Promise<Map<string, any>> {
+  const schemas = new Map<string, any>();
+  
+  for (const slug of slugs) {
+    try {
+      const url = `${SCHEMA_BASE_URL}/${slug}`;
+      const response = await fetch(`${url}/latest?format=json`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (data.content) {
+          // Use versioned URL as key
+          const versionedUrl = `${url}/${data.version || '0'}/`;
+          schemas.set(versionedUrl, data.content);
+        }
+      }
+    } catch (err) {
+      console.warn(`Failed to fetch schema ${slug}:`, err);
+    }
+  }
+  
+  return schemas;
+}
+
 export function useSchemas() {
   const [schemas, setSchemas] = useState<SchemaCache>(cache);
   const [loading, setLoading] = useState(!cache.loaded);
@@ -38,30 +66,14 @@ export function useSchemas() {
 
     async function fetchSchemas() {
       try {
-        const colorSchemas = new Map<string, any>();
-        
-        // Fetch color schemas
-        for (const slug of COLOR_SCHEMA_SLUGS) {
-          try {
-            const url = `${SCHEMA_BASE_URL}/${slug}`;
-            const response = await fetch(`${url}/latest?format=json`);
-            
-            if (response.ok) {
-              const data = await response.json();
-              if (data.content) {
-                // Use versioned URL as key
-                const versionedUrl = `${url}/${data.version || '0'}/`;
-                colorSchemas.set(versionedUrl, data.content);
-              }
-            }
-          } catch (err) {
-            console.warn(`Failed to fetch schema ${slug}:`, err);
-          }
-        }
+        const [colorSchemas, functionSchemas] = await Promise.all([
+          fetchSchemasBySlugs(COLOR_SCHEMA_SLUGS),
+          fetchSchemasBySlugs(FUNCTION_SCHEMA_SLUGS),
+        ]);
 
         if (!cancelled) {
           cache.colorSchemas = colorSchemas;
-          cache.functionSchemas = new Map(); // TODO: Add function schemas
+          cache.functionSchemas = functionSchemas;
           cache.loaded = true;
           
           setSchemas({ ...cache });
