@@ -119,7 +119,7 @@ const config: Config = {
         },
         {
           type: "doc",
-          docId: "overview",
+          docId: "syntax",
           docsPluginId: "language",
           position: "left",
           label: "Language",
@@ -173,7 +173,7 @@ const config: Config = {
           items: [
             {
               label: "Language Reference",
-              to: "/language/overview",
+              to: "/language/syntax",
             },
             {
               label: "CLI Commands",
