@@ -12,7 +12,6 @@ function HomepageHeader(): JSX.Element {
     <header className={styles.heroBanner}>
       <div className="container">
         <span className={styles.heroBadge}>
-          <span>🚀</span>
           <span>TokenScript Interpreter</span>
         </span>
         <Heading as="h1" className={styles.heroTitle}>
@@ -21,16 +20,13 @@ function HomepageHeader(): JSX.Element {
           Beautifully Automated
         </Heading>
         <p className={styles.heroSubtitle}>
-          A statically-typed language for design tokens with an embeddable interpreter.
-          Build powerful token transformations with first-class support for colors, units,
+          A language for design tokens with an embeddable interpreter.
+          Build powerful token transformations with support for custom colors, units,
           and design system workflows.
         </p>
         <div className={styles.buttons}>
           <Link className="button button--secondary button--lg" to="/about/quick-start">
             Get Started
-          </Link>
-          <Link className="button button--outline button--lg" to="/about/why-tokenscript">
-            Why TokenScript?
           </Link>
         </div>
       </div>
@@ -46,7 +42,7 @@ function CodeExampleSection(): JSX.Element {
           Generate Design Systems Programmatically
         </Heading>
         <p style={{ textAlign: "center", color: "var(--ifm-color-emphasis-600)", marginBottom: "3rem", fontSize: "1rem" }}>
-          Write logic once. Generate entire color palettes, spacing scales, or typographic systems.
+          Generate entire color palettes, spacing scales, or typographic systems.
         </p>
         <div className="row" style={{ justifyContent: "center" }}>
           <div className="col col--8">
@@ -78,9 +74,7 @@ return ramp;
             </TokenScriptCodeBlock>
           </div>
         </div>
-        <p style={{ textAlign: "center", marginTop: "2rem", fontSize: "0.875rem", color: "var(--ifm-color-emphasis-600)" }}>
-          Change the brand color. The entire ramp regenerates automatically.
-        </p>
+
       </div>
     </section>
   );
