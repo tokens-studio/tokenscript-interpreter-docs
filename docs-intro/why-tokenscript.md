@@ -205,36 +205,58 @@ Change `baseSpacing` once → entire scale updates automatically.
 
 **Solution:** Generate programmatically:
 
-<TokenScriptCodeBlock mode="script" showResult={false}>
+<TokenScriptCodeBlock mode="script" lines={{ end: 12 }}>
 {`variable brand: Color = #0066FF;
 
-variable brand50: Color = lighten(brand, 45);
-variable brand100: Color = lighten(brand, 40);
-variable brand200: Color = lighten(brand, 30);
-// ... compute all 9 shades
-variable brand900: Color = darken(brand, 40);`}
+variable brand50: Color.Hsl = lighten(brand, 45);
+variable brand100: Color.Hsl = lighten(brand, 35);
+variable brand200: Color.Hsl = lighten(brand, 25);
+variable brand300: Color.Hsl = lighten(brand, 15);
+variable brand400: Color.Hsl = lighten(brand, 5);
+variable brand500: Color.Hsl = brand.to.hsl();
+variable brand600: Color.Hsl = darken(brand, 10);
+variable brand700: Color.Hsl = darken(brand, 20);
+variable brand800: Color.Hsl = darken(brand, 30);
+variable brand900: Color.Hsl = darken(brand, 40);
+
+variable output: Dictionary;
+output.set("brand-50", brand50);
+output.set("brand-100", brand100);
+output.set("brand-200", brand200);
+output.set("brand-300", brand300);
+output.set("brand-400", brand400);
+output.set("brand-500", brand500);
+output.set("brand-600", brand600);
+output.set("brand-700", brand700);
+output.set("brand-800", brand800);
+output.set("brand-900", brand900);
+
+return output;
+`}
 </TokenScriptCodeBlock>
 
 Update brand color once → all shades regenerate.
 
-### Unit Conversion for Multi-Platform
+<!-- ### Unit Conversion for Multi-Platform -->
 
-**Problem:** iOS needs `pt`, Android needs `dp`, web needs `px`.
+<!-- **Problem:** iOS needs `pt`, Android needs `dp`, web needs `px`. -->
 
-**Solution:** Convert automatically:
+<!-- **Solution:** Convert automatically: -->
 
-<TokenScriptCodeBlock mode="script" showResult={false}>
-{`variable baseSpacing: NumberWithUnit = 16px;
+<!-- <TokenScriptCodeBlock mode="script"> -->
+<!-- {`variable baseSpacing: NumberWithUnit = 16px; -->
 
-// For iOS (1pt = 1px on 1x displays)
-variable iosSpacing: NumberWithUnit = baseSpacing;  // 16pt
+<!-- // For iOS (1pt = 1px on 1x displays) -->
+<!-- variable iosSpacing: NumberWithUnit = baseSpacing;  // 16pt -->
 
-// For Android (1dp ≈ 1px on mdpi)
-variable androidSpacing: NumberWithUnit = baseSpacing;  // 16dp
+<!-- // For Android (1dp ≈ 1px on mdpi) -->
+<!-- variable androidSpacing: NumberWithUnit = baseSpacing;  // 16dp -->
 
-// Can also do explicit conversions
-variable remSpacing: NumberWithUnit = baseSpacing.convertTo("rem", 16);  // 1rem`}
-</TokenScriptCodeBlock>
+<!-- // Can also do explicit conversions -->
+<!-- variable remSpacing: NumberWithUnit = baseSpacing; -->
+
+<!-- return iosSpacing, androidSpacing, remSpacing`} -->
+<!-- </TokenScriptCodeBlock> -->
 
 ## What Can You Build With TokenScript?
 
