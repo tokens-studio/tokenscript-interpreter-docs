@@ -10,7 +10,7 @@ import {
 } from '@tokens-studio/tokenscript-interpreter';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-json';
-import tokenscriptLanguage from '@site/src/theme/prism-tokenscript';
+import { tokenscriptLanguage } from '@tokens-studio/tokenscript-interpreter/syntax-highlighting';
 import OutputPanel from './OutputPanel';
 import styles from './styles.module.css';
 import './prism-tokenscript-theme.css';

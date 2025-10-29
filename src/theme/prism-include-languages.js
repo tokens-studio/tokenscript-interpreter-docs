@@ -1,5 +1,5 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-import tokenscriptLanguage from './prism-tokenscript';
+import { tokenscriptLanguage } from '@tokens-studio/tokenscript-interpreter/syntax-highlighting';
 
 const prismIncludeLanguages = (PrismObject) => {
   // Always register tokenscript language (works in both SSR and browser)
