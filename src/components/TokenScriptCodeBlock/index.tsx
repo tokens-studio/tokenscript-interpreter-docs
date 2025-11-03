@@ -28,7 +28,7 @@ interface TokenScriptCodeBlockProps {
   showResult?: boolean;
   title?: string;
   mode?: 'json' | 'script';
-  input?: Record<string, any>;
+  input?: any;
   colorSchemas?: Map<string, any>;
   functionSchemas?: Map<string, any>;
   lines?: { start?: number; end?: number };
