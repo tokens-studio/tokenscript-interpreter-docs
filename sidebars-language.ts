@@ -6,6 +6,7 @@ const sidebars: SidebarsConfig = {
     "types",
     "control-flow",
     "functions",
+    "schemas",
   ],
 };
 
