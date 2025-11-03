@@ -1,14 +1,15 @@
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-import { tokenscriptLanguage } from '@tokens-studio/tokenscript-interpreter/syntax-highlighting';
+import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
+import { tokenscriptLanguage } from "@tokens-studio/tokenscript-interpreter/syntax-highlighting";
 
 const prismIncludeLanguages = (PrismObject) => {
-  // Always register tokenscript language (works in both SSR and browser)
   tokenscriptLanguage(PrismObject);
-  
+
+  PrismObject.languages.jsonc = PrismObject.languages.json;
+
   if (ExecutionEnvironment.canUseDOM) {
     // Handle additional languages from config
     try {
-      const siteConfig = require('@generated/docusaurus.config').default;
+      const siteConfig = require("@generated/docusaurus.config").default;
       const prismConfig = siteConfig?.themeConfig?.prism || {};
       const additionalLanguages = prismConfig.additionalLanguages || [];
 
@@ -19,7 +20,7 @@ const prismIncludeLanguages = (PrismObject) => {
       globalThis.Prism = PrismObject;
 
       additionalLanguages.forEach((lang) => {
-        if (lang === 'tokenscript') {
+        if (lang === "tokenscript") {
           // Already registered above
           return;
         }
@@ -33,7 +34,7 @@ const prismIncludeLanguages = (PrismObject) => {
 
       delete globalThis.Prism;
     } catch (e) {
-      console.warn('Failed to load additional Prism languages', e);
+      console.warn("Failed to load additional Prism languages", e);
     }
   }
 };
