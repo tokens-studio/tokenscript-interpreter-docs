@@ -360,6 +360,38 @@ const JsonOutput = ({ value }: { value: any }) => {
 };
 
 /**
+ * Format a type name to be more readable
+ * e.g., "LIST.IMPLICIT" -> "List.Implicit"
+ */
+function formatTypeName(typeName: string): string {
+  return typeName
+    .split('.')
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join('.');
+}
+
+/**
+ * Get the type name from a result
+ */
+export function getResultTypeName(result: any): string | null {
+  if (!result) {
+    return null;
+  }
+
+  if (isBaseSymbol(result)) {
+    let typeName: string;
+    if (result.getTypeName) {
+      typeName = result.getTypeName();
+    } else {
+      typeName = result.type;
+    }
+    return formatTypeName(typeName);
+  }
+
+  return null;
+}
+
+/**
  * Main output panel component
  */
 export interface OutputPanelProps {

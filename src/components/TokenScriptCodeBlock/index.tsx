@@ -11,7 +11,7 @@ import {
 import Prism from 'prismjs';
 import 'prismjs/components/prism-json';
 import { tokenscriptLanguage } from '@tokens-studio/tokenscript-interpreter/syntax-highlighting';
-import OutputPanel from './OutputPanel';
+import OutputPanel, { getResultTypeName } from './OutputPanel';
 import styles from './styles.module.css';
 import './prism-tokenscript-theme.css';
 import { COLOR_SCHEMAS, FUNCTION_SCHEMAS } from "@site/src/lib/schemas.generated";
@@ -204,7 +204,12 @@ export default function TokenScriptCodeBlock({
       {showResult && (
         <div className={styles.resultContainer}>
           <div className={styles.resultHeader}>
-            <span>Result</span>
+            <span>
+              Result
+              {result && !error && mode === 'script' && (
+                <span className={styles.resultType}> ({getResultTypeName(result)})</span>
+              )}
+            </span>
           </div>
           
           <OutputPanel 

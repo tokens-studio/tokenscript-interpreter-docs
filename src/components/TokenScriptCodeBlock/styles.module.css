@@ -250,6 +250,12 @@ html[data-theme='dark'] .resultHeader {
   }
 }
 
+.resultType {
+  opacity: 0.8;
+  font-weight: 500;
+  text-transform: none;
+}
+
 .outputError {
   padding: 1rem;
   color: var(--ifm-color-danger-darkest);
