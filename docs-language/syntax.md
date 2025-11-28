@@ -10,7 +10,7 @@ import TokenScriptCodeBlock from '@site/src/components/TokenScriptCodeBlock';
 
 ## Character Set & Identifiers
 
-- Identifiers may include standard ASCII letters, digits, hyphen (`-`), underscore (`_`), and extended Unicode characters (e.g., emoji).
+- Identifiers may include standard ASCII letters, digits, hyphens (`-`), underscores (`_`), and extended Unicode characters (e.g., emoji).
 - Identifiers must begin with an alphabetic or non-ASCII character (numbers are not allowed in the first position).
 - Identifiers are case-insensitive (`primaryColor` and `PrimaryColor` are treated equally).
 
@@ -35,14 +35,134 @@ variable spacing: NumberWithUnit = 4px; // Trailing comments are allowed`}
 | Numbers | `42`, `3.1415`, `.5` | Integers and decimals; leading zero added for `.5` style numbers by the lexer. |
 | Hex Colors | `#FFAA00`, `#abc` | Interpreted as `Color.Hex`. |
 | Strings | `identifierStyle` | Bare identifiers not bound in scope fall back to string literals. |
-| Explicit Strings | `"quoted value"` or `'alternate quotes'` | Preserve whitespace and special characters. |
+| Explicit Strings | `"quoted value"` or `'alternate quotes'` | Preserves whitespace and special characters. |
 | Booleans | `true`, `false` | Reserved keywords mapped to `Boolean`. |
 | Null | `null` | Reserved keyword mapped to `Null`. |
 | Lists | `value1, value2, value3` | Comma-separated sequence; implicit lists use spaces when built by certain operations. |
 
+## Implicit Strings and Lists
+
+### Overview
+
+TokenScript supports **implicit strings** - strings that don't require quotes. This is a fallback mechanism for when a string is not made explicit with quotes.
+
+:::warning Recommendation: Use Explicit Strings
+Implicit strings exist for backward compatibility and convenience, but they have confusing edge cases.
+
+**Prefer to use quotes around strings (`"hello"`) instead of relying on implicit strings (`hello`).**
+:::
+
+### Basic Behavior
+
+Implicit strings are recognized when the lexer/parser encounters text that:
+
+1. Starts with a valid identifier character (letters, emoji, etc.)
+2. Or starts with a number followed by text that is **not a recognized unit**
+
+<TokenScriptCodeBlock mode="script">
+{`Implicit strings supported`}
+</TokenScriptCodeBlock>
+
+<TokenScriptCodeBlock mode="script">
+{`// Strings starting with numbers (not recognized units)
+// ⚠️ GOTCHA: Space is added between number and text!
+1unknown       // Output: ["1", "unknown"] (List) - not "1unknown"!
+5test          // Output: ["5", "test"] (List) - not "5test"!
+3D-Font        // Output: ["3", "D-Font"] (List) - not "3D-Font"!`}
+</TokenScriptCodeBlock>
+
+<TokenScriptCodeBlock mode="script">
+{`1px
+5rem
+10%`}
+</TokenScriptCodeBlock>
+
+### Implicit Lists
+
+When multiple values are combined without operators, they form **implicit lists**. 
+<br />This allows natural composition of values:
+
+<TokenScriptCodeBlock mode="script">
+{`1px solid black`}
+</TokenScriptCodeBlock>
+
+### Edge Cases and Pitfalls
+
+#### Arithmetic Operations with Implicit Strings
+
+When you mix arithmetic operators with implicit strings, the behavior may surprise you:
+
+<TokenScriptCodeBlock mode="script">
+{`// ⚠️ This evaluates to "2 unknown" not an error!
+// The arithmetic happens first: (1 + 1) = 2
+// Then creates implicit list with result and string: "2 unknown"
+1 + 1unknown`}
+</TokenScriptCodeBlock>
+
+##### Recommended usage
+
+Use recognized units for arithmetic:
+
+<TokenScriptCodeBlock mode="script">
+{`1px + 1px`}
+</TokenScriptCodeBlock>
+
+Use explicit strings to avoid the edge cases:
+
+<TokenScriptCodeBlock mode="script">
+{`"1unknown"`}
+</TokenScriptCodeBlock>
+
+So the aforementioned example will now throw an error:
+
+<TokenScriptCodeBlock mode="script">
+{`1 + "1unknown"`}
+</TokenScriptCodeBlock>
+
+#### 2. Strings Starting with Numbers
+
+Unlike CSS (which disallows unquoted identifiers starting with numbers), TokenScript allows them as implicit strings:
+
+<TokenScriptCodeBlock mode="script">
+{`3D Font`}
+</TokenScriptCodeBlock>
+
+<TokenScriptCodeBlock mode="script">
+{`"3D Font"`}
+</TokenScriptCodeBlock>
+
+### Best Practices
+
+:::warning Always Use Explicit Strings When Possible
+While implicit strings are convenient, they can lead to confusion and errors.<br />**We recommend using explicit strings in most cases.**
+:::
+
+<TokenScriptCodeBlock mode="script">
+{`// Use explicit strings (clear intent)
+"3D Font", "some other font", "Font with emoji 😼";`}
+</TokenScriptCodeBlock>
+
+#### When Implicit Strings Are Acceptable
+
+Implicit strings are mainly useful for:
+
+1. **Simple identifiers without spaces or special characters**
+
+<TokenScriptCodeBlock mode="script">
+{`primary`}
+</TokenScriptCodeBlock>
+
+2. **CSS-like shorthand values**
+
+<TokenScriptCodeBlock mode="script">
+{`1px solid black`}
+</TokenScriptCodeBlock>
+
+3. **Backward compatibility** - Existing TokenScript code may rely on implicit strings
+
 ## Units
 
-Numbers may be suffixed with a units like `px`, `em`, `rem`, `vw`, `vh`, `pt`, `in`, `cm`, `mm`, `deg`, `%`.
+Numbers may be suffixed with units like `px`, `em`, `rem`, `vw`, `vh`, `pt`, `in`, `cm`, `mm`, `deg`, `%`.
 <TokenScriptCodeBlock mode="script" showResult={false}>
 {`variable padding: NumberWithUnit = 1.5rem;
 variable angle: NumberWithUnit = 45deg;`}
@@ -81,8 +201,8 @@ variable ramp: List = accent, accent.to.oklch();`}
 
 - Type annotations are required (`Type` or `Type.SubType`).
 - Initializers are optional; without an initializer, variables start with the type’s `empty()` value, which in most symbols is `null`
-  - For [Dictionary](/language/types#dictionary) its an empty dictionary.
-  - For [List](/language/types#list) its an empty list.
+  - For [Dictionary](/language/types#dictionary), it's an empty dictionary.
+  - For [List](/language/types#list), it's an empty list.
 
 ### Assignments & Reassignments
 
