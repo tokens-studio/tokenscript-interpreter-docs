@@ -1,0 +1,83 @@
+.blogListPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.blogListPage h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-heading-color);
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.filterSection {
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.04), rgba(59, 130, 246, 0.04));
+  border: 1px solid rgba(0, 102, 255, 0.12);
+  border-radius: 12px;
+}
+
+.filterLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tutorialList {
+  margin-top: 2rem;
+}
+
+.blogListPage :global(article footer) {
+  margin-top: 1rem;
+}
+
+.tutorialList h2 {
+    font-size: 1.8rem;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .filterSection {
+  background: linear-gradient(135deg, rgba(29, 78, 216, 0.15), rgba(59, 130, 246, 0.12));
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+[data-theme='dark'] .filterLabel {
+  color: #94a3b8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .blogListPage h1 {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.9375rem;
+  }
+
+  .filterSection {
+    padding: 1rem;
+  }
+
+  .filterLabel {
+    font-size: 0.8125rem;
+  }
+}

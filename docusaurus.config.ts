@@ -25,7 +25,15 @@ const config: Config = {
       "classic",
       {
         docs: false, // Disable the default docs plugin
-        blog: false,
+        blog: {
+          path: "tutorials",
+          routeBasePath: "tutorials",
+          blogTitle: "Tutorials",
+          blogDescription: "Learn TokenScript through step-by-step tutorials",
+          blogSidebarTitle: "All Tutorials",
+          blogSidebarCount: "ALL",
+          postsPerPage: 10,
+        },
         pages: {
           path: "src/pages",
         },
@@ -89,6 +97,11 @@ const config: Config = {
           label: "Language",
         },
         {
+          to: "/tutorials",
+          label: "Tutorials",
+          position: "left",
+        },
+        {
           href: "https://github.com/tokens-studio/tokenscript",
           label: "GitHub",
           position: "right",
@@ -117,6 +130,10 @@ const config: Config = {
             {
               label: "Language Reference",
               to: "/language/syntax",
+            },
+            {
+              label: "Tutorials",
+              to: "/tutorials",
             },
           ],
         },

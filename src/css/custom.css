@@ -900,6 +900,37 @@ html[data-theme="dark"] .clean-btn[title="Switch between dark and light mode"]:h
   }
 }
 
+/* ===== BLOG POST ITEM TAGS ===== */
+.blog-tags-container a,
+article a[href*="/tags/"] {
+  color: #475569 !important;
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  border: none !important;
+  padding: 0.25rem 0.625rem !important;
+  border-radius: 4px !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
+}
+
+html[data-theme="dark"] .blog-tags-container a,
+html[data-theme="dark"] article a[href*="/tags/"] {
+  color: #93c5fd !important;
+  background-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+.blog-tags-container a:hover,
+article a[href*="/tags/"]:hover {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  color: #1e40af !important;
+}
+
+html[data-theme="dark"] .blog-tags-container a:hover,
+html[data-theme="dark"] article a[href*="/tags/"]:hover {
+  background-color: rgba(59, 130, 246, 0.3) !important;
+  color: #bfdbfe !important;
+}
+
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 10px;
